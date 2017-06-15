@@ -11,7 +11,6 @@ import {GlobalVars }from './../shared/global';
 //import {GeolocalisationPage} from '../pages/geolocalisation/geolocalisation'
 import {Storage }from '@ionic/storage';
 import {TranslateService}from '@ngx-translate/core';
-import {Network }from '@ionic-native/network';
 import { MobileServer } from "./restservice/mobileserver";
 
 /*import {
@@ -20,7 +19,7 @@ import { MobileServer } from "./restservice/mobileserver";
 } from '@ionic/cloud-angular';  */
 @Component( {
 templateUrl:'app.html',
-providers:[Restservice, Network]
+providers:[Restservice]
 
 })
 export class MyApp {
