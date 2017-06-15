@@ -469,6 +469,9 @@ Bootstap Customization
         /***************************************************************************
             Bootstap Customization
         ***************************************************************************/
+        .content-ios .btn-custom1 {
+            font-weight: normal !important;
+        }
         .bar-button-default-md,
         .bar-button-clear-md-default,
         .bar-button-md-default,
