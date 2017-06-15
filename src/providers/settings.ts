@@ -15,8 +15,9 @@ export class Settings {
 
     constructor() {
         // this.theme = new BehaviorSubject('default');
-      //  this.theme = new BehaviorSubject('moov');
         this.theme = new BehaviorSubject('default');
+       this.theme = new BehaviorSubject('moov');
+        // this.theme = new BehaviorSubject('default');
     }
 
     setActiveTheme(val) {

@@ -1,3 +1,4 @@
+import { ServicePage } from './../service/service';
 import { GlobalVars } from './../../shared/global';
 import { HomePage } from './../home/home';
 import { ToastController } from 'ionic-angular/components/toast/toast';
@@ -191,7 +192,7 @@ export class Showticket {
           handler: () => {
 
             this.SuprimerTicket();
-            this.navCtrl.setRoot(HomePage)
+            this.navCtrl.setRoot(ServicePage)
             console.log('Buy clicked');
           }
         }
