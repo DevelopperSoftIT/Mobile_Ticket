@@ -1,15 +1,14 @@
     //theme custom for moov
-    .moov {
-        $colors: ( primary: rgba(106, 151, 24, 255), primary-text: #fff, secondary: rgba(248, 248, 248, 0.75), danger: #f53d3d, light: #f4f4f4, dark: #222, tabbar: #1f7998);
+    .mtn {
+        $colors: ( primary: rgba(2, 115, 155, 255), primary-text: #fff, secondary: rgba(2, 115, 155, 255), danger: #f53d3d, light: #f4f4f4, dark: #222, tabbar: #1f7998);
         .toolbar-background {
             background-color: map-get($colors, primary);
-            ;
         }
         .toolbar-title {
             color: map-get($colors, primary-text);
         }
         .has-header {
-            background-image: url(../assets/icon/backetisalat.png);
+            background-image: url(../assets/icon/backgroundmtn.png);
             //  background-image: url(../assets/icon/backgroudmoov.png);
             background-repeat: no-repeat;
             background-position-x: center;
@@ -72,8 +71,8 @@ font-weight: 200 !important;
             padding: 1.625em !important;
             margin: 1em auto !important;
             /* width: 250px; */
-            background-color: map-get($colors, secondary) !important;
             font-family: Helvetica;
+            background-color: map-get($colors, secondary) !important;
             font-weight: lighter !important;
         }
         #global {
@@ -99,7 +98,7 @@ background: transparent !important;
             text-align: center !important;
             font-size: 1.5em !important;
             color: white !important;
-            background-color: rgba(106, 151, 24, 0.85) !important;
+            background-color: map-get($colors, secondary) !important;
             width: 85% !important;
             font-weight: lighter !important;
             border-radius: 0 64px 64px !important;

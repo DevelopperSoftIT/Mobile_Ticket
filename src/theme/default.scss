@@ -70,6 +70,7 @@
             margin: 1em auto !important;
             /* width: 250px; */
             font-family: Helvetica;
+            background-color: map-get($colors, secondary) !important;
             font-weight: lighter !important;
         }
         /*entete

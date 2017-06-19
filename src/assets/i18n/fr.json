@@ -39,7 +39,8 @@
             "second": "ème",
             "third": "ème",
             "other": "ème"
-        }
+        },
+        "notificationpush": "Vous ête appelés"
 
     },
     "Contactpage": {
@@ -54,11 +55,14 @@
     "Dialogue": {
         "titlenotif": "Notification",
         "titlecancel": "Annuler la visite",
-        "massagenofif": "Vous ete attendu au ",
+        "massagenofif": "Vous ête attendus au ",
         "massagecancel": "Voulez-vous vrament annuler votre ticket ?",
         "oknotif": "ok",
         "cancelbuttonnotif": "non",
         "okcancel": "Oui"
+    },
+    "Loading": {
+        "message": "Chargement en cours..."
     },
     "Error": {
         "errorMessage": "Problème de connexion",

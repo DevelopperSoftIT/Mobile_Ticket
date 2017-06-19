@@ -12,7 +12,9 @@
 
     <div *ngIf="!iserror" class="page-content-default">
         <div *ngIf="!iscalled && !isticketfinish">
-            <div class="page-message"> {{'Showticketpage.note' | translate}}</div>
+            <div class="page-message">
+                <!--{{'Showticketpage.note' | translate}}-->
+            </div>
         </div>
 
         <div *ngIf="showrang() && !iscalled && !isticketfinish ">

@@ -14,13 +14,10 @@ export class Settings {
   private theme: BehaviorSubject<String>;
 
     constructor() {
-        // this.theme = new BehaviorSubject('default');
-<<<<<<< HEAD
-       // this.theme = new BehaviorSubject('default');
-=======
->>>>>>> 2d8964445ec24b41a4bbd37f3f4262a20a33c8e0
-       this.theme = new BehaviorSubject('moov');
-        // this.theme = new BehaviorSubject('default');
+      // this.theme = new BehaviorSubject('default');
+      // this.theme = new BehaviorSubject('mtn');
+      this.theme = new BehaviorSubject('moov');
+
     }
 
     setActiveTheme(val) {

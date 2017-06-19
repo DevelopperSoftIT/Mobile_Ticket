@@ -1,3 +1,4 @@
+import { GlobalVars } from './../../shared/global';
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
@@ -14,8 +15,10 @@ import {MarketingEntitie} from'../../app/entitie/marketingEntite'
 })
 export class MarketingPage {
 Marckic: MarketingEntitie[];
-  constructor(public navCtrl: NavController,private restservice:Restservice) {
+  client?:string;
 
+  constructor(public navCtrl: NavController,private restservice:Restservice) {
+ this.client=GlobalVars.getClient()
   }
   ngOnInit() {
     console.log('cool ')

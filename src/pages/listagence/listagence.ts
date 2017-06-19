@@ -1,12 +1,10 @@
+import { Common } from './../../shared/common';
 import { GlobalVars } from './../../shared/global';
-//import { ErrorComponent } from './../../components/error/error';
 import { ToastController } from 'ionic-angular/components/toast/toast';
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { ServicePage } from './../service/service';
-//import { BrancheEntity } from './../../app/entitie/branche';
 import { Http } from '@angular/http';
-import { NavController, LoadingController } from 'ionic-angular';
-//import { Showticket } from '../showticket/showticket'
+import { NavController} from 'ionic-angular';
 import { Restservice } from '../../app/restservice/restservice'
 import { AlertController } from 'ionic-angular';
 declare var MobileTicketAPI: any;
@@ -24,48 +22,22 @@ export class ListagencePage {
   client:string
 
   constructor(private toastCtrl: ToastController,
-   public loadingCtrl: LoadingController,
-   public navCtrl: NavController,
-   public alertCtrl: AlertController,
-   private restservice: Restservice,
-   private http: Http) {
+   /*public loadingCtrl: LoadingController*/private common:Common,
+    public navCtrl: NavController,
+    public alertCtrl: AlertController,
+    private restservice: Restservice,
+    private http: Http) {
     this.client=GlobalVars.getClient()
 
   }
 
   ionViewDidLoad() {
     console.log('load enter')
-
     this.getAgence();
-  }
-
-  ngOnInit() {
-    // this.presentLoadingDefault();
-    //  this.getAgence();
-    //  this. searchMovieDB("mod");
-    console.log('initializing ...... ag mode')
-
-    console.log('fin');
 
   }
-  /**Chargement  */
-  presentLoadingDefault() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Chargement en cours...'
-    });
-    this.loading.present();
 
-
-  }
-  loadingfinish() {
-    setTimeout(() => {
-      this.loading.dismiss();
-    }, 1000);
-    this.ecoute = true;
-    //this.Rrefreshe();
-
-  }
-  getRefreche() {
+  /*getRefreche() {
     this.restservice.getAllbranches().subscribe(Agences => {
 
       console.log('data a ' + Agences)
@@ -73,40 +45,44 @@ export class ListagencePage {
       //this.loadingfinish();
       // var a=data.results
       console.log(Agences)
-this.iserror=false;
+      this.iserror=false;
        } , error => {
-         this.iserror=true;
+          this.iserror=true;
           alert(error + 'erreur')
-          this.loadingfinish();
+          this.common.loadingfinish();
         }
       //
 
     )
-  }
+  }*/
 
   getAgence() {
-this.presentLoadingDefault();
+    this.common.presentLoadingDefault();
     this.restservice.getAllbranches().subscribe(Agences => {
 
-      console.log('data a ' + Agences)
-      Agences = this.branche = Agences;
-      console.log(Agences)
-      this.loadingfinish()
-      // var a=data.results
-this.iserror=false;
+        console.log('data a ' + Agences)
+        Agences = this.branche = Agences;
+        console.log(Agences)
+        this.common.loadingfinish()
+        this.common.toastInfo("Veuillez sélectionner une agence.");
 
-          }, (error) => {
-            this.iserror=true;
-          this.loadingfinish();
-          // alert(error+'erreur')
-          console.log(error)
-          this.presentToast();
-           console.log("status "+error.status)
-        }
+        // var a=data.results
+        this.iserror=false;
+      },
+      (error) => {
+        this.iserror=true;
+        this.common.loadingfinish();
+        // alert(error+'erreur')
+        console.log(error)
+        this.common.toastErrorRetry(() => {this.getAgence()} );
+        // this.presentToast();
+        // this.common.toastError(this.getAgence);
+        console.log("status "+error.status)
+        console.log("error: " +this.iserror);
+
+      }
       //this.loadingfinish();
-
-  )
-
+    )
   }
 
   /**item taped */
@@ -117,19 +93,23 @@ this.iserror=false;
   }
   //***************** */
 
-  //test
-
-presentToast() {
-  let toast = this.toastCtrl.create({
+   presentToast() {
+    let toast = this.toastCtrl.create({
     message: 'Problème de connexion',
-    duration: 3000,
-    position: 'bottom'
-  });
+  //  duration: 3000,
+    position: 'bottom',
+    showCloseButton:true,
+    closeButtonText:"Ressayer"
+    });
 
-  toast.onDidDismiss(() => {
-    console.log('Dismissed toast');
-  });
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+      this.getAgence();
+      // this.common.test(this.getAgence())
+    });
 
-  toast.present();
-}
+    toast.present();
+  }
+
+
 }

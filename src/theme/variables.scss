@@ -46,6 +46,18 @@ $font-path: "../assets/fonts";
 //--------------------------------------------------
 @import "default";
 @import "moov";
+@import "mtn";
+.toast-error .toast-wrapper {
+    background-color: #f53d3d !important;
+    // color: #f53d3d;
+}
+
+.page-content-error div {
+    display: block!important;
+    margin: 0 auto!important;
+    padding: 7em !important;
+}
+
 
 /***************************************************************************
     Bootstap Customization

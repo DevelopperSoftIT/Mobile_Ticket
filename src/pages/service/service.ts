@@ -1,11 +1,10 @@
+import { Common } from './../../shared/common';
 import { GlobalVars } from './../../shared/global';
-import { ToastController } from 'ionic-angular/components/toast/toast';
-
-  import { Http } from '@angular/http';
-  import { Component } from '@angular/core';
-  import { NavController,NavParams,LoadingController,AlertController } from 'ionic-angular';
-  import {Showticket}  from'../showticket/showticket'
-  import {Restservice} from '../../app/restservice/restservice'
+import { Http } from '@angular/http';
+import { Component } from '@angular/core';
+import { NavController,NavParams,AlertController } from 'ionic-angular';
+import {Showticket}  from'../showticket/showticket'
+import {Restservice} from '../../app/restservice/restservice'
 
 
 
@@ -15,91 +14,74 @@ import { ToastController } from 'ionic-angular/components/toast/toast';
     providers:[Restservice]
   })
   export class ServicePage {
-  movies: Array<any>;
-  Service:Array<any>;
-  brancheName?:string ;
-   loading: any;
-   client?:string;
-   iserror: boolean = false;
-  id:number;
-    constructor(private toastCtrl: ToastController,public loadingCtrl: LoadingController,private navParams: NavParams,public navCtrl: NavController,public alertCtrl: AlertController, private restservice:Restservice,private http:Http) {
+    movies: Array<any>;
+    Service:Array<any>;
+    brancheName?:string ;
+    loading: any;
+    client?:string;
+    iserror: boolean = false;
+    id:number;
+    constructor(private common:Common,private navParams: NavParams,public navCtrl: NavController,public alertCtrl: AlertController, private restservice:Restservice,private http:Http) {
       this.client=GlobalVars.getClient()
       this.id=navParams.get('id');
       this.brancheName=navParams.get('name');
       console.log("this.id "+this.id);
       this.getService(this.id);
     }
+  ngAfterViewInit() {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+     setInterval(()=>{this.refleshService(this.id)},15000)
+  }
 
-    ngOnInit() {
-//this.getService(this.id);6
-      //  this. searchMovieDB("mod");
-         console.log('initializing ...... ag mode')
-       //  this.getAllbranche();
-   //    this.getHttpnative();
-   //   this.getSecret();
-  //     this. Listag();
-         console.log('fin');
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
+  /**
+   * @param id reflesh service id
+   */
 
-    }
-  getService(id){
-    this.presentLoadingDefault();
-      console.log("point 2");
+  refleshService(id){
+ console.log("ServicePage.refleshService :");
     this.restservice.getServiceFromBranche(id).subscribe(Service =>{
-
-          console.log('data a '+Service)
-        Service= this.Service=Service;
-        // var a=data.results
-          console.log(Service)
-          this.loadingfinish()
-          this.iserror=false;
-          },error=>{
-            this.loadingfinish();
-             this.iserror=true;
-             this.presentToast();
-             console.log("Service"+ error.status)}
+      console.log('data a '+Service)
+      Service= this.Service=Service;
+      // var a=data.results
+      console.log(Service)
+    //  this.common.loadingfinish()
+     // this.common.toastInfo(this.common.getTranslate("Servicepage.nameservice"));
+      this.iserror=false;
+          },
+      error=>{
+        console.log("ServicePage.getService.error :");
+    ///    this.common.loadingfinish();
+        this.iserror=true;
+        this.common.toastErrorRetry(() =>{this.getService(this.id)});
+        console.log("Service"+ error.status)}
+      )
+  }
+  getService(id){
+    this.common.presentLoadingDefault();
+    console.log("ServicePage.getService :");
+    this.restservice.getServiceFromBranche(id).subscribe(Service =>{
+      console.log('data a '+Service)
+      Service= this.Service=Service;
+      // var a=data.results
+      console.log(Service)
+      this.common.loadingfinish()
+      this.common.toastInfo(this.common.getTranslate("Servicepage.nameservice"));
+      this.iserror=false;
+          },
+      error=>{
+        console.log("ServicePage.getService.error :");
+        this.common.loadingfinish();
+        this.iserror=true;
+        this.common.toastErrorRetry(() =>{this.getService(this.id)});
+        console.log("Service"+ error.status)}
       )
     }
 
   /**item taped */
   itemTaped(service){
     this.navCtrl.setRoot(Showticket,{id:service.serviceId,idbr:this.id,sernam:service.serviceName,branchename:this.brancheName});
-      console.log("taped"+ service.serviceId);
-
+    console.log("ServicePage.itemTaped"+ service.serviceId);
   }
-  //***************** */
-
-//test
-presentLoadingDefault() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Chargement en cours...'
-    });
-    this.loading.present();
-
-
-  }
-  loadingfinish() {
-    setTimeout(() => {
-      this.loading.dismiss();
-    }, 1000);
-
-    //this.Rrefreshe();
-
-  }
-  presentToast() {
-  let toast = this.toastCtrl.create({
-    message: 'Problème de connexion',
-    duration: 3000,
-    position: 'bottom'
-  });
-
-  toast.onDidDismiss(() => {
-    console.log('Dismissed toast');
-  });
-
-  toast.present();
-}
-
 
   }

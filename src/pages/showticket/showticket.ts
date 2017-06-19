@@ -1,15 +1,11 @@
+import { Common } from './../../shared/common';
 import { ServicePage } from './../service/service';
 import { GlobalVars } from './../../shared/global';
 import { HomePage } from './../home/home';
-import { ToastController } from 'ionic-angular/components/toast/toast';
-import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { VisitStatusEntity } from './../../app/entitie/visit-status.entity';
-//import { VisitEntity } from './../../app/entitie/visit.entity';
-//import { timeout } from 'rxjs/operator/timeout';
-//import { createIdentifierToken } from '@angular/compiler/src/identifiers';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { Restservice } from '../../app/restservice/restservice'
 //import {TextToSpeech} from '@ionic-native/text-to-speech';
 import { LocalNotifications } from '@ionic-native/local-notifications';
@@ -79,12 +75,13 @@ export class Showticket {
   cancelbuttoncancel: string = "Non";
   messagecancel: string = "Voulez vous  annuler la visite";
   text: string = "cool";
+  notificationpush:string="Vous ête appelés";
   client?:string;
 
 
-  constructor(private appMinimize: AppMinimize,private toastCtrl: ToastController, public translate: TranslateService, private platform: Platform, private backgroundMode: BackgroundMode, private localNotifications: LocalNotifications, public navCtrl: NavController, private restservice: Restservice, private navParams: NavParams, public loadingCtrl: LoadingController, private alertCtrl: AlertController) {
+  constructor(private common:Common,private appMinimize: AppMinimize, public translate: TranslateService, private platform: Platform, private backgroundMode: BackgroundMode, private localNotifications: LocalNotifications, public navCtrl: NavController, private restservice: Restservice, private navParams: NavParams, private alertCtrl: AlertController) {
     this.client=GlobalVars.getClient()
-    this.presentLoadingDefault();
+  //  this.common.presentLoadingDefault();
     this.idser = navParams.get('id');
     this.idbr = navParams.get('idbr');
     this.branchename = navParams.get('branchename');
@@ -121,14 +118,6 @@ export class Showticket {
 
   }
 
-  ngOnInit() {
-    if (this.visitId != null) {
-      //
-      console.log('init')
-    }
-
-  }
-
   /*async sayText():Promise<any>{
     try{
       await this.tts.speak({text:this.text,locale:"fr-FR",rate:0.5}).then(res=>{
@@ -143,8 +132,8 @@ export class Showticket {
   }*/
   getvisit(idser, idbr) {
 
-    console.log("point 2 showticketPage");
-    this.restservice.creatvisit(idser, idbr).subscribe(ticketinfo => {
+      console.log("Showticket.getvisit :");
+      this.restservice.creatvisit(idser, idbr).subscribe(ticketinfo => {
 
       console.log('data showticket ' + ticketinfo)
       ticketinfo = this.ticketinfo = ticketinfo;
@@ -162,10 +151,15 @@ export class Showticket {
       if (this.visitId != null) {
         setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 1000);
       }
-      this.loadingfinish();
+      this.iserror=false;
+      this.common.loadingfinish();
+       this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
       console.log(ticketinfo)
-    }, error => {
-      this.loadingfinish();
+    },
+    error => {
+      this.common.loadingfinish();
+      this.iserror=true;
+      this.common.toastErrorRetry(()=>{this.getvisit(this.idser,this.idbr)})
       // alert(error + 'erreur')
     }
     )
@@ -183,7 +177,7 @@ export class Showticket {
           role: 'cancel',
           handler: () => {
             this.istiketpresente = true;
-            setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 5000);
+            setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 3000);
             console.log('Cancel clicked');
           }
         },
@@ -192,7 +186,8 @@ export class Showticket {
           handler: () => {
 
             this.SuprimerTicket();
-            this.navCtrl.setRoot(ServicePage)
+            this.navCtrl.setRoot(ServicePage,{ id: this.branchId,name:this.branchename})
+            // this.navCtrl.setRoot(ServicePage)
             console.log('Buy clicked');
           }
         }
@@ -258,7 +253,7 @@ export class Showticket {
 
       if (this.iscalled) {
         // Verifier le statut pour savoir lorsque le ticket passe au status END
-        setTimeout(() => { this.teststatut(ticketviststatus) }, 3000);
+        setTimeout(() => { this.teststatut(ticketviststatus) }, 2000);
       }
       else {
         //
@@ -279,7 +274,7 @@ export class Showticket {
         })();
 
         /* Appel de test status */
-        setTimeout(() => { this.teststatut(ticketviststatus) }, 3000);
+        setTimeout(() => { this.teststatut(ticketviststatus) }, 2000);
 
 
       }
@@ -295,7 +290,8 @@ export class Showticket {
       if(error.status==404 && this.iscalled){
          this.isticketfinish = true
       }else{
-      this.iserror = true;
+        this.iserror = true;
+        this.gevisitstatus(this.idbr,this.idser,this.checksum)
       }
     })
 /*    .catch(error => {
@@ -304,23 +300,6 @@ export class Showticket {
     })*/
   }
 
-
-  //**looding  chargemet  */
-  presentLoadingDefault() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Chargement en cours...'
-    });
-    this.loading.present();
-  }
-
-  /**Chageme,t terminé  */
-  loadingfinish() {
-    setTimeout(() => {
-      this.loading.dismiss();
-    }, 3000);
-    // this.ecoute=true;
-    //this.Rrefreshe();
-  }
   /**voir si la position est superieur 10 */
   showrang(): any {
     if (this.visitPosition > 10) {
@@ -356,23 +335,24 @@ export class Showticket {
         if (this.queueId != Viststate.queueId) {
           this.sernam = Viststate.queueName;
         }
-        this.timer = TimerObservable.create(5000, 5000);
+      //  this.timer = TimerObservable.create(5000, 5000);
         if (!this.showrang()) {
           setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 10000)
         } else {
           console.log('verifie')
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 3000)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
         }
 
       } else if (Viststate.currentStatus === 'CALLED') {
         // this.istiketpresente = false;
         if (this.iscalled) {
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 3000)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
         } else {
           this.guichet = Viststate.servicePointName;
+          this.common.toastInfo(this.common.getTranslate("Showticketpage.yourturn")+this.guichet);
           this.notification();
           this.presentAlert()
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 3000)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
         }
         //this.text="Vous ete attendu";
         // this.sayText();
@@ -424,7 +404,7 @@ export class Showticket {
     this.iscalled = true;
     this.localNotifications.schedule({
       id: 1,
-      text: 'Vous ete appele',
+      text: this.notificationpush,
       // sound: '../../assets/YourTurn.wav',
       data: { secret: "nonif" }
     });
@@ -432,30 +412,28 @@ export class Showticket {
   }
   /**Annuler Ticket */
   SuprimerTicket() {
-    this.presentLoadingDefault()
+    this.common.presentLoadingDefault()
     this.restservice.cancelvisit(this.branchId, this.visitId, this.checksum).then(ticketsuprime => {
-      this.loadingfinish();
+      this.common.loadingfinish();
       console.log(ticketsuprime)
 
     }, error => {
       console.log('erreur ' + error);
-      this.loadingfinish();
+      this.common.loadingfinish();
+      this.common.toastErrorRetry(()=>{this.SuprimerTicket()})
     }
     )
   }
   /**charger les translation  */
-  getTranslante(id): any {
-    this.translate.get(id).subscribe((res: string) => {
-      return res;
-    });
-  }
-
   chargeTranslate() {
     // this.titlenotif = this.getTranslante('Showticketpage.dialog.titleTicketCall');
     // this.titlecancel =  this.getTranslante('Dialogue.titlecancel');
 
     this.translate.get('Showticketpage.dialog.titleTicketCall').subscribe((res: string) => {
       this.titlenotif = res;
+    });
+    this.translate.get('Showticketpage.notificationpush').subscribe((res: string) => {
+      this.notificationpush = res;
     });
     this.translate.get('Dialogue.titlecancel').subscribe((res: string) => {
       this.titlecancel = res;
@@ -476,39 +454,6 @@ export class Showticket {
       this.cancelbuttonnotif = res;
     });
 
-  }
-
-  /**Tosat en cas d'erreur */
-  presentToast() {
-    let toast = this.toastCtrl.create({
-      message: 'Appuyer sur la touche du milieu ou annuler le ticket',
-      duration: 3000,
-      position: 'bottom'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
-  }
-
-  toastError() {
-    this.toast("Problème de connexion");
-  }
-
-  toast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 3000,
-      position: 'bottom'
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-    });
-
-    toast.present();
   }
   /***retour home */
   home() {

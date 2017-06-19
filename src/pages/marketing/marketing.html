@@ -1,17 +1,15 @@
-<ion-header color='primary'>
-    <ion-navbar color='primary'>
-        <ion-toolbar color='primary'>
-            <ion-title> {{'ModuleMarketingPage.title' | translate }} </ion-title>
-            <!--<ion-title color="primary" id="sub-title" class="sub-title toolbar-title-md toolbar-title" style="font-size:12px"> {{'Listeagencepage.namepage' | translate }} </ion-title>-->
-            <!--<div color="primary" class="sub-title toolbar-title-md toolbar-title" style="font-size:12px"> {{'Listeagencepage.namepage' | translate }} </div>-->
+<ion-header>
+    <ion-navbar color='primary_'>
+        <ion-toolbar>
+            <ion-title> {{'ModuleTicketPage.title' | translate }} </ion-title>
+            <div class="sub-title toolbar-title-md toolbar-title">{{client}} </div>
         </ion-toolbar>
     </ion-navbar>
 </ion-header>
-
 <ion-content class="has-header">
-    <div>
-        <div class="page-message"> {{'ModuleMarketingPage.message' | translate }}</div>
-    </div>
+
+    <div class="page-message"> {{'ModuleMarketingPage.message' | translate }}</div>
+
     <!--
             <ion-card>
 
@@ -33,9 +31,9 @@
                 </ion-item>
 
             </ion-card>-->
-    <ion-content class="has-header">
 
-        <!--     <ion-card *ngFor=" let mark of Marckic">
+
+    <!--     <ion-card *ngFor=" let mark of Marckic">
 
             <img src='{{mark.url}}' />
             <div class="card-title">{{mark.message}}</div>
@@ -53,6 +51,4 @@
             Aimez-nous
             </button>
         </ion-card>-->
-
-    </ion-content>
 </ion-content>
