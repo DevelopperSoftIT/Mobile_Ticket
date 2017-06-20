@@ -18,22 +18,22 @@ import {TranslateService} from '@ngx-translate/core';
 
 })
 export class HomePage {
-client:string
+  client:string
   constructor(public navCtrl: NavController,translate: TranslateService,public popoverCtrl: PopoverController) {
-this.client=GlobalVars.getClient();
+    this.client=GlobalVars.getClient();
   }
- private passnew(){
-this.navCtrl.push(ListagencePage);
+  private passnew(){
+  this.navCtrl.push(ListagencePage);
     console.log("test");
   } /*
    private parametreshow(){
-this.navCtrl.push(Parametre);
+  this.navCtrl.push(Parametre);
     console.log("test");
   }
   private showServices() {
   //  this.navCtrl.push(ServicePage);
   }*/
-private showMarketing() {
+  private showMarketing() {
     this.navCtrl.push(MarketingPage);
   }
   presentPopover(myEvent) {

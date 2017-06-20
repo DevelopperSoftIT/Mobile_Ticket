@@ -1,5 +1,4 @@
 import { Common } from './../../shared/common';
-import { ServicePage } from './../service/service';
 import { GlobalVars } from './../../shared/global';
 import { HomePage } from './../home/home';
 import { VisitStatusEntity } from './../../app/entitie/visit-status.entity';
@@ -12,6 +11,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Platform } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
+import { ListagencePage } from "../listagence/listagence";
 @Component({
   selector: 'page-showticket',
   templateUrl: 'showticket.html',
@@ -186,8 +186,8 @@ export class Showticket {
           handler: () => {
 
             this.SuprimerTicket();
-            this.navCtrl.setRoot(ServicePage,{ id: this.branchId,name:this.branchename})
-            // this.navCtrl.setRoot(ServicePage)
+            // this.navCtrl.setRoot(ServicePage,{ id: this.branchId,name:this.branchename})
+            this.navCtrl.setRoot(ListagencePage)
             console.log('Buy clicked');
           }
         }
