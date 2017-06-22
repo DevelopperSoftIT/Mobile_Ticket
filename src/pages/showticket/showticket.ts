@@ -92,6 +92,7 @@ export class Showticket {
     this.sernam = navParams.get('sernam');
     this.getvisit(this.idser, this.idbr);
     this.backgroundMode.enable();
+    this.backgroundMode.configure({title:"Mobile Ticket",text:"Ticket en cours ..."})
     /*if (this.visitId != null) {
       while (true) {
         console.log("check");

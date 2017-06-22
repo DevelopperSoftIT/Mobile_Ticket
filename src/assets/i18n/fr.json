@@ -61,13 +61,14 @@
         "okcancel": "Oui"
     },
     "Loading": {
-        "message": "Chargement en cours..."
+        "messageContent": "Chargement en cours..."
     },
     "Error": {
         "errorMessage": "Problème de connexion",
-        "errorButton": "Réessayer",
+        "buttonTryToast": "Réessayer",
         "taostMessage": "",
-        "loadingMessage": ""
+        "loadingMessage": "",
+        "buttonCloseToast": "Fermer"
     },
     "ModuleRendezVousPage": {
         "title": "Prise de rendez-vous",

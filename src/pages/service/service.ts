@@ -21,7 +21,7 @@ import {Restservice} from '../../app/restservice/restservice'
     client?:string;
     iserror: boolean = false;
     id:number;
-    startRefrech:boolean=false;
+    startRefrech:number=1;
     constructor(private common:Common,private navParams: NavParams,public navCtrl: NavController,public alertCtrl: AlertController, private restservice:Restservice,private http:Http) {
       this.client=GlobalVars.getClient()
       this.id=navParams.get('id');
@@ -34,28 +34,43 @@ import {Restservice} from '../../app/restservice/restservice'
     //Add 'implements AfterViewInit' to the class.
     // this.startRefrech=true;
     // this.startRefreshTim()
+    console.log("startRefreshTim begin")
+    this.startRefrech =setInterval(()=>{
+      console.log("startRefreshTim begin")
+      this.refleshService(this.id)
+    },15000)
 
   }
+  /*ngOnDestroy() {
+  if (this.startRefrech) {
+    console.log("clearInterval begin")
+    clearInterval(this.startRefrech);
+  }
+}*/
 
   ionViewDidLoad(){
     this.getService(this.id);
   }
   ionViewWillLeave() {
     console.log("Quiter la page service")
+    if (this.startRefrech) {
+      console.log("clearInterval ionViewWillLeave")
+    clearInterval(this.startRefrech);
+   }
     //this.common.toastErrorRetry(null);
   //  this.common.toastErrorRetry(() =>{this.getService(this.id)},false);
    // this.common.destoryToast();
   //  this.startRefrech=false;
    //this.startRefreshTim()
   }
-  startRefreshTim(){
+  /*startRefreshTim(){
     console.log("startRefreshTim begin")
     if(this.startRefrech){
       console.log("startRefres etat "+this.startRefrech)
       setInterval(()=>{this.refleshService(this.id)},15000)
     }
     console.log("startRefreshTim end")
-  }
+  }*/
   /**
    * @param id reflesh service id
    */

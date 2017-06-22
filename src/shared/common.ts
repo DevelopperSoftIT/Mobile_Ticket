@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { ToastController,Toast } from 'ionic-angular/components/toast/toast';
+import { ToastController } from 'ionic-angular/components/toast/toast';
 
 
 @Injectable()
@@ -48,7 +48,7 @@ export class Common{
  public presentLoadingDefault() {
     console.log("Common.presentLoadingDefault: ")
     this.loading = this.loadingCtrl.create({
-      content: 'Chargement en cours...'
+      content: this.getTranslate("Loading.messageContent")
     });
     this.loading.present();
   }
@@ -68,7 +68,7 @@ export class Common{
    * @param showbutton
    * @param methode
    */
-  toast(msg, duration = 30000, position = 'middile', showbutton = false,buttonMessage='Fermre',methode?:void){
+  toast(msg, duration = 30000, position = 'middile', showbutton = false,buttonMessage=this.getTranslate("Error.buttonCloseToast")){
     console.log("Common.toast: durre " +duration)
     let toast = this.toastCtrl.create({
       message: msg,
@@ -79,26 +79,15 @@ export class Common{
     });
 
     toast.onDidDismiss(() => {
-      if(methode != null){
-        methode;
-      }
       console.log('Dismissed toast');
     });
     toast.present();
   }
-/**
- * toast  info
- * @param msg
- * @param duration
- * @param position
- * @param showbutton
- * @param methode
- */
 
-  toastError(methode?:any) {
-    console.log("Common.toastError: "+methode)
-    this.toast( 'Problème de connexion',10000,'bottom', true,'Réessayer', methode);
-  }
+  // toastError(methode?:any) {
+  //   console.log("Common.toastError: "+methode)
+  //   this.toast( 'Problème de connexion',10000,'bottom', true,'Réessayer');
+  // }
 
   /**
    * toast info
@@ -117,12 +106,12 @@ export class Common{
 
   toastErrorRetry(callback: () => void/*,iscallback=true*/) {
      this.tc = this.toastCtrl.create({
-    message: 'Problème de connexion',
+    message: this.getTranslate("Error.errorMessage"),
     //  duration: 3000,
     position: 'bottom',
     showCloseButton:true,
     cssClass:"toast-error",
-    closeButtonText:"Ressayer",
+    closeButtonText:this.getTranslate("Error.buttonTryToast"),
      dismissOnPageChange:true
     });
 
@@ -157,6 +146,10 @@ export class Common{
       this.messageLoading = res;
     });
   }
+  /**
+   *
+   * @param msgtots message to translate
+   */
   getTranslate(msgtots):string{
     var ts;
     this.translate.get(msgtots).subscribe((res: string) => {
