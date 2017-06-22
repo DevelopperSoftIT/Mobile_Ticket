@@ -17,8 +17,8 @@
     },
     "ModuleTicketPage": {
         "title": "Prise de ticket",
-        "subtitle": " Veuillez choisir une agence",
-        "message": " Veuillez choisir une agence"
+        "subtitle": "Veuillez choisir une agence",
+        "message": "Veuillez choisir une agence"
 
     },
     "Showticketpage": {
@@ -28,11 +28,11 @@
         "note": "Votre position dans la file d'attente et votre ticket",
         "namepage": "Votre Place est ",
         "notewelcom": "Bienvenue à",
-        "yourturn": "Veuillez passez au",
+        "yourturn": "Ticket appelé au {{guichet}}",
         "okbtn": "Ok",
         "ticketEndMessage": "Merci pour votre visite.",
         "dialog": {
-            "titleTicketCall": "Ticket appelé"
+            "titleTicketCall": "Appel du ticket"
         },
         "position": {
             "first": "ère",
@@ -40,8 +40,7 @@
             "third": "ème",
             "other": "ème"
         },
-        "notificationpush": "Vous ête appelés"
-
+        "notificationpush": "Votre ticket N° {{ticket}} est appelé au {{guichet}} "
     },
     "Contactpage": {
         "namepage": "Contact",
@@ -55,10 +54,10 @@
     "Dialogue": {
         "titlenotif": "Notification",
         "titlecancel": "Annuler la visite",
-        "massagenofif": "Vous ête attendus au ",
+        "massagenofif": "Votre ticket est appelé au {{guichet}} ",
         "massagecancel": "Voulez-vous vrament annuler votre ticket ?",
-        "oknotif": "ok",
-        "cancelbuttonnotif": "non",
+        "oknotif": "OK",
+        "cancelbuttonnotif": "Non",
         "okcancel": "Oui"
     },
     "Loading": {

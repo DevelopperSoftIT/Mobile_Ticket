@@ -12,6 +12,7 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { Platform } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { ListagencePage } from "../listagence/listagence";
+// import {sprintf} from "sprintf-js";
 @Component({
   selector: 'page-showticket',
   templateUrl: 'showticket.html',
@@ -39,6 +40,7 @@ export class Showticket {
   hilightSelcted: boolean = false;
   iserror: boolean = false;
   guichet: string;
+
   /**Queut info  */
 
   public servicePointName: string = "";
@@ -75,8 +77,10 @@ export class Showticket {
   cancelbuttoncancel: string = "Non";
   messagecancel: string = "Voulez vous  annuler la visite";
   text: string = "cool";
-  notificationpush:string="Vous ête appelés";
+  notificationpush:string="Votre ticket N°";
+  notificationpush2:string="est appelé au";
   client?:string;
+  param = {guichet:" guichet"};
 
 
   constructor(private common:Common,private appMinimize: AppMinimize, public translate: TranslateService, private platform: Platform, private backgroundMode: BackgroundMode, private localNotifications: LocalNotifications, public navCtrl: NavController, private restservice: Restservice, private navParams: NavParams, private alertCtrl: AlertController) {
@@ -291,7 +295,8 @@ export class Showticket {
          this.isticketfinish = true
       }else{
         this.iserror = true;
-        this.gevisitstatus(this.idbr,this.idser,this.checksum)
+          this.common.toastErrorRetry(()=>{this.gevisitstatus(this.idbr,this.idser,this.checksum)})
+
       }
     })
 /*    .catch(error => {
@@ -349,7 +354,8 @@ export class Showticket {
           setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
         } else {
           this.guichet = Viststate.servicePointName;
-          this.common.toastInfo(this.common.getTranslate("Showticketpage.yourturn")+this.guichet);
+          this.param={guichet:this.guichet};
+         // this.common.toastInfo(this.common.getTranslate("Showticketpage.yourturn")+this.guichet);
           this.notification();
           this.presentAlert()
           setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
@@ -362,9 +368,12 @@ export class Showticket {
   }
   /**Alert de ticket  */
   presentAlert() {
+    this.translate.get('Dialogue.massagenofif',{guichet:this.guichet}).subscribe((res: string) => {
+      this.messagenotif = res;
+    });
     let alert = this.alertCtrl.create({
       title: this.titlenotif,
-      subTitle: this.messagenotif + this.servicePointName,
+      subTitle: this.messagenotif,
       buttons: [{
         text: this.okbuttonenotif,
         handler: () => {
@@ -401,6 +410,9 @@ export class Showticket {
   }
   /**Notification  */
   notification() {
+    this.translate.get('Showticketpage.notificationpush',{ ticket: this.ticketNumber,guichet:this.guichet}).subscribe((res: string) => {
+      this.notificationpush = res;
+    });
     this.iscalled = true;
     this.localNotifications.schedule({
       id: 1,
@@ -428,19 +440,25 @@ export class Showticket {
   chargeTranslate() {
     // this.titlenotif = this.getTranslante('Showticketpage.dialog.titleTicketCall');
     // this.titlecancel =  this.getTranslante('Dialogue.titlecancel');
-
+    // this.notificationpush2=this.common.getTranslate("Showticketpage.notificationpush2");
+    //this.messagenotif=this.common.getTranslate("Dialogue.massagenofif");
     this.translate.get('Showticketpage.dialog.titleTicketCall').subscribe((res: string) => {
       this.titlenotif = res;
     });
-    this.translate.get('Showticketpage.notificationpush').subscribe((res: string) => {
+
+    this.translate.get('Showticketpage.notificationpush',{ ticket: this.ticketNumber,guichet:this.guichet}).subscribe((res: string) => {
       this.notificationpush = res;
     });
+
+    /*this.translate.get('Showticketpage.notificationpush1').subscribe((res: string) => {
+      this.notificationpush1 = res;
+    });*/
     this.translate.get('Dialogue.titlecancel').subscribe((res: string) => {
       this.titlecancel = res;
     });
-    this.translate.get('Dialogue.massagenofif').subscribe((res: string) => {
-      this.messagenotif = res;
-    });
+    // this.translate.get('Dialogue.massagenofif').subscribe((res: string) => {
+    //   this.messagenotif = res;
+    // });
     this.translate.get('Dialogue.massagecancel').subscribe((res: string) => {
       this.messagecancel = res;
     });

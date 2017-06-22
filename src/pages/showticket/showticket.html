@@ -34,7 +34,7 @@
         </div>
 
         <div *ngIf="iscalled && !isticketfinish">
-            <div class="page-message">{{'Showticketpage.yourturn' | translate}} {{guichet}} </div>
+            <div class="page-message">{{'Showticketpage.yourturn' | translate:param }} </div>
         </div>
 
         <div *ngIf="!isticketfinish" class="ticket_container ticket_info parent-center parent-center:before">
@@ -53,7 +53,8 @@
         </div>
     </div>
 
-    <error *ngIf="iserror && !isticketfinish" (click)="gevisitstatus(branchId, visitId,checksum);"></error>
+    <error *ngIf="iserror && !isticketfinish"></error>
+    <!--<error *ngIf="iserror && !isticketfinish" (click)="gevisitstatus(branchId, visitId,checksum);"></error>-->
 
     <!-- <div *ngIf="isticketfinish">
         <div class="fvisit">

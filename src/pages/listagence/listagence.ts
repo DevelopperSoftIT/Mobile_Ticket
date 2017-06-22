@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { Common } from './../../shared/common';
 import { GlobalVars } from './../../shared/global';
 import { ToastController } from 'ionic-angular/components/toast/toast';
@@ -26,7 +27,8 @@ export class ListagencePage {
     public navCtrl: NavController,
     public alertCtrl: AlertController,
     private restservice: Restservice,
-    private http: Http) {
+    private http: Http,
+    public translate: TranslateService) {
     this.client=GlobalVars.getClient()
 
   }
@@ -34,7 +36,10 @@ export class ListagencePage {
   ionViewDidLoad() {
     console.log('load enter')
     this.getAgence();
-
+  }
+  ionViewWillLeave() {
+    console.log("Quiter la page")
+    //this.common.destoryToast();
   }
 
   /*getRefreche() {

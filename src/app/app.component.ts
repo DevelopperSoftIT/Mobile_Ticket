@@ -1,5 +1,4 @@
 import { Settings } from './../providers/settings';
-import { AppMinimize } from '@ionic-native/app-minimize';
 import {HomePage }from './../pages/home/home';
 import {Component }from '@angular/core';
 import {Platform }from 'ionic-angular';
@@ -76,12 +75,11 @@ translateConfig() {
       this.globalvars.setClient("SOFT-IT");
        //this.globalvars.setClient("Moov Bénin");
       // Url proxy de l'API Gateway en mode developpement
-      // this.globalvars.setUrl('/api/')
+    //  this.globalvars.setUrl('/api/')
 
 
 
     }
-
   }
 
 }

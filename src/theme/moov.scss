@@ -1,6 +1,6 @@
     //theme custom for moov
     .moov {
-        $colors: ( primary: rgba(106, 151, 24, 255), primary-text: #fff, secondary: rgba(248, 248, 248, 0.75), danger: #f53d3d, light: #f4f4f4, dark: #222, tabbar: #1f7998);
+        $colors: ( primary: rgba(106, 151, 24, 255), primary-text: #fff, secondary: rgba(248, 248, 248, 0.75), secondary-text: #000, danger: #f53d3d, light: #f4f4f4, dark: #222, tabbar: #1f7998);
         .toolbar-background {
             background-color: map-get($colors, primary);
             ;
@@ -60,18 +60,19 @@ font-weight: 200 !important;
             margin-bottom: auto;
             padding: auto;
             align-content: center;
-            color: white;
+            color: map-get($colors, primary-text);
             font-size: 20px;
         }
         .laberror {
             font-size: 20px;
-            color: white;
+            color: map-get($colors, primary-text);
         }
         .btn-default {
             display: block !important;
             padding: 1.625em !important;
             margin: 1em auto !important;
             /* width: 250px; */
+            color: map-get($colors, secondary-text);
             background-color: map-get($colors, secondary) !important;
             font-family: Helvetica;
             font-weight: lighter !important;
@@ -81,25 +82,15 @@ font-weight: 200 !important;
             margin-right: auto;
             width: 75%;
         }
-        /*entete
-.titre {
-display: block;
-font-size: 20px;
-padding: 10px auto;
-margin: 20px auto;
-text-align: center;
-color: white;
-background: transparent !important;
-//  font-family: 'Nanami-Rounded-Medium'
-}*/
         .btn-custom1 {
             display: block !important;
             padding: 1.5em 0.5em !important;
             margin: 1em auto !important;
             text-align: center !important;
             font-size: 1.5em !important;
-            color: white !important;
-            background-color: rgba(106, 151, 24, 0.85) !important;
+            color: map-get($colors, primary-text);
+            background-color: map-get($colors, primary);
+            ;
             width: 85% !important;
             font-weight: lighter !important;
             border-radius: 0 64px 64px !important;
@@ -254,7 +245,7 @@ Bootstap Customization
         }
         .ticket-service-name {
             margin-top: 0.5em;
-            color: black !important;
+            color: map-get($colors, secondary-text);
             font-size: 20px !important;
             width: 10em !important;
             line-height: 24px;
@@ -294,7 +285,7 @@ Bootstap Customization
         }
         .sub-heading-text-2 {
             font-size: 20px;
-            color: #FFFFFF;
+            color: map-get($colors, primary-text);
             //  font-family: Nanami-Rounded-Light;
             width: 75%;
             margin: 0 auto;
@@ -317,7 +308,7 @@ Bootstap Customization
         ///queut info
         .queue-itm {
             display: inline-block;
-            color: black;
+            color: map-get($colors, secondary-text);
             vertical-align: middle;
             margin-right: 2px;
         }
@@ -353,7 +344,7 @@ Bootstap Customization
             max-width: 50px;
             max-height: 50px;
             display: inline-table;
-            color: white;
+            color: map-get($colors, primary-text);
         }
         .queue-itm.animselected {
             animation: pulse-selected 2s;
@@ -370,7 +361,7 @@ Bootstap Customization
         }
         .guichet {
             font-size: 25px;
-            color: white;
+            color: map-get($colors, primary-text);
             vertical-align: middle;
             text-align: center;
             font-family: 'Nanami-Rounded-Medium';
@@ -393,7 +384,7 @@ Bootstap Customization
             }
         }
         .labfin {
-            color: white;
+            color: map-get($colors, primary-text);
             font-size: 25px;
             vertical-align: middle;
             text-align: center;

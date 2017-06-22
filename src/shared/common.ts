@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { ToastController } from 'ionic-angular/components/toast/toast';
+import { ToastController,Toast } from 'ionic-angular/components/toast/toast';
 
 
 @Injectable()
@@ -12,6 +12,7 @@ export class Common{
 
   loading: any;
   messageLoading:string="Chargement en cours";
+  tc:any;
   /**
    *
    * @param toastCtrl
@@ -56,7 +57,7 @@ export class Common{
     console.log(" Common.loadingfinish: ")
     setTimeout(() => {
       this.loading.dismiss();
-    }, 1000);
+    }, 100);
   }
 
   /**
@@ -114,22 +115,36 @@ export class Common{
  * @param callback
  */
 
-  toastErrorRetry(callback: () => void) {
-    let tc = this.toastCtrl.create({
+  toastErrorRetry(callback: () => void/*,iscallback=true*/) {
+     this.tc = this.toastCtrl.create({
     message: 'Problème de connexion',
     //  duration: 3000,
     position: 'bottom',
     showCloseButton:true,
     cssClass:"toast-error",
-    closeButtonText:"Ressayer"
+    closeButtonText:"Ressayer",
+     dismissOnPageChange:true
     });
 
-    tc.onDidDismiss(() => {
+     this.tc.onDidDismiss((data, role) => {
+        console.log('toastErrorRetry - onDidDismiss begin');
+        // console.log(data);
+        // console.log(role);
+        if (role== "close") {
+          callback();
+        }
+        console.log('toastErrorRetry - onDidDismiss end')
+    });
+
+     this.tc.present();
+  }
+  destoryToast(){
+    console.log('destoryToast');
+    // this.tc.dismiss();
+    this.tc.onDidDismiss(() => {
       console.log('toastErrorRetry - onDidDismiss');
-      callback();;
-    });
 
-    tc.present();
+    });
   }
 
 /**
@@ -138,15 +153,14 @@ export class Common{
  chargeTranslate() {
     // this.titlenotif = this.getTranslante('Showticketpage.dialog.titleTicketCall');
     // this.titlecancel =  this.getTranslante('Dialogue.titlecancel');
-
-    this.translate.get('Loading.message').subscribe((res: string) => {
+      this.translate.get('Loading.message').subscribe((res: string) => {
       this.messageLoading = res;
     });
   }
   getTranslate(msgtots):string{
     var ts;
-     this.translate.get(msgtots).subscribe((res: string) => {
-     ts = res;
+    this.translate.get(msgtots).subscribe((res: string) => {
+      ts = res;
     });
     return ts;
   }

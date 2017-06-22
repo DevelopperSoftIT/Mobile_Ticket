@@ -21,25 +21,47 @@ import {Restservice} from '../../app/restservice/restservice'
     client?:string;
     iserror: boolean = false;
     id:number;
+    startRefrech:boolean=false;
     constructor(private common:Common,private navParams: NavParams,public navCtrl: NavController,public alertCtrl: AlertController, private restservice:Restservice,private http:Http) {
       this.client=GlobalVars.getClient()
       this.id=navParams.get('id');
       this.brancheName=navParams.get('name');
       console.log("this.id "+this.id);
-      this.getService(this.id);
+
     }
   ngAfterViewInit() {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
-     setInterval(()=>{this.refleshService(this.id)},15000)
+    // this.startRefrech=true;
+    // this.startRefreshTim()
+
   }
 
+  ionViewDidLoad(){
+    this.getService(this.id);
+  }
+  ionViewWillLeave() {
+    console.log("Quiter la page service")
+    //this.common.toastErrorRetry(null);
+  //  this.common.toastErrorRetry(() =>{this.getService(this.id)},false);
+   // this.common.destoryToast();
+  //  this.startRefrech=false;
+   //this.startRefreshTim()
+  }
+  startRefreshTim(){
+    console.log("startRefreshTim begin")
+    if(this.startRefrech){
+      console.log("startRefres etat "+this.startRefrech)
+      setInterval(()=>{this.refleshService(this.id)},15000)
+    }
+    console.log("startRefreshTim end")
+  }
   /**
    * @param id reflesh service id
    */
 
   refleshService(id){
- console.log("ServicePage.refleshService :");
+    console.log("ServicePage.refleshService : start");
     this.restservice.getServiceFromBranche(id).subscribe(Service =>{
       console.log('data a '+Service)
       Service= this.Service=Service;
@@ -52,10 +74,11 @@ import {Restservice} from '../../app/restservice/restservice'
       error=>{
         console.log("ServicePage.getService.error :");
     ///    this.common.loadingfinish();
-        this.iserror=true;
-        this.common.toastErrorRetry(() =>{this.getService(this.id)});
+       // this.iserror=true;
+        //this.common.toastErrorRetry(() =>{this.getService(this.id)});
         console.log("Service"+ error.status)}
       )
+      console.log("ServicePage.refleshService : end");
   }
   getService(id){
     this.common.presentLoadingDefault();
