@@ -1,13 +1,10 @@
 import { GlobalVars } from './../../shared/global';
 import { PrdvPage } from './../prdv/prdv';
 import { PopoverPage } from './../popover/popover';
-//import { ServicePage } from './../service/service';
 import { Component } from '@angular/core';
 import { NavController,PopoverController } from 'ionic-angular';
-//import {NewticketPage}  from'../newticket/newticket'
 import {ListagencePage}  from'../listagence/listagence'
 import {MarketingPage} from '../marketing/marketing'
-import {Parametre} from '../parametre/parametre'
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -19,7 +16,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class HomePage {
   client:string
-  constructor(public navCtrl: NavController,translate: TranslateService,public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController,private translate: TranslateService,public popoverCtrl: PopoverController) {
     this.client=GlobalVars.getClient();
   }
   private passnew(){

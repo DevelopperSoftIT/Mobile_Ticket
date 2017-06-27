@@ -2,7 +2,8 @@ import { Settings } from './../providers/settings';
 import {HomePage }from './../pages/home/home';
 import {Component }from '@angular/core';
 import {Platform }from 'ionic-angular';
-import {StatusBar, Splashscreen }from 'ionic-native';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import {StatusBar } from '@ionic-native/status-bar';
 import {Restservice}from './restservice/restservice'
 import {GlobalVars }from './../shared/global';
 //import {AgencesEntite} from './restservice/AgenceEntitie'
@@ -25,10 +26,16 @@ export class MyApp {
 
 
 rootPage = HomePage;
-
 selectedTheme: String;
-constructor(platform:Platform, private storage:Storage, private translate:TranslateService, private mobileServer:MobileServer,private globalvars:GlobalVars,
-private settings:Settings) {
+
+constructor(platform:Platform,
+  private storage:Storage,
+  private translate:TranslateService,
+  private mobileServer:MobileServer,
+  private globalvars:GlobalVars,
+  private splashScreen:SplashScreen,
+  private statusBar:StatusBar,
+  private settings:Settings) {
 //Chargement du theme
   this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
 /**chargement de la translation  */
@@ -36,8 +43,8 @@ private settings:Settings) {
   this.initConfig();
   platform.ready().then(() =>  {
 
-  StatusBar.styleDefault();
-  Splashscreen.hide();
+ this.statusBar.styleDefault();
+ this.splashScreen.hide();
   });
 }
 
@@ -75,7 +82,7 @@ translateConfig() {
       this.globalvars.setClient("SOFT-IT");
        //this.globalvars.setClient("Moov Bénin");
       // Url proxy de l'API Gateway en mode developpement
-       //this.globalvars.setUrl('/api/')
+       this.globalvars.setUrl('/api/')
 
 
 

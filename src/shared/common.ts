@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { ToastController } from 'ionic-angular/components/toast/toast';
+import { ToastController } from 'ionic-angular';
 
 
 @Injectable()
@@ -19,7 +19,10 @@ export class Common{
    * @param loadingCtrl
    * @param translate
    */
-  constructor(private toastCtrl: ToastController,public loadingCtrl: LoadingController,public translate: TranslateService) {
+  constructor(
+    private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController,
+    private translate: TranslateService) {
     this.chargeTranslate();
 
   }
@@ -29,18 +32,17 @@ export class Common{
  */
   //Affichier le toast
   public  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
 
-  let toast = this.toastCtrl.create({
-    message: msg,
-     duration: 3000,
-    position: 'bottom'
+    });
 
-   });
-
-  toast.onDidDismiss(() => {
+    toast.onDidDismiss(() => {
     console.log('Dismissed toast');
-  });
-  toast.present();
+    });
+    toast.present();
 }
 /**
  * Default loading

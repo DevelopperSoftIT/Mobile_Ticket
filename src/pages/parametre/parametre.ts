@@ -1,3 +1,4 @@
+import { GlobalVars } from './../../shared/global';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
@@ -7,29 +8,27 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'parametre.html'
 })
 export class Parametre {
-num:any;
-  constructor(public navCtrl: NavController,private storage:Storage) {
-
+  num:any;
+  client?:string;
+  constructor(
+    private navCtrl: NavController,
+    private storage:Storage) {
+      this.client=GlobalVars.getClient()
   }
-ngOnInit() {
+  ngOnInit() {
   this.getMum();
   //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
   //Add 'implements OnInit' to the class.
-
-}
-getMum(){
+  }
+  getMum(){
    this.storage.get('numero').then((val) => {
-         console.log('Your age is', val);
-
-          this.num=val;
-
-
-
+      console.log('Your age is', val);
+      this.num=val;
        })
-}
-modifnum(){
+  }
+  modifnum(){
   console.log('modif');
-this.storage.set('numero',''+this.num);
-this.navCtrl.pop();
-}
+  this.storage.set('numero',''+this.num);
+  this.navCtrl.pop();
+  }
 }

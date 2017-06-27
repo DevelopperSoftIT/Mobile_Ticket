@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Common } from './../../shared/common';
 import { GlobalVars } from './../../shared/global';
-import { ToastController } from 'ionic-angular/components/toast/toast';
+import { ToastController } from 'ionic-angular';
 import { Component} from '@angular/core';
 import { ServicePage } from './../service/service';
 import { Http } from '@angular/http';
@@ -23,12 +23,13 @@ export class ListagencePage {
   client:string
 
   constructor(private toastCtrl: ToastController,
-   /*public loadingCtrl: LoadingController*/private common:Common,
-    public navCtrl: NavController,
-    public alertCtrl: AlertController,
+   /*public loadingCtrl: LoadingController*/
+    private common:Common,
+    private navCtrl: NavController,
+    private alertCtrl: AlertController,
     private restservice: Restservice,
     private http: Http,
-    public translate: TranslateService) {
+    private translate: TranslateService) {
     this.client=GlobalVars.getClient()
 
   }
@@ -94,27 +95,6 @@ export class ListagencePage {
   itemTaped(branche) {
     this.navCtrl.push(ServicePage, { id: branche.id,name:branche.name });
     console.log("taped" + branche.id);
-
   }
-  //***************** */
-
-   presentToast() {
-    let toast = this.toastCtrl.create({
-    message: 'Problème de connexion',
-  //  duration: 3000,
-    position: 'bottom',
-    showCloseButton:true,
-    closeButtonText:"Ressayer"
-    });
-
-    toast.onDidDismiss(() => {
-      console.log('Dismissed toast');
-      this.getAgence();
-      // this.common.test(this.getAgence())
-    });
-
-    toast.present();
-  }
-
 
 }

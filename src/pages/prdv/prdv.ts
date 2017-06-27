@@ -15,7 +15,8 @@ import { NavController, NavParams } from 'ionic-angular';
 export class PrdvPage {
   client?:string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private navCtrl: NavController,
+    private navParams: NavParams) {
         this.client=GlobalVars.getClient()
 
   }

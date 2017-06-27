@@ -1,23 +1,18 @@
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
 import { Settings } from './../providers/settings';
 import { GlobalVars } from './../shared/global';
 import { Common } from './../shared/common';
 import { PrdvPage } from './../pages/prdv/prdv';
 import { ErrorComponent } from './../components/error/error';
-//import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { PopoverPage } from './../pages/popover/popover';
-//import { TextToSpeech } from '@ionic-native/text-to-speech'
 import { Restservice } from './restservice/restservice';
-//import { HttpService } from './providers/http.service';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-//import { CloudSettings, CloudModule } from '@ionic/cloud-angular';
 import { MyApp } from './app.component';
 import { Showticket } from '../pages/showticket/showticket';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-//import { PostticketPage } from '../pages/postticket/postticket';
-import { TabsPage } from '../pages/tabs/tabs';
-import { NewticketPage } from '../pages/newticket/newticket';
 import { ServicePage } from '../pages/service/service'
 import { ListagencePage } from '../pages/listagence/listagence';
 import { MarketingPage } from '../pages/marketing/marketing';
@@ -27,11 +22,13 @@ import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-//import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Http } from '@angular/http'
 import { createTranslateLoader } from "./providers/createTranslateLoader";
 import { MobileServer } from "./restservice/mobileserver";
 import { AppMinimize } from '@ionic-native/app-minimize';
+//new Import ionic 3
+import {BrowserModule} from '@angular/platform-browser'
+
 
 //import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 /*
@@ -58,9 +55,6 @@ const cloudSettings: CloudSettings = {
     Showticket,
     ContactPage,
     HomePage,
-    TabsPage,
-    NewticketPage,
-
     ListagencePage,
     MarketingPage,
     Parametre,
@@ -76,8 +70,7 @@ const cloudSettings: CloudSettings = {
   ],
   imports: [HttpModule,
     IonicModule.forRoot(MyApp),
-    // CloudModule.forRoot(cloudSettings),
-
+    BrowserModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -93,9 +86,6 @@ const cloudSettings: CloudSettings = {
     Showticket,
     ContactPage,
     HomePage,
-    TabsPage,
-    NewticketPage,
-
     ListagencePage,
     MarketingPage,
     Parametre,
@@ -103,11 +93,10 @@ const cloudSettings: CloudSettings = {
     ServicePage,
     PopoverPage,
     PrdvPage,
-
-
-
     // PostticketPage
   ],
-  providers: [Settings,Restservice, MobileServer, Common, GlobalVars, BackgroundMode, AppMinimize, { provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [SplashScreen,
+              StatusBar,
+    Settings,Restservice, MobileServer, Common, GlobalVars, BackgroundMode, AppMinimize, { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule { }

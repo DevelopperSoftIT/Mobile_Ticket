@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams ,LoadingController} from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+// import { Geolocation } from '@ionic-native/geolocation';
 import {Restservice} from '../../app/restservice/restservice'
-import {TabsPage} from '../tabs/tabs';
 //import {StorageM} from '../../app/providers/storage'
 import { Storage } from '@ionic/storage';
 /*
@@ -15,7 +14,7 @@ declare var google;
 @Component({
   selector: 'page-geolocalisation',
   templateUrl: 'geolocalisation.html',
-  providers: [Geolocation]
+  // providers: [Geolocation]
 
 })
 export class GeolocalisationPage {
@@ -25,23 +24,20 @@ adr:string;
 lat:any[];
 prefix:number;
 num:number;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private geolocation: Geolocation,private restservice:Restservice,
-  private load:LoadingController,private storage:Storage) {
-    this.prefix= +229;
-             storage.ready().then(() => {
-
-       // set a key/value
-
-
-       // Or to get a key/value pair
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,/*private geolocation: Geolocation*/
+    private restservice:Restservice,
+    private load:LoadingController,private storage:Storage) {
+      this.prefix= +229;
+      storage.ready().then(() => {
        storage.get('numero').then((val) => {
         // console.log('Your age is', val);
          if(val!=null && val!="NaN"){
-         this.navCtrl.push(TabsPage);
-//this.getMum();
-//this.getMelocalise();
+        //  this.navCtrl.push(TabsPage);
+        //this.getMum();
+        //this.getMelocalise();
          }else{
-this.getMelocalise();
+        // this.getMelocalise();
          }
 
        })
@@ -76,7 +72,7 @@ this.storage.getMum().then(
   }
 );
 }*/
-getMelocalise(){
+/*getMelocalise(){
   let loading=this.load.create({
     content:'Localisation en cours .....',
     duration: 3000
@@ -115,7 +111,7 @@ this.restservice.getAdresse(adr).subscribe(resp=>{
  console.log(resp[0]);
 }
 );
-}
+}*/
  /*public geolocate():void{
 
   this.geolocation.getCurrentPosition({enableHighAccuracy:true, timeout:5000, maximumAge:0}).then(position => {
@@ -146,7 +142,7 @@ this.restservice.getAdresse(adr).subscribe(resp=>{
 {
   console.log(this.prefix);
   this.addMum(this.prefix+this.num);
-  this.navCtrl.push(TabsPage);
+  // this.navCtrl.push(TabsPage);
   console.log('continus');
 }
 

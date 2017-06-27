@@ -58,9 +58,9 @@ import {Restservice} from '../../app/restservice/restservice'
     clearInterval(this.startRefrech);
    }
     //this.common.toastErrorRetry(null);
-  //  this.common.toastErrorRetry(() =>{this.getService(this.id)},false);
-   // this.common.destoryToast();
-  //  this.startRefrech=false;
+    //  this.common.toastErrorRetry(() =>{this.getService(this.id)},false);
+    // this.common.destoryToast();
+    //  this.startRefrech=false;
    //this.startRefreshTim()
   }
   /*startRefreshTim(){

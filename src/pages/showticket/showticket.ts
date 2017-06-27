@@ -139,7 +139,6 @@ export class Showticket {
 
       console.log("Showticket.getvisit :");
       this.restservice.creatvisit(idser, idbr).subscribe(ticketinfo => {
-
       console.log('data showticket ' + ticketinfo)
       ticketinfo = this.ticketinfo = ticketinfo;
       // var a=data.results
@@ -192,7 +191,7 @@ export class Showticket {
 
             this.SuprimerTicket();
             // this.navCtrl.setRoot(ServicePage,{ id: this.branchId,name:this.branchename})
-            this.navCtrl.setRoot(ListagencePage)
+            this.navCtrl.setRoot(HomePage);
             console.log('Buy clicked');
           }
         }
@@ -248,7 +247,7 @@ export class Showticket {
       this.visitinfo = ticketviststatus;
 
       //verifier la connexion
-    /*  if (typeof  this.visitinfo == 'undefined' ) {
+      /*  if (typeof  this.visitinfo == 'undefined' ) {
         console.log('connection perdu')
         this.toastError();
         setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 10000);
@@ -300,10 +299,10 @@ export class Showticket {
 
       }
     })
-/*    .catch(error => {
+  /*    .catch(error => {
       console.log('Une erreur est survenue ' + error)
       console.log(error)
-    })*/
+  })*/
   }
 
   /**voir si la position est superieur 10 */
