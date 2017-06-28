@@ -121,7 +121,7 @@ export class Common{
         console.log('toastErrorRetry - onDidDismiss begin');
         // console.log(data);
         // console.log(role);
-        if (role== "close") {
+        if (role == "close") {
           callback();
         }
         console.log('toastErrorRetry - onDidDismiss end')

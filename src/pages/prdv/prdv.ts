@@ -14,15 +14,22 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class PrdvPage {
   client?:string;
-
+  date:any;
+  date2:any;
   constructor(private navCtrl: NavController,
     private navParams: NavParams) {
-        this.client=GlobalVars.getClient()
+     this.client=GlobalVars.getClient()
+     let datenow=Date.now()
+     this.date=new Date(datenow);
+     this.date2=new Date();
+     console.log(this.date)
+
 
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PrdvPage');
   }
+
 
 }

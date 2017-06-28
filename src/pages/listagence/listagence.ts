@@ -91,6 +91,27 @@ export class ListagencePage {
     )
   }
 
+  //fonction de verification de l'heur d'ouverture et fermeture des branches
+ /* brancheIsOpenOrClose(b):boolean{
+     let datenow=Date.now()
+     var date=new Date(datenow);
+     var time=date.getHours();
+     const [oph, opmin] =b.openTime.split(':')
+     const [clh, clm] = b.closeTime.split(':')
+     console.log(`${time}/ time open ${b.name} orchestra ${oph}`)
+     console.log(`${time}/ time close orchestra ${clh}`)
+    //  console.log(openTime+':'+closeTime)
+     if(+time > +oph && +time < +clh){
+       // this.removeBranche(b);
+        return false;
+     }else{
+      //return false;
+     }
+
+    return true;
+  }*/
+
+
   /**item taped */
   itemTaped(branche) {
     this.navCtrl.push(ServicePage, { id: branche.id,name:branche.name });

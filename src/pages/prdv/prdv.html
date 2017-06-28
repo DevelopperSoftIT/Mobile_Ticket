@@ -12,4 +12,12 @@
     <div>
         <p class="page-message"> {{'ModuleRendezVousPage.message' | translate }}</p>
     </div>
+    <div>
+        <p>
+            date heurs : {{date.getHours()}} : {{date.getMinutes()}} date utc : {{date.getTimezoneOffset()}} : {{date.getUTCHours()}}
+        </p>
+        <p>
+            date heurs : {{date2.getHours()}} : {{date2.getMinutes()}} date utc : {{date2.getTimezoneOffset()}} : {{date2.getUTCHours()}}
+        </p>
+    </div>
 </ion-content>

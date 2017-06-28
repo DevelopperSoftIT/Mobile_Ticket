@@ -12,12 +12,36 @@
 
     <div *ngIf="!iserror" class="page-content-default">
         <!--<div class="page-message"> {{'ModuleTicketPage.message' | translate }}</div>-->
-        <ion-list>
-            <ion-item *ngFor=" let b of branche" class="btn-custom1 round" (click)="itemTaped(b)">
+        <ion-list *ngFor=" let b of branche ">
+            <!--
+          <button class="btn-custom1 round " [disabled]="brancheIsOpenOrClose(b)" (click)="itemTaped(b)">
+              <div center>{{b.name}}</div>
+          </button>
+          -->
+            <!--<button class="btn-custom1" [disabled]="brancheIsOpenOrClose(b)" (click)="itemTaped(b)" ion-button round icon-right>-->
+            <button class="btn-custom1" [disabled]="!b.branchOpen" (click)="itemTaped(b)" ion-button round icon-right>
+            <ion-grid no-padding>
+              <ion-row no-padding>
+                <ion-col col-11 center >
+                  <div center>{{b.name}}</div>
+                </ion-col>
+                <ion-col col-1>
+                  <!--<ion-icon color='danger' name="md-close-circle" *ngIf="brancheIsOpenOrClose(b)"></ion-icon>-->
+                  <ion-icon color='danger' name="md-close-circle" *ngIf="!b.branchOpen"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid >
+          </button>
+        </ion-list>
+    </div>
+    <!--<div *ngIf="!iserror" class="page-content-default">
+        <div class="page-message"> {{'ModuleTicketPage.message' | translate }}</div>
+        <ion-list *ngFor=" let b of branche ">
+            <ion-item class="btn-custom1 round " *ngIf="checkOpenTime(b,b.openTime,b.closeTime)" [ngClass]="{hidecell:checkOpenTime(b,b.openTime,b.closeTime)}" (click)="itemTaped(b)">
                 <div center>{{b.name}}</div>
             </ion-item>
         </ion-list>
-    </div>
+    </div>-->
     <error *ngIf="iserror"></error>
     <!--<error *ngIf="iserror" (click)="getAgence()"></error>-->
 
