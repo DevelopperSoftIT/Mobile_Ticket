@@ -1,4 +1,4 @@
-import { GlobalVars } from './../../shared/global';
+import { GlobalVars } from './../../providers/global';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';

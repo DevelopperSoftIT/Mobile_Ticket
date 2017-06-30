@@ -1,0 +1,6 @@
+
+export const GlobalConstant= {
+  "VISIT_STATE_GET_INTERVAL" : 2000 ,
+  "SERVICE_FETCH_INTERVAL" : 15000 ,
+  "BRANCH_FETCH_RADIUS" : 10000
+}

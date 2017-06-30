@@ -1,12 +1,13 @@
+import { MobileServer } from './../providers/mobileserver';
+import { Restservice } from './../providers/restservice';
+import { GlobalVars } from './../providers/global';
+import { Common } from './../providers/common';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Settings } from './../providers/settings';
-import { GlobalVars } from './../shared/global';
-import { Common } from './../shared/common';
 import { PrdvPage } from './../pages/prdv/prdv';
 import { ErrorComponent } from './../components/error/error';
 import { PopoverPage } from './../pages/popover/popover';
-import { Restservice } from './restservice/restservice';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -23,11 +24,11 @@ import { HttpModule } from '@angular/http';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { Http } from '@angular/http'
-import { createTranslateLoader } from "./providers/createTranslateLoader";
-import { MobileServer } from "./restservice/mobileserver";
 import { AppMinimize } from '@ionic-native/app-minimize';
+import { createTranslateLoader } from "../providers/createTranslateLoader";
 //new Import ionic 3
 import {BrowserModule} from '@angular/platform-browser'
+import { Geolocation } from '@ionic-native/geolocation';
 
 
 
@@ -98,6 +99,8 @@ const cloudSettings: CloudSettings = {
   ],
   providers: [SplashScreen,
               StatusBar,
-    Settings,Restservice, MobileServer, Common, GlobalVars, BackgroundMode, AppMinimize, { provide: ErrorHandler, useClass: IonicErrorHandler }]
+    Settings,Restservice, MobileServer, Common, GlobalVars, BackgroundMode, AppMinimize, { provide: ErrorHandler, useClass: IonicErrorHandler },
+
+    Geolocation]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
-import { GlobalVars } from './../../shared/global';
+import { Common } from './../../providers/common';
+import { GlobalVars } from './../../providers/global';
 import { PrdvPage } from './../prdv/prdv';
 import { PopoverPage } from './../popover/popover';
 import { Component } from '@angular/core';
@@ -6,6 +7,7 @@ import { NavController,PopoverController } from 'ionic-angular';
 import {ListagencePage}  from'../listagence/listagence'
 import {MarketingPage} from '../marketing/marketing'
 import {TranslateService} from '@ngx-translate/core';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @Component({
   selector: 'page-home',
@@ -16,7 +18,12 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class HomePage {
   client:string
-  constructor(public navCtrl: NavController,private translate: TranslateService,public popoverCtrl: PopoverController) {
+  constructor(private globalvars:GlobalVars,
+    private navCtrl: NavController,
+    private translate: TranslateService,
+    private popoverCtrl: PopoverController,
+    private geolocation: Geolocation,
+    private common:Common) {
     this.client=GlobalVars.getClient();
   }
   private passnew(){
@@ -33,6 +40,14 @@ export class HomePage {
   private showMarketing() {
     this.navCtrl.push(MarketingPage);
   }
+
+  ngOnInit() {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+     this.getCordonat();
+
+  }
+
   presentPopover(myEvent) {
     let popover = this.popoverCtrl.create(PopoverPage);
     popover.present({
@@ -42,5 +57,21 @@ export class HomePage {
   pageprdv(){
     this.navCtrl.push(PrdvPage);
   }
+  /**
+   * Recuperer les cordonnées de geolocalisation
+   */
+  getCordonat(){
+    this.common.presentLoadingDefault();
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
+    this.globalvars.setLatitude(resp.coords.latitude);
+    this.globalvars.setLongitude(resp.coords.longitude);
+    this.common.loadingfinish()
+  }).catch((error) => {
+    this.common.loadingfinish()
+      console.log('Error getting location', error);
+    });
+  }
+
 
 }

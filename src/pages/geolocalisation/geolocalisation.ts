@@ -1,7 +1,7 @@
+import { Restservice } from './../../providers/restservice';
 import { Component } from '@angular/core';
 import { NavController, NavParams ,LoadingController} from 'ionic-angular';
 // import { Geolocation } from '@ionic-native/geolocation';
-import {Restservice} from '../../app/restservice/restservice'
 //import {StorageM} from '../../app/providers/storage'
 import { Storage } from '@ionic/storage';
 /*

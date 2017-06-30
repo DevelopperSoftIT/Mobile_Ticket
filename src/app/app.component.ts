@@ -1,26 +1,22 @@
+import { MobileServer } from './../providers/mobileserver';
+import { GlobalVars } from './../providers/global';
 import { Settings } from './../providers/settings';
 import {HomePage }from './../pages/home/home';
 import {Component }from '@angular/core';
 import {Platform }from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {StatusBar } from '@ionic-native/status-bar';
-import {Restservice}from './restservice/restservice'
-import {GlobalVars }from './../shared/global';
-//import {AgencesEntite} from './restservice/AgenceEntitie'
 //import { TabsPage } from '../pages/tabs/tabs';
 //import {GeolocalisationPage} from '../pages/geolocalisation/geolocalisation'
 import {Storage }from '@ionic/storage';
 import {TranslateService}from '@ngx-translate/core';
-import { MobileServer } from "./restservice/mobileserver";
 
 /*import {
   Push,
   PushToken
 } from '@ionic/cloud-angular';  */
 @Component( {
-templateUrl:'app.html',
-providers:[Restservice]
-
+templateUrl:'app.html'
 })
 export class MyApp {
 

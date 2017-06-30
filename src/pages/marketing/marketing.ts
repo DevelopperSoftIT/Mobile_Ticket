@@ -1,17 +1,16 @@
-import { GlobalVars } from './../../shared/global';
+import { MarketingEntitie } from './../../app/entitie/marketingEntite';
+import { Restservice } from './../../providers/restservice';
+import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
- import {Restservice} from '../../app/restservice/restservice'
 //import {ServicesPage}  from'../services/services'
 //import {ListagencePage}  from'../listagence/listagence'
-import {MarketingEntitie} from'../../app/entitie/marketingEntite'
 
 
 @Component({
   selector: 'page-marketing',
   templateUrl: 'marketing.html',
-   providers:[Restservice]
 })
 export class MarketingPage {
 Marckic: MarketingEntitie[];

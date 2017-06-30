@@ -1,18 +1,17 @@
-import { myConfig } from './../../providers/config';
-import { Common } from './../../shared/common';
-import { GlobalVars } from './../../shared/global';
+import { Restservice } from './../../providers/restservice';
+import { GlobalVars } from './../../providers/global';
+import { Common } from './../../providers/common';
+import { GlobalConstant } from './../../providers/constants';
 import { Http } from '@angular/http';
 import { Component } from '@angular/core';
 import { NavController,NavParams,AlertController } from 'ionic-angular';
 import {Showticket}  from'../showticket/showticket'
-import {Restservice} from '../../app/restservice/restservice'
 
 
 
   @Component({
     selector: 'page-service',
     templateUrl: 'service.html',
-    providers:[Restservice]
   })
   export class ServicePage {
     movies: Array<any>;
@@ -39,7 +38,7 @@ import {Restservice} from '../../app/restservice/restservice'
     this.startRefrech =setInterval(()=>{
       console.log("startRefreshTim begin")
       this.refleshService(this.id)
-    },myConfig.service_fetch_interval)
+    }, GlobalConstant.SERVICE_FETCH_INTERVAL)
 
   }
   /*ngOnDestroy() {

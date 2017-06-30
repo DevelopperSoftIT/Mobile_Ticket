@@ -1,6 +1,7 @@
-import { GlobalVars } from './../../shared/global';
+import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /*
   Generated class for the Prdv page.
@@ -16,8 +17,10 @@ export class PrdvPage {
   client?:string;
   date:any;
   date2:any;
+  longitude : number;
+  latitude : number;
   constructor(private navCtrl: NavController,
-    private navParams: NavParams) {
+    private navParams: NavParams,private geolocation: Geolocation) {
      this.client=GlobalVars.getClient()
      let datenow=Date.now()
      this.date=new Date(datenow);
@@ -29,7 +32,16 @@ export class PrdvPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PrdvPage');
+    this.getCordonat();
   }
-
+   getCordonat(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+    console.log(`longitude : ${resp.coords.longitude} latitude : ${resp.coords.latitude}`)
+    this.latitude = resp.coords.latitude;
+    this.longitude = resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
 
 }

@@ -1,22 +1,22 @@
-import { Common } from './../../shared/common';
-import { GlobalVars } from './../../shared/global';
+import { Restservice } from './../../providers/restservice';
+import { GlobalVars } from './../../providers/global';
+import { Common } from './../../providers/common';
 import { HomePage } from './../home/home';
 import { VisitStatusEntity } from './../../app/entitie/visit-status.entity';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { Restservice } from '../../app/restservice/restservice'
 //import {TextToSpeech} from '@ionic-native/text-to-speech';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Platform } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
-import { myConfig } from './../../providers/config';
+import { GlobalConstant } from './../../providers/constants';
 // import {sprintf} from "sprintf-js";
 @Component({
   selector: 'page-showticket',
   templateUrl: 'showticket.html',
-  providers: [Restservice, LocalNotifications]
+  providers: [ LocalNotifications]
 
 
 
@@ -154,7 +154,7 @@ export class Showticket {
       console.log(ticketinfo)
 
       if (this.visitId != null) {
-        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval);
+        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
       }
       this.iserror=false;
       this.common.loadingfinish();
@@ -182,7 +182,7 @@ export class Showticket {
           role: 'cancel',
           handler: () => {
             this.istiketpresente = true;
-            setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval);
+            setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
             console.log('Cancel clicked');
           }
         },
@@ -258,7 +258,7 @@ export class Showticket {
 
       if (this.iscalled) {
         // Verifier le statut pour savoir lorsque le ticket passe au status END
-        setTimeout(() => { this.teststatut(ticketviststatus) }, myConfig.flashInterval);
+        setTimeout(() => { this.teststatut(ticketviststatus) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
       }
       else {
         //
@@ -293,7 +293,7 @@ export class Showticket {
         console.log(this.fakeArray);
 
         /* Appel de test status */
-        setTimeout(() => { this.teststatut(ticketviststatus) }, myConfig.flashInterval);
+        setTimeout(() => { this.teststatut(ticketviststatus) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
 
 
       }
@@ -357,23 +357,23 @@ export class Showticket {
         }
       //  this.timer = TimerObservable.create(5000, 5000);
         if (!this.showrang()) {
-          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
+          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL)
         } else {
           console.log('verifie')
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL)
         }
 
       } else if (Viststate.currentStatus === 'CALLED') {
         // this.istiketpresente = false;
         if (this.iscalled) {
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL)
         } else {
           this.guichet = Viststate.servicePointName;
           this.param={guichet:this.guichet};
          // this.common.toastInfo(this.common.getTranslate("Showticketpage.yourturn")+this.guichet);
           this.notification();
           this.presentAlert()
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL)
         }
         //this.text="Vous ete attendu";
         // this.sayText();

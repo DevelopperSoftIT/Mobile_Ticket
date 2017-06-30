@@ -1,5 +1,5 @@
-import { GlobalVars } from './../../shared/global';
-import {VisitStatusEntity }from './../entitie/visit-status.entity';
+import { GlobalVars } from './global';
+import { VisitStatusEntity } from './../app/entitie/visit-status.entity';
 import {Injectable }from '@angular/core'
 import {Http }from '@angular/http'
 import {Observable }from 'rxjs/Observable';
@@ -42,7 +42,7 @@ export class Restservice {
     return this.http.get(this.baseUrl + "branches/?longitude=0&latitude=0&radius=2147483647", this.option).map(res => res.json());
   }
   /**Recuperer les branches avec la geolocalisation et du me */
-  getBranchesWithLocation(long,lat,raidus="2147483647") {
+  getBranchesWithLocation(long,lat,raidus=0) {
     console.log(`getbranche url: ${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`)
     // return this.http.get(this.baseUrl + "branches/?longitude="+long+"&latitude="+lat+"&radius="+raidus, this.option).map(res => res.json());
     return this.http.get(`${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`, this.option).map(res => res.json());

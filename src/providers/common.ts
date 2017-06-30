@@ -114,7 +114,7 @@ export class Common{
     showCloseButton:true,
     cssClass:"toast-error",
     closeButtonText:this.getTranslate("Error.buttonTryToast"),
-     dismissOnPageChange:true
+    dismissOnPageChange:true
     });
 
      this.tc.onDidDismiss((data, role) => {

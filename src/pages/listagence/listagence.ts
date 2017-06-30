@@ -1,14 +1,16 @@
+import { Restservice } from './../../providers/restservice';
+import { GlobalVars } from './../../providers/global';
+import { Common } from './../../providers/common';
 import { TranslateService } from '@ngx-translate/core';
-import { Common } from './../../shared/common';
-import { GlobalVars } from './../../shared/global';
 import { ToastController } from 'ionic-angular';
 import { Component} from '@angular/core';
 import { ServicePage } from './../service/service';
 import { Http } from '@angular/http';
 import { NavController} from 'ionic-angular';
-import { Restservice } from '../../app/restservice/restservice'
 import { AlertController } from 'ionic-angular';
-declare var MobileTicketAPI: any;
+import { Geolocation } from '@ionic-native/geolocation';
+import { GlobalConstant } from './../../providers/constants';
+
 @Component({
   selector: 'page-listagence',
   templateUrl: 'listagence.html',
@@ -20,7 +22,9 @@ export class ListagencePage {
   loading: any;
   ecoute: boolean = false;
   iserror: boolean = false;
-  client:string
+  client:string;
+  longitude : number;
+  latitude : number
 
   constructor(private toastCtrl: ToastController,
    /*public loadingCtrl: LoadingController*/
@@ -29,13 +33,17 @@ export class ListagencePage {
     private alertCtrl: AlertController,
     private restservice: Restservice,
     private http: Http,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private geolocation: Geolocation) {
     this.client=GlobalVars.getClient()
+    this.longitude=GlobalVars.getLongitude()
+    this.latitude=GlobalVars.getLatitude()
 
   }
 
   ionViewDidLoad() {
     console.log('load enter')
+  //  this.getCordonat();
     this.getAgence();
   }
   ionViewWillLeave() {
@@ -65,7 +73,7 @@ export class ListagencePage {
   getAgence() {
     this.common.presentLoadingDefault();
     // this.restservice.getAllbranches().subscribe(Agences => {
-    this.restservice.getBranchesWithLocation("2.421649173160738","6.376635426773302","0").subscribe(Agences => {
+    this.restservice.getBranchesWithLocation( this.longitude, this.latitude, GlobalConstant.BRANCH_FETCH_RADIUS).subscribe(Agences => {
         console.log('data a ' + Agences)
         Agences = this.branche = Agences;
         console.log(Agences)
@@ -145,5 +153,17 @@ export class ListagencePage {
     this.navCtrl.push(ServicePage, { id: branche.id,name:branche.name });
     console.log("taped" + branche.id);
   }
+  /**
+   * Recuperer les cordonnées de geolocalisation
+  getCordonat(){
+    this.geolocation.getCurrentPosition().then((resp) => {
+      console.log(`longitude : ${resp.coords.longitude} latitude : ${resp.coords.latitude}`)
+    this.latitude = resp.coords.latitude;
+    this.longitude = resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
+  }
+   */
 
 }
