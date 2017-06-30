@@ -41,7 +41,14 @@ export class Restservice {
     console.log("getbranche url: "+this.baseUrl + "branches/?longitude=0&latitude=0&radius=2147483647")
     return this.http.get(this.baseUrl + "branches/?longitude=0&latitude=0&radius=2147483647", this.option).map(res => res.json());
   }
+  /**Recuperer les branches avec la geolocalisation et du me */
+  getBranchesWithLocation(long,lat,raidus="2147483647") {
+    console.log(`getbranche url: ${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`)
+    // return this.http.get(this.baseUrl + "branches/?longitude="+long+"&latitude="+lat+"&radius="+raidus, this.option).map(res => res.json());
+    return this.http.get(`${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`, this.option).map(res => res.json());
+  }
 
+//recuperation de la position du client
   getAdresse(adr) {
     console.log('getAdresse ' + adr);
     var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + adr + '&key=AIzaSyCv-q1pzWPUy3vH_wHgsT1PxOJo6htg3uc';

@@ -125,6 +125,9 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+        *[nowrap] {
+            white-space: nowrap;
+        }
         //page home
         //page service
         .customer-waiting {

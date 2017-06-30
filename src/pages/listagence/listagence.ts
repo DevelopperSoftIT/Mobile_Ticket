@@ -64,6 +64,34 @@ export class ListagencePage {
 
   getAgence() {
     this.common.presentLoadingDefault();
+    // this.restservice.getAllbranches().subscribe(Agences => {
+    this.restservice.getBranchesWithLocation("2.421649173160738","6.376635426773302","0").subscribe(Agences => {
+        console.log('data a ' + Agences)
+        Agences = this.branche = Agences;
+        console.log(Agences)
+        this.common.loadingfinish()
+        this.common.toastInfo("Veuillez sélectionner une agence.");
+
+        // var a=data.results
+        this.iserror=false;
+      },
+      (error) => {
+        this.iserror=true;
+        this.common.loadingfinish();
+        // alert(error+'erreur')
+        console.log(error)
+        this.common.toastErrorRetry(() => {this.getAgence()} );
+        // this.presentToast();
+        // this.common.toastError(this.getAgence);
+        console.log("status "+error.status)
+        console.log("error: " +this.iserror);
+
+      }
+      //this.loadingfinish();
+    )
+  }
+  /*getAgence() {
+    this.common.presentLoadingDefault();
     this.restservice.getAllbranches().subscribe(Agences => {
 
         console.log('data a ' + Agences)
@@ -89,7 +117,7 @@ export class ListagencePage {
       }
       //this.loadingfinish();
     )
-  }
+  }*/
 
   //fonction de verification de l'heur d'ouverture et fermeture des branches
  /* brancheIsOpenOrClose(b):boolean{

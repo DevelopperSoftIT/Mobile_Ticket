@@ -1,6 +1,6 @@
     //theme custom for moov
     .mtn {
-        $colors: ( primary: rgba(2, 115, 155, 255), primary-text: #fff, secondary: rgba(2, 115, 155, 255), danger: #f53d3d, light: #f4f4f4, dark: #222, tabbar: #1f7998);
+        $colors: ( primary: rgba(2, 115, 155, 255), primary-text: #fff, secondary: rgba(255, 255, 255, 255), secondary-text: #000, danger: #f53d3d, light: #f4f4f4, dark: #222, tabbar: #1f7998);
         .toolbar-background {
             background-color: map-get($colors, primary);
         }
@@ -10,7 +10,7 @@
         .has-header {
             background-image: url(../assets/icon/backgroundmtn.png);
             //  background-image: url(../assets/icon/backgroudmoov.png);
-            background-repeat: no-repeat;
+            // background-repeat: no-repeat;
             background-position-x: center;
             background-position-y: center; //  background-size: contain;
             //background-color: red !important;
@@ -72,6 +72,7 @@ font-weight: 200 !important;
             margin: 1em auto !important;
             /* width: 250px; */
             font-family: Helvetica;
+            color: map-get($colors, secondary-text) !important;
             background-color: map-get($colors, secondary) !important;
             font-weight: lighter !important;
         }
@@ -97,11 +98,11 @@ background: transparent !important;
             margin: 1em auto !important;
             text-align: center !important;
             font-size: 1.5em !important;
-            color: white !important;
+            color: map-get($colors, secondary-text) !important;
             background-color: map-get($colors, secondary) !important;
             width: 85% !important;
             font-weight: lighter !important;
-            border-radius: 0 64px 64px !important;
+            border-radius: 64px 64px 64px !important;
         }
         .btn-custom1[icon-right] ion-icon {
             line-height: 1 !important;
@@ -115,7 +116,7 @@ background: transparent !important;
             //border-radius: 0 64px 64px;
         }
         .sub-title {
-            font-weight: lighter!important;
+            font-weight: lighter !important;
             font-size: 14px !important;
         }
         .toolbar-content-ios .sub-title {
@@ -127,7 +128,7 @@ background: transparent !important;
             padding: 0.25em;
             margin: 0.5em auto;
             text-align: center;
-            color: #555;
+            color: map-get($colors, secondary-text) !important;
         }
         *[no-padding] {
             padding: 0px !important;
@@ -135,6 +136,9 @@ background: transparent !important;
         *[text-ellipsis] {
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        *[nowrap] {
             white-space: nowrap;
         }
         /***************************************************************************
@@ -166,7 +170,8 @@ Bootstap Customization
         .customer-icon {
             width: 30px; //custom moov
             vertical-align: sub;
-            stroke: #fff; //custom moov
+            stroke: map-get($colors, secondary-text) !important;
+            ; //custom moov
             padding: 1px;
         }
         .tick-container {
@@ -312,6 +317,11 @@ Bootstap Customization
             margin-left: auto;
             margin-right: auto;
             display: block;
+        }
+        *[center] {
+            margin: auto;
+            display: block;
+            text-align: center;
         }
         ///queut info
         .queue-itm {

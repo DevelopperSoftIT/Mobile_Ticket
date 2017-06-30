@@ -11,7 +11,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { BackgroundMode } from '@ionic-native/background-mode';
 import { Platform } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
-import { ListagencePage } from "../listagence/listagence";
+import { myConfig } from './../../providers/config';
 // import {sprintf} from "sprintf-js";
 @Component({
   selector: 'page-showticket',
@@ -40,6 +40,7 @@ export class Showticket {
   hilightSelcted: boolean = false;
   iserror: boolean = false;
   guichet: string;
+  maxNumber:number=999;
 
   /**Queut info  */
 
@@ -153,7 +154,7 @@ export class Showticket {
       console.log(ticketinfo)
 
       if (this.visitId != null) {
-        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 1000);
+        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval);
       }
       this.iserror=false;
       this.common.loadingfinish();
@@ -181,7 +182,7 @@ export class Showticket {
           role: 'cancel',
           handler: () => {
             this.istiketpresente = true;
-            setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 3000);
+            setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval);
             console.log('Cancel clicked');
           }
         },
@@ -233,7 +234,7 @@ export class Showticket {
     }
     /*/ else if (this.index === this.upper && this.upper > this.prevUpperBound) {
          return true;
- }*/
+    }*/
     return true;
   }
 
@@ -257,7 +258,7 @@ export class Showticket {
 
       if (this.iscalled) {
         // Verifier le statut pour savoir lorsque le ticket passe au status END
-        setTimeout(() => { this.teststatut(ticketviststatus) }, 2000);
+        setTimeout(() => { this.teststatut(ticketviststatus) }, myConfig.flashInterval);
       }
       else {
         //
@@ -265,20 +266,34 @@ export class Showticket {
         this.servicePointName = this.visitinfo.servicePointName;
         // Trier  de rang
         this.fakeArray = (() => {
-          let startFromZero = false;
-          let array = Array(this.visitinfo.queueSize);
+          // let startFromZero = false;
+          let visibleLineSize = 10;
+          this.maxNumber = Number.MAX_VALUE;
+          // console.log('max value :' + maxNumber);
+          let array = Array(visibleLineSize);
+          // let array = Array(this.visitinfo.queueSize);
 
           for (let i = 0; i < array.length; i++) {
-            array[i] = i + (startFromZero ? 0 : 1);
+            if(this.visitPosition < visibleLineSize) {
+              if(this.visitinfo.queueSize > visibleLineSize ){
+                array[i] = visibleLineSize - i;
+              }else{
+                array[i] = i < this.visitinfo.queueSize ? ( this.visitinfo.queueSize - i ) : this.maxNumber;
+              }
+            } else {
+              array[i] = this.visitPosition < this.visitinfo.queueSize ? ( this.visitPosition + 1 - i ) : ( this.visitPosition - i );
+            }
+            // array[i] = i + (startFromZero ? 0 : 1);
           }
 
           return array.sort(function (a, b) {
             return b - a;
           });
         })();
+        console.log(this.fakeArray);
 
         /* Appel de test status */
-        setTimeout(() => { this.teststatut(ticketviststatus) }, 2000);
+        setTimeout(() => { this.teststatut(ticketviststatus) }, myConfig.flashInterval);
 
 
       }
@@ -342,23 +357,23 @@ export class Showticket {
         }
       //  this.timer = TimerObservable.create(5000, 5000);
         if (!this.showrang()) {
-          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 10000)
+          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
         } else {
           console.log('verifie')
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
         }
 
       } else if (Viststate.currentStatus === 'CALLED') {
         // this.istiketpresente = false;
         if (this.iscalled) {
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
         } else {
           this.guichet = Viststate.servicePointName;
           this.param={guichet:this.guichet};
          // this.common.toastInfo(this.common.getTranslate("Showticketpage.yourturn")+this.guichet);
           this.notification();
           this.presentAlert()
-          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 2000)
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, myConfig.flashInterval)
         }
         //this.text="Vous ete attendu";
         // this.sayText();

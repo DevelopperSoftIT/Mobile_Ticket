@@ -2,12 +2,6 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Settings provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Settings {
 
@@ -15,7 +9,7 @@ export class Settings {
 
     constructor() {
       this.theme = new BehaviorSubject('default');
-      // this.theme = new BehaviorSubject('mtn');
+      this.theme = new BehaviorSubject('mtn');
       // this.theme = new BehaviorSubject('moov');
 
     }

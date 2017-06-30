@@ -3,7 +3,6 @@
         <ion-toolbar>
             <ion-title> {{'ModuleTicketPage.title' | translate }} </ion-title>
             <div class="sub-title toolbar-title-md toolbar-title"> {{client}} </div>
-
         </ion-toolbar>
     </ion-navbar>
 </ion-header>
@@ -28,6 +27,7 @@
                 <ion-col col-1>
                   <!--<ion-icon color='danger' name="md-close-circle" *ngIf="brancheIsOpenOrClose(b)"></ion-icon>-->
                   <ion-icon color='danger' name="md-close-circle" *ngIf="!b.branchOpen"></ion-icon>
+                  <ion-icon name="ios-arrow-forward-outline" *ngIf="b.branchOpen"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-grid >

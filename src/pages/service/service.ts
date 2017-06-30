@@ -1,3 +1,4 @@
+import { myConfig } from './../../providers/config';
 import { Common } from './../../shared/common';
 import { GlobalVars } from './../../shared/global';
 import { Http } from '@angular/http';
@@ -38,7 +39,7 @@ import {Restservice} from '../../app/restservice/restservice'
     this.startRefrech =setInterval(()=>{
       console.log("startRefreshTim begin")
       this.refleshService(this.id)
-    },15000)
+    },myConfig.service_fetch_interval)
 
   }
   /*ngOnDestroy() {

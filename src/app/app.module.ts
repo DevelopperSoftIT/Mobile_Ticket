@@ -30,6 +30,7 @@ import { AppMinimize } from '@ionic-native/app-minimize';
 import {BrowserModule} from '@angular/platform-browser'
 
 
+
 //import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 /*
 const cloudSettings: CloudSettings = {
