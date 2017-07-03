@@ -11,6 +11,7 @@ export class Common{
    */
 
   loading: any;
+  loading2: any;
   messageLoading:string="Chargement en cours";
   tc:any;
   /**
@@ -54,11 +55,24 @@ export class Common{
     });
     this.loading.present();
   }
+ public LoadingCustom() {
+    console.log("Common.presentLoadingDefault 2: ")
+    this.loading2 = this.loadingCtrl.create({
+      content: this.getTranslate("Loading.messageContent")
+    });
+    this.loading2.present();
+  }
 
   loadingfinish() {
     console.log(" Common.loadingfinish: ")
     setTimeout(() => {
       this.loading.dismiss();
+    }, 100);
+  }
+  LoadingCustomfinish() {
+    console.log(" Common.loadingfinish 2: ")
+    setTimeout(() => {
+      this.loading2.dismiss();
     }, 100);
   }
 

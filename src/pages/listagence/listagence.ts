@@ -1,3 +1,4 @@
+import { DistanceCalculatorProvider } from './../../providers/distance-calculator/distance-calculator';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
@@ -25,6 +26,8 @@ export class ListagencePage {
   client:string;
   longitude : number;
   latitude : number
+  longitudeFromBranche : number;
+  latitudeFromBranche : number
 
   constructor(private toastCtrl: ToastController,
    /*public loadingCtrl: LoadingController*/
@@ -34,7 +37,9 @@ export class ListagencePage {
     private restservice: Restservice,
     private http: Http,
     private translate: TranslateService,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    private calculateDistanceProvider:DistanceCalculatorProvider) {
+
     this.client=GlobalVars.getClient()
     this.longitude=GlobalVars.getLongitude()
     this.latitude=GlobalVars.getLatitude()
@@ -43,8 +48,9 @@ export class ListagencePage {
 
   ionViewDidLoad() {
     console.log('load enter')
-  //  this.getCordonat();
+    //  this.getCordonat();
     this.getAgence();
+   // this.calculatorDistance();
   }
   ionViewWillLeave() {
     console.log("Quiter la page")
@@ -165,5 +171,12 @@ export class ListagencePage {
     });
   }
    */
+  /**
+   * getdistance
+   */
+  calculatorDistance(lat2,long2){
+  return  this.calculateDistanceProvider.getDistanceBetweenBranchAndClient(this.latitude,this.longitude,lat2,long2)
+    //console.log('Distance '+d)
+  }
 
 }

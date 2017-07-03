@@ -29,6 +29,7 @@ import { createTranslateLoader } from "../providers/createTranslateLoader";
 //new Import ionic 3
 import {BrowserModule} from '@angular/platform-browser'
 import { Geolocation } from '@ionic-native/geolocation';
+import { DistanceCalculatorProvider } from '../providers/distance-calculator/distance-calculator';
 
 
 
@@ -101,6 +102,7 @@ const cloudSettings: CloudSettings = {
               StatusBar,
     Settings,Restservice, MobileServer, Common, GlobalVars, BackgroundMode, AppMinimize, { provide: ErrorHandler, useClass: IonicErrorHandler },
 
-    Geolocation]
+    Geolocation,
+    DistanceCalculatorProvider]
 })
 export class AppModule { }

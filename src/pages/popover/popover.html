@@ -1,6 +1,6 @@
 <ion-list color='primary'>
     <ion-list-header>{{'Homepage.titles' | translate }}</ion-list-header>
-    <button ion-item (click)="close()">Accueil</button>
+    <button ion-item [disabled]="true" (click)="close()">Accueil</button>
     <button ion-item (click)="openparametre()">Paramètre</button>
-    <button ion-item (click)="close()">Contact</button>
+    <!--<button ion-item (click)="close()">Contact</button>-->
 </ion-list>

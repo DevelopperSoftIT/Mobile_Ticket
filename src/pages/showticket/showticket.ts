@@ -86,7 +86,7 @@ export class Showticket {
 
   constructor(private common:Common,private appMinimize: AppMinimize, public translate: TranslateService, private platform: Platform, private backgroundMode: BackgroundMode, private localNotifications: LocalNotifications, public navCtrl: NavController, private restservice: Restservice, private navParams: NavParams, private alertCtrl: AlertController) {
     this.client=GlobalVars.getClient()
-  //  this.common.presentLoadingDefault();
+     //  this.common.presentLoadingDefault();
     this.idser = navParams.get('id');
     this.idbr = navParams.get('idbr');
     this.branchename = navParams.get('branchename');
@@ -158,7 +158,7 @@ export class Showticket {
       }
       this.iserror=false;
       this.common.loadingfinish();
-       this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
+      this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
       console.log(ticketinfo)
     },
     error => {
@@ -193,7 +193,7 @@ export class Showticket {
             this.SuprimerTicket();
             // this.navCtrl.setRoot(ServicePage,{ id: this.branchId,name:this.branchename})
             this.navCtrl.setRoot(HomePage);
-            console.log('Buy clicked');
+            console.log('SuprimerTicket ok ');
           }
         }
       ]
@@ -242,11 +242,8 @@ export class Showticket {
   /** fonction etat visite */
   gevisitstatus(idbr, idse, cheksum) {
     console.log("get visite state");
-
     this.restservice.getcurentvisitstat(idbr, idse, cheksum).then(ticketviststatus => {
-
       this.visitinfo = ticketviststatus;
-
       //verifier la connexion
       /*  if (typeof  this.visitinfo == 'undefined' ) {
         console.log('connection perdu')
@@ -254,8 +251,6 @@ export class Showticket {
         setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, 10000);
         return;
       }*/
-
-
       if (this.iscalled) {
         // Verifier le statut pour savoir lorsque le ticket passe au status END
         setTimeout(() => { this.teststatut(ticketviststatus) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
@@ -290,12 +285,9 @@ export class Showticket {
             return b - a;
           });
         })();
-        console.log(this.fakeArray);
-
+        // console.log(this.fakeArray);
         /* Appel de test status */
         setTimeout(() => { this.teststatut(ticketviststatus) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
-
-
       }
       console.log(ticketviststatus)
       this.iserror = false;

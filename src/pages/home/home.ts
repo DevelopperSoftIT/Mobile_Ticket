@@ -61,14 +61,14 @@ export class HomePage {
    * Recuperer les cordonnées de geolocalisation
    */
   getCordonat(){
-    this.common.presentLoadingDefault();
+    this.common.LoadingCustom();
     this.geolocation.getCurrentPosition().then((resp) => {
-      console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
+    console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
     this.globalvars.setLatitude(resp.coords.latitude);
     this.globalvars.setLongitude(resp.coords.longitude);
-    this.common.loadingfinish()
+    this.common.LoadingCustomfinish()
   }).catch((error) => {
-    this.common.loadingfinish()
+       this.common.LoadingCustomfinish()
       console.log('Error getting location', error);
     });
   }
