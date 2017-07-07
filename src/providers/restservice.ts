@@ -43,6 +43,10 @@ export class Restservice {
   }
   /**Recuperer les branches avec la geolocalisation et du me */
   getBranchesWithLocation(long,lat,raidus=0) {
+    //verifier si la geolocalisation a echoue
+    if(long==0 && lat==0){
+      raidus=0;
+    }
     console.log(`getbranche url: ${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`)
     // return this.http.get(this.baseUrl + "branches/?longitude="+long+"&latitude="+lat+"&radius="+raidus, this.option).map(res => res.json());
     return this.http.get(`${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`, this.option).map(res => res.json());

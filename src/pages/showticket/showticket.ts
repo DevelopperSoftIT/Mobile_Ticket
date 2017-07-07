@@ -84,43 +84,52 @@ export class Showticket {
   param = {guichet:" guichet"};
 
 
-  constructor(private common:Common,private appMinimize: AppMinimize, public translate: TranslateService, private platform: Platform, private backgroundMode: BackgroundMode, private localNotifications: LocalNotifications, public navCtrl: NavController, private restservice: Restservice, private navParams: NavParams, private alertCtrl: AlertController) {
-    this.client=GlobalVars.getClient()
-     //  this.common.presentLoadingDefault();
-    this.idser = navParams.get('id');
-    this.idbr = navParams.get('idbr');
-    this.branchename = navParams.get('branchename');
-    this.sernam = navParams.get('sernam');
-    this.getvisit(this.idser, this.idbr);
-    this.backgroundMode.enable();
-    this.backgroundMode.configure({title:"Mobile Ticket",text:"Ticket en cours ..."})
-    /*if (this.visitId != null) {
-      while (true) {
-        console.log("check");
-        this.gevisitstatus(this.branchId, this.visitId, this.checksum);
-      }
-      //
-    }*/
-    this.platform.registerBackButtonAction(() => {
-      console.log('go back')
-      this.appMinimize.minimize().then(
-        success => console.log('Closed'),
-        err => console.log('Something went wrong')
-      );
-
-     /* if (this.istiketpresente === true) {
-        this.backgroundMode.enable();
-        this.presentToast();
-        console.log("ticketinfo")
-      } else {
-        console.log("exte")
-        this.platform.exitApp();
+  constructor(private common:Common,
+    private appMinimize: AppMinimize,
+    public translate: TranslateService,
+    private platform: Platform,
+    private backgroundMode: BackgroundMode,
+    private localNotifications: LocalNotifications,
+    public navCtrl: NavController,
+    private restservice: Restservice,
+    private navParams: NavParams,
+    private alertCtrl: AlertController) {
+      this.client=GlobalVars.getClient()
+      //  this.common.presentLoadingDefault();
+      this.idser = navParams.get('id');
+      this.idbr = navParams.get('idbr');
+      this.branchename = navParams.get('branchename');
+      this.sernam = navParams.get('sernam');
+      this.getvisit(this.idser, this.idbr);
+      this.backgroundMode.enable();
+      this.backgroundMode.configure({title:"Mobile Ticket",text:"Ticket en cours ..."})
+      /*if (this.visitId != null) {
+        while (true) {
+          console.log("check");
+          this.gevisitstatus(this.branchId, this.visitId, this.checksum);
+        }
+        //
       }*/
+      this.platform.registerBackButtonAction(() => {
+        console.log('go back')
+        this.appMinimize.minimize().then(
+          success => console.log('Closed'),
+          err => console.log('Something went wrong')
+        );
 
-      //
+      /* if (this.istiketpresente === true) {
+          this.backgroundMode.enable();
+          this.presentToast();
+          console.log("ticketinfo")
+        } else {
+          console.log("exte")
+          this.platform.exitApp();
+        }*/
 
-    }, 200);
-    this.chargeTranslate();
+        //
+
+      }, 200);
+      this.chargeTranslate();
 
   }
 
@@ -301,9 +310,11 @@ export class Showticket {
       if(error.status==404 && this.iscalled){
          this.isticketfinish = true
       }else{
-        this.iserror = true;
+          /*this.iserror = true;
           this.common.toastErrorRetry(()=>{this.gevisitstatus(this.idbr,this.idser,this.checksum)})
-
+*/
+          this.common.toastInfoProblemConnexion();
+          setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL)
       }
     })
   /*    .catch(error => {

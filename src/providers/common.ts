@@ -1,5 +1,6 @@
+import { PopoverPage } from './../pages/popover/popover';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadingController } from 'ionic-angular';
+import { LoadingController, PopoverController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 
@@ -115,12 +116,18 @@ export class Common{
   toastInfo(msg, duration = 5000, position = 'middle', showbutton = true) {
     this.toast(msg, duration, position, showbutton);
   }
+  toastInfoProblemConnexion(msg=this.getTranslate("Error.errorMessage"), duration = 5000, position = 'bottom', showbutton = true) {
+    this.toast(msg, duration, position, showbutton);
+  }
 /**
  * toast error  and try
  * @param callback
  */
 
   toastErrorRetry(callback: () => void/*,iscallback=true*/) {
+    if(this.tc){
+      this.destoryToast();
+    }
      this.tc = this.toastCtrl.create({
     message: this.getTranslate("Error.errorMessage"),
     //  duration: 3000,
@@ -173,6 +180,16 @@ export class Common{
     });
     return ts;
   }
+  /**
+   * presente popover
+   * @param myEvent
+   * @param activeAcueil
+   */
+  // presentPopover(activeAcueil?) {
+  //   let popover = this.popoverCtrl.create(PopoverPage,{"activeAcueil":activeAcueil});
+  //   popover.present({
 
+  //   });
+  // }
 }
 

@@ -3,6 +3,11 @@
         <ion-toolbar>
             <ion-title> {{'ModuleTicketPage.title' | translate }} </ion-title>
             <div class="sub-title toolbar-title-md toolbar-title"> {{client}} </div>
+            <ion-buttons end>
+                <button ion-button icon-only (click)="presentPopover($event)">
+                    <ion-icon name="more" item-right ></ion-icon>
+                </button>
+            </ion-buttons>
         </ion-toolbar>
     </ion-navbar>
 </ion-header>
@@ -23,9 +28,9 @@
               <ion-row no-padding>
                 <ion-col col-11 center >
                   <div center>{{b.name}}</div>
-                  <div center> {{calculatorDistance(b.latitude,b.longitude)}}</div>
+                  <!--<div center> {{calculatorDistance(b.latitude,b.longitude)}}</div>-->
                 </ion-col>
-                <ion-col class="icon-custom" col-1>
+                <ion-col class="icon-custom_" col-1>
                   <!--<ion-icon color='danger' name="md-close-circle" *ngIf="brancheIsOpenOrClose(b)"></ion-icon>-->
                   <ion-icon color='danger' name="md-close-circle" *ngIf="!b.branchOpen"></ion-icon>
                   <ion-icon name="ios-arrow-forward-outline" *ngIf="b.branchOpen"></ion-icon>

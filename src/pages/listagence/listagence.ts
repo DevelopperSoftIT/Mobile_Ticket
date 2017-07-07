@@ -1,9 +1,10 @@
+import { PopoverPage } from './../popover/popover';
 import { DistanceCalculatorProvider } from './../../providers/distance-calculator/distance-calculator';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastController } from 'ionic-angular';
+import { ToastController, PopoverController } from 'ionic-angular';
 import { Component} from '@angular/core';
 import { ServicePage } from './../service/service';
 import { Http } from '@angular/http';
@@ -27,7 +28,8 @@ export class ListagencePage {
   longitude : number;
   latitude : number
   longitudeFromBranche : number;
-  latitudeFromBranche : number
+  latitudeFromBranche : number;
+  startRefrech:number=1;
 
   constructor(private toastCtrl: ToastController,
    /*public loadingCtrl: LoadingController*/
@@ -38,7 +40,9 @@ export class ListagencePage {
     private http: Http,
     private translate: TranslateService,
     private geolocation: Geolocation,
-    private calculateDistanceProvider:DistanceCalculatorProvider) {
+    private calculateDistanceProvider:DistanceCalculatorProvider,
+    private popoverCtrl: PopoverController,
+    private globalvars:GlobalVars) {
 
     this.client=GlobalVars.getClient()
     this.longitude=GlobalVars.getLongitude()
@@ -53,33 +57,23 @@ export class ListagencePage {
    // this.calculatorDistance();
   }
   ionViewWillLeave() {
-    console.log("Quiter la page")
-    //this.common.destoryToast();
+    console.log("Quiter la page Agence")
+    if (this.startRefrech) {
+      console.log("clearInterval ionViewWillLeave")
+    clearInterval(this.startRefrech);
+   }}
+
+  ngAfterViewInit() {
+    this.startRefrech =setInterval(()=>{
+      console.log("startRefreshTim begin")
+      this.refleshCordonat();
+    }, GlobalConstant.BRANCH_REFRESH_TIMER)
   }
-
-  /*getRefreche() {
-    this.restservice.getAllbranches().subscribe(Agences => {
-
-      console.log('data a ' + Agences)
-      Agences = this.branche = Agences;
-      //this.loadingfinish();
-      // var a=data.results
-      console.log(Agences)
-      this.iserror=false;
-       } , error => {
-          this.iserror=true;
-          alert(error + 'erreur')
-          this.common.loadingfinish();
-        }
-      //
-
-    )
-  }*/
 
   getAgence() {
     this.common.presentLoadingDefault();
     // this.restservice.getAllbranches().subscribe(Agences => {
-    this.restservice.getBranchesWithLocation( this.longitude, this.latitude, GlobalConstant.BRANCH_FETCH_RADIUS).subscribe(Agences => {
+    this.restservice.getBranchesWithLocation(this.longitude, this.latitude, GlobalConstant.BRANCH_FETCH_RADIUS).subscribe(Agences => {
         console.log('data a ' + Agences)
         Agences = this.branche = Agences;
         console.log(Agences)
@@ -177,6 +171,45 @@ export class ListagencePage {
   calculatorDistance(lat2,long2){
   return  this.calculateDistanceProvider.getDistanceBetweenBranchAndClient(this.latitude,this.longitude,lat2,long2)
     //console.log('Distance '+d)
+  }
+   presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverPage,{"activeAcueil":false});
+    popover.present({
+      ev: myEvent
+    });
+  }
+  refleshBranch(){
+    this.restservice.getBranchesWithLocation(this.longitude, this.latitude, GlobalConstant.BRANCH_FETCH_RADIUS).subscribe(Agences => {
+        console.log('data a ' + Agences)
+        Agences = this.branche = Agences;
+        console.log(Agences)
+        this.iserror=false;
+      },
+      (error) => {
+        this.iserror=true;
+        console.log("status "+error.status)
+        console.log("error: " +this.iserror);
+
+      }
+      //this.loadingfinish();
+    )
+  }
+
+
+  refleshCordonat(){
+     // this.common.LoadingCustom();
+    this.geolocation.getCurrentPosition().then((resp) => {
+    console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
+    this.globalvars.setLatitude(resp.coords.latitude);
+    this.globalvars.setLongitude(resp.coords.longitude);
+    this.refleshBranch();
+    // this.common.LoadingCustomfinish()
+  }).catch((error) => {
+    this.globalvars.setLatitude(0);
+    this.globalvars.setLongitude(0);
+      //  this.common.LoadingCustomfinish()
+      console.log('Error getting location', error);
+    });
   }
 
 }

@@ -102,9 +102,10 @@ font-weight: 200 !important;
         .btn-custom1 .label-md {
             margin: 0;
         }
-        ion-item.btn-custom1.round {
-            padding: 0.5em 1em!important;
-            //border-radius: 0 64px 64px;
+        button.btn-custom1.round {
+            padding: 0.7em 1.2em!important;
+            border-radius: 64px;
+            padding-bottom: 2.5em !important;
         }
         .sub-title {
             font-weight: lighter!important;

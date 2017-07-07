@@ -1,10 +1,11 @@
+import { PopoverPage } from './../popover/popover';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
 import { GlobalConstant } from './../../providers/constants';
 import { Http } from '@angular/http';
 import { Component } from '@angular/core';
-import { NavController,NavParams,AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
 import {Showticket}  from'../showticket/showticket'
 
 
@@ -22,11 +23,18 @@ import {Showticket}  from'../showticket/showticket'
     iserror: boolean = false;
     id:number;
     startRefrech:number=1;
-    constructor(private common:Common,private navParams: NavParams,public navCtrl: NavController,public alertCtrl: AlertController, private restservice:Restservice,private http:Http) {
-      this.client=GlobalVars.getClient()
-      this.id=navParams.get('id');
-      this.brancheName=navParams.get('name');
-      console.log("this.id "+this.id);
+    constructor(
+      private common:Common,
+      private navParams: NavParams,
+      public navCtrl: NavController,
+      public alertCtrl: AlertController,
+      private restservice:Restservice,
+      private http:Http,
+      private popoverCtrl: PopoverController) {
+        this.client=GlobalVars.getClient()
+        this.id=navParams.get('id');
+        this.brancheName=navParams.get('name');
+        console.log("this.id "+this.id);
 
     }
   ngAfterViewInit() {
@@ -120,6 +128,16 @@ import {Showticket}  from'../showticket/showticket'
   itemTaped(service){
     this.navCtrl.setRoot(Showticket,{id:service.serviceId,idbr:this.id,sernam:service.serviceName,branchename:this.brancheName});
     console.log("ServicePage.itemTaped"+ service.serviceId);
+  }
+  /**
+   * show pop over
+   * @param myEvent
+   */
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverPage,{"activeAcueil":false});
+    popover.present({
+      ev: myEvent
+    });
   }
 
   }

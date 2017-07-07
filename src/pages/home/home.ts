@@ -1,3 +1,4 @@
+import { GlobalConstant } from './../../providers/constants';
 import { Common } from './../../providers/common';
 import { GlobalVars } from './../../providers/global';
 import { PrdvPage } from './../prdv/prdv';
@@ -18,6 +19,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 })
 export class HomePage {
   client:string
+  startRefrech:number=1;
+
   constructor(private globalvars:GlobalVars,
     private navCtrl: NavController,
     private translate: TranslateService,
@@ -47,9 +50,23 @@ export class HomePage {
      this.getCordonat();
 
   }
+   ngAfterViewInit() {
+
+    // console.log("startRefreshTim begin")
+    this.startRefrech =setInterval(()=>{
+      console.log("startRefreshTim begin")
+      this.refleshCordonat();
+    }, GlobalConstant.GEO_REFRESH_TIMER)
+  }
+  ionViewWillLeave() {
+    console.log("Quiter la page Home")
+    if (this.startRefrech) {
+      console.log("clearInterval ionViewWillLeave")
+    clearInterval(this.startRefrech);
+   }}
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverPage);
+    let popover = this.popoverCtrl.create(PopoverPage,{"activeAcueil":true});
     popover.present({
       ev: myEvent
     });
@@ -68,7 +85,23 @@ export class HomePage {
     this.globalvars.setLongitude(resp.coords.longitude);
     this.common.LoadingCustomfinish()
   }).catch((error) => {
+    this.globalvars.setLatitude(0);
+    this.globalvars.setLongitude(0);
        this.common.LoadingCustomfinish()
+      console.log('Error getting location', error);
+    });
+  }
+  refleshCordonat(){
+    // this.common.LoadingCustom();
+    this.geolocation.getCurrentPosition().then((resp) => {
+    console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
+    this.globalvars.setLatitude(resp.coords.latitude);
+    this.globalvars.setLongitude(resp.coords.longitude);
+    // this.common.LoadingCustomfinish()
+  }).catch((error) => {
+    this.globalvars.setLatitude(0);
+    this.globalvars.setLongitude(0);
+      //  this.common.LoadingCustomfinish()
       console.log('Error getting location', error);
     });
   }
