@@ -79,7 +79,7 @@ translateConfig() {
       this.globalvars.setClient("MTN BENIN");
        //this.globalvars.setClient("Moov Bénin");
       // Url proxy de l'API Gateway en mode developpement
-      //  this.globalvars.setUrl('/api/')
+      // this.globalvars.setUrl('/api/')
     }
   }
 

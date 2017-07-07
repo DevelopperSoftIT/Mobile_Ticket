@@ -125,9 +125,9 @@ export class Common{
  */
 
   toastErrorRetry(callback: () => void/*,iscallback=true*/) {
-    if(this.tc){
-      this.destoryToast();
-    }
+    // if(this.tc){
+    //   this.destoryToast();
+    // }
      this.tc = this.toastCtrl.create({
     message: this.getTranslate("Error.errorMessage"),
     //  duration: 3000,
