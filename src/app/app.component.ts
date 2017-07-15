@@ -67,19 +67,19 @@ translateConfig() {
         this.storage.set('url', api.apigetwayurl);
         this.storage.set('client', api.name);
         this.globalvars.setClient(api.name);
-        console.log('MyApp.getconfig ');
-
+        console.log('MyApp.getconfig');
       },error=>{
         console.log(error);
       })
     } else {
       // Url direct de l'API Gateway
       this.globalvars.setUrl('http://10.77.210.19:9090/MobileTicket/')
+      // this.globalvars.setUrl('http://192.168.0.167:9090/MobileTicket/')
       // this.globalvars.setClient("SOFT-IT");
       this.globalvars.setClient("MTN BENIN");
-       //this.globalvars.setClient("Moov Bénin");
+      //this.globalvars.setClient("Moov Bénin");
       // Url proxy de l'API Gateway en mode developpement
-      // this.globalvars.setUrl('/api/')
+      this.globalvars.setUrl('/api/')
     }
   }
 

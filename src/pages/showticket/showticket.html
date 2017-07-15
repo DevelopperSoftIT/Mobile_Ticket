@@ -49,7 +49,7 @@
         <button *ngIf="!iscalled" ion-button color="danger" round class="cancel-visit" (tap)='Cancelvisite()'>{{'Showticketpage.cancelviste' | translate}}</button>
 
         <div *ngIf="isticketfinish">
-            <div class="page-message"> {{'Showticketpage.ticketEndMessage' | translate }}</div>
+            <div class="page-message"> {{message}}</div>
             <button ion-button round (tap)="home()" class="btn-default" color="secondary">{{'Showticketpage.okbtn' | translate}}</button>
             <!--  <button ion-button class="new" (tap)="home()">{{'Showticketpage.okbtn' | translate}}</button>-->
         </div>

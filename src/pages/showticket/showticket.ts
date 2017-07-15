@@ -82,6 +82,7 @@ export class Showticket {
   notificationpush2:string="est appelé au";
   client?:string;
   param = {guichet:" guichet"};
+  message : any;
 
 
   constructor(private common:Common,
@@ -201,7 +202,7 @@ export class Showticket {
 
             this.SuprimerTicket();
             // this.navCtrl.setRoot(ServicePage,{ id: this.branchId,name:this.branchename})
-            this.navCtrl.setRoot(HomePage);
+
             console.log('SuprimerTicket ok ');
           }
         }
@@ -307,13 +308,20 @@ export class Showticket {
       console.debug(error)
 
       // if(error.status==404 && error._body.message==="New visits are not available until visitsOnBranchCache is refreshed"){
-      if(error.status==404 && this.iscalled){
-         this.isticketfinish = true
+      // if(error.status==404 && this.iscalled){
+      if(error.status==404) { // On considère qu'il y a l'erreur 404 uniquement quand le ticket est introuvable, et non plus lors d'un problème de connexion qu'on a géré avec un timeout sur les http.get() et http.post() - Jacques & Abdou
+        this.message = this.common.getTranslate("Showticketpage.ticketEndMessage");
+        if(!this.iscalled) {
+          this.message = this.common.getTranslate("Showticketpage.ticketNoShowMessage");
+          this.iscalled = true;
+        }
+        this.isticketfinish = true
       }else{
           /*this.iserror = true;
           this.common.toastErrorRetry(()=>{this.gevisitstatus(this.idbr,this.idser,this.checksum)})
 */
-          this.common.toastInfoProblemConnexion();
+          // Afiiche le message d'erreur de connexion lorsque le ticket est créé ou appélé sans fermer la page de ticket
+          this.common.toastError();
           setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL)
       }
     })
@@ -334,7 +342,6 @@ export class Showticket {
   }
 
   /**visite position index du client  */
-
   public SelctedPosition(index): boolean {
     // console.log("inexdex")
     // console.log(index)
@@ -346,7 +353,6 @@ export class Showticket {
   }
 
   /** Voir la status du client  */
-
   private teststatut(Viststate: VisitStatusEntity) {
     console.log('test status')
     if (typeof Viststate == 'undefined' && this.iscalled) {
@@ -445,6 +451,7 @@ export class Showticket {
     this.common.presentLoadingDefault()
     this.restservice.cancelvisit(this.branchId, this.visitId, this.checksum).then(ticketsuprime => {
       this.common.loadingfinish();
+      this.navCtrl.setRoot(HomePage);
       console.log(ticketsuprime)
 
     }, error => {

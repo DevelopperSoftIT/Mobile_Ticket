@@ -52,23 +52,25 @@ export class Common{
  public presentLoadingDefault() {
     console.log("Common.presentLoadingDefault: ")
     this.loading = this.loadingCtrl.create({
-      content: this.getTranslate("Loading.messageContent")
+      content: this.getTranslate("Loading.messageContent"),
     });
     this.loading.present();
-  }
+ }
+
  public LoadingCustom() {
     console.log("Common.presentLoadingDefault 2: ")
     this.loading2 = this.loadingCtrl.create({
-      content: this.getTranslate("Loading.messageContent")
+      content: this.getTranslate("Loading.messageContent"),
     });
     this.loading2.present();
   }
 
   loadingfinish() {
     console.log(" Common.loadingfinish: ")
-    setTimeout(() => {
       this.loading.dismiss();
-    }, 100);
+   /*  setTimeout(() => {
+      this.loading.dismiss();
+    }, 100); */
   }
   LoadingCustomfinish() {
     console.log(" Common.loadingfinish 2: ")
@@ -85,12 +87,13 @@ export class Common{
    * @param showbutton
    * @param methode
    */
-  toast(msg, duration = 30000, position = 'middile', showbutton = false,buttonMessage=this.getTranslate("Error.buttonCloseToast")){
+  toast(msg, duration = 30000, position = 'middile', showbutton = false, buttonMessage= this.getTranslate("Error.buttonCloseToast"), cssClass=''){
     console.log("Common.toast: durre " +duration)
     let toast = this.toastCtrl.create({
       message: msg,
       duration: duration,
       position: position,
+      cssClass: cssClass,
       showCloseButton:showbutton,
       closeButtonText:buttonMessage
     });
@@ -113,11 +116,13 @@ export class Common{
    * @param position
    * @param showbutton
    */
-  toastInfo(msg, duration = 5000, position = 'middle', showbutton = true) {
+  toastInfo(msg, duration = 3000, position = 'middle', showbutton = true) {
     this.toast(msg, duration, position, showbutton);
   }
-  toastInfoProblemConnexion(msg=this.getTranslate("Error.errorMessage"), duration = 5000, position = 'bottom', showbutton = true) {
-    this.toast(msg, duration, position, showbutton);
+
+
+  toastError( msg = this.getTranslate("Error.errorMessage"), duration = 5000, position = 'bottom', showbutton = true, cssClass = "toast-error") {
+    this.toast(msg, duration, position, showbutton, this.getTranslate("Error.buttonCloseToast"), cssClass);
   }
 /**
  * toast error  and try
@@ -150,6 +155,8 @@ export class Common{
 
      this.tc.present();
   }
+
+/*
   destoryToast(){
     console.log('destoryToast');
     // this.tc.dismiss();
@@ -157,7 +164,7 @@ export class Common{
       console.log('toastErrorRetry - onDidDismiss');
 
     });
-  }
+  } */
 
 /**
  * charger la translation

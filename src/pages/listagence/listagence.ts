@@ -73,7 +73,8 @@ export class ListagencePage {
   getAgence() {
     this.common.presentLoadingDefault();
     // this.restservice.getAllbranches().subscribe(Agences => {
-    this.restservice.getBranchesWithLocation(this.longitude, this.latitude, GlobalConstant.BRANCH_FETCH_RADIUS).subscribe(Agences => {
+    this.restservice.getBranchesWithLocation(this.longitude, this.latitude, GlobalConstant.BRANCH_FETCH_RADIUS)
+      .subscribe(Agences => {
         console.log('data a ' + Agences)
         Agences = this.branche = Agences;
         console.log(Agences)

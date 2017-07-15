@@ -5,5 +5,6 @@ export const GlobalConstant= {
   "BRANCH_FETCH_RADIUS" : 0,//10 km
   // "BRANCH_FETCH_RADIUS" : 10000,//10 km
   "GEO_REFRESH_TIMER" : 1000*60,//une minute
-  "BRANCH_REFRESH_TIMER" : 1000*60 //une minute
+  "BRANCH_REFRESH_TIMER" : 1000*60, //une minute,
+  "URL_TIMEOUT" : 10000 //15 seconde
 }

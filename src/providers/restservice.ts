@@ -1,3 +1,4 @@
+import { GlobalConstant } from './constants';
 import { GlobalVars } from './global';
 import { VisitStatusEntity } from './../app/entitie/visit-status.entity';
 import {Injectable }from '@angular/core'
@@ -6,6 +7,7 @@ import {Observable }from 'rxjs/Observable';
 import {Headers, RequestOptions }from '@angular/http';
 import {Storage }from '@ionic/storage';
 import 'rxjs/Rx'
+import 'rxjs/add/operator/timeout';
 
 
 @Injectable()
@@ -39,7 +41,8 @@ export class Restservice {
   /**Recuperer les branches */
   getAllbranches() {
     console.log("getbranche url: "+this.baseUrl + "branches/?longitude=0&latitude=0&radius=2147483647")
-    return this.http.get(this.baseUrl + "branches/?longitude=0&latitude=0&radius=2147483647", this.option).map(res => res.json());
+    return this.http.get(this.baseUrl + "branches/?longitude=0&latitude=0&radius=2147483647", this.option).timeout(3000)
+    .map(res => res.json());
   }
   /**Recuperer les branches avec la geolocalisation et du me */
   getBranchesWithLocation(long,lat,raidus=0) {
@@ -49,7 +52,9 @@ export class Restservice {
     }
     console.log(`getbranche url: ${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`)
     // return this.http.get(this.baseUrl + "branches/?longitude="+long+"&latitude="+lat+"&radius="+raidus, this.option).map(res => res.json());
-    return this.http.get(`${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`, this.option).map(res => res.json());
+    return this.http.get(`${this.baseUrl}branches/?longitude=${long}&latitude=${lat}&radius=${raidus}`, this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
   }
 
 //recuperation de la position du client
@@ -63,12 +68,16 @@ export class Restservice {
   /** service des branches */
   getServiceFromBranche(id) {
     console.log("get service from branche url {}"+this.baseUrl + "branches/" + id + "/services/wait-info")
-    return this.http.get(this.baseUrl + "branches/" + id + "/services/wait-info",this.option).map(res => res.json());
+    return this.http.get(this.baseUrl + "branches/" + id + "/services/wait-info",this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
   }
   /**creer visite */
   creatvisit(idser, idbr) {
     console.log("creat visite url {}"+this.baseUrl + "services/" + idser + "/branches/" + idbr + "/ticket/issue")
-    return this.http.post(this.baseUrl + "services/" + idser + "/branches/" + idbr + "/ticket/issue", {}, this.option).map(res => res.json());
+    return this.http.post(this.baseUrl + "services/" + idser + "/branches/" + idbr + "/ticket/issue", {}, this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
   }
 
   /** etat de la visite  */
@@ -77,6 +86,7 @@ export class Restservice {
 
     const url = this.baseUrl + "MyVisit/CurrentStatus/branches/" + branchIdVal + "/visits/" + visitIdVal + "?checksum=" + checksum;
     return this.http.get(url, this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
       .toPromise()
       .then(response => response.json() as VisitStatusEntity)
      // .catch(error => console.log('Une erreur est survenue ' + error))
@@ -87,6 +97,7 @@ export class Restservice {
     console.log("cancel visite url {}"+this.baseUrl + "branches/" + branchIdVal + "/ticket/" + visitIdVal + "?checksum=" + checksum)
     const url = this.baseUrl + "branches/" + branchIdVal + "/ticket/" + visitIdVal + "?checksum=" + checksum;
     return this.http.delete(url, this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
       .toPromise()
       .then(response => response.json())
       .catch(error => console.log('Une erreur est survenue ' + error))

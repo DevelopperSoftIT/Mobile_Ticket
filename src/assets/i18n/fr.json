@@ -31,6 +31,7 @@
         "yourturn": "Ticket appelé au {{guichet}}",
         "okbtn": "Ok",
         "ticketEndMessage": "Merci pour votre visite.",
+        "ticketNoShowMessage": "Désolé votre ticket a été appelé pendant que vous étiez déconnecté. Vous pouvez prendre un autre ticket, resté connecté et vous rendre à l'agence. Merci.",
         "dialog": {
             "titleTicketCall": "Appel du ticket"
         },
