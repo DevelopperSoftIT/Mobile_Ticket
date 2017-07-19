@@ -1,3 +1,4 @@
+import { DelayTicketPage } from './../delay-ticket/delay-ticket';
 import { PopoverPage } from './../popover/popover';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
@@ -126,7 +127,8 @@ import {Showticket}  from'../showticket/showticket'
 
   /**item taped */
   itemTaped(service){
-    this.navCtrl.setRoot(Showticket,{id:service.serviceId,idbr:this.id,sernam:service.serviceName,branchename:this.brancheName});
+    // this.navCtrl.setRoot(Showticket,{id:service.serviceId,idbr:this.id,sernam:service.serviceName,branchename:this.brancheName});
+    this.navCtrl.push(DelayTicketPage,{service : service, brancheName: this.brancheName, brancheId: this.id})
     console.log("ServicePage.itemTaped"+ service.serviceId);
   }
   /**

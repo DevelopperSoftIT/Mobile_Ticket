@@ -1,7 +1,7 @@
 {
     "Homepage": {
         "bienvenu": "Veuillez choisir une opération",
-        "Bpriseticket": "Prise de ticket",
+        "Bpriseticket": "Take Ticket",
         "Bpriserdv": "Prise de rendez-vous",
         "Bsclient": "Service client",
         "Bmarketing": "Espace publicitaire",
@@ -16,7 +16,7 @@
 
     },
     "ModuleTicketPage": {
-        "title": "Prise de ticket",
+        "title": "Take Ticket",
         "subtitle": "Veuillez choisir une agence",
         "message": "Veuillez choisir une agence"
 

@@ -13,13 +13,14 @@ import 'rxjs/add/operator/timeout';
 @Injectable()
 export class Restservice {
 
-  public http:any;
+  public http : any;
   //signature:string = "b903de146a3764e2141c464713212606"
-  baseUrl:String;
-  headers:any;
+  baseUrl : String;
+  baseUrl2 : String;
+  headers : any;
   //urlAdminServeur:string;
-  option:any;
-  constructor(http:Http, private storage:Storage) {
+  option : any;
+  constructor( http : Http, private storage : Storage) {
   //Entete des requet emit vers l'api getway
     this.headers = new Headers();
     console.log("point 1");
@@ -27,7 +28,8 @@ export class Restservice {
     this.headers.append("Content-Type", "application/json");
     this.headers.append("auth-token", "06a91668-9e6c-4ac0-9566-830c30720150");
     this.option = new RequestOptions({ headers: this.headers });
-   this.baseUrl=GlobalVars.getUrl();
+    this.baseUrl= GlobalVars.getUrl();
+    this.baseUrl2 ="/api3/rest/mobile/";
     console.log("Restservice.construtor: " +this.baseUrl);
     //this.urlAdminServeur="http://192.168.0.137:8080/webAdmin/api/clients/sign/";
     this.http = http;
@@ -76,6 +78,18 @@ export class Restservice {
   creatvisit(idser, idbr) {
     console.log("creat visite url {}"+this.baseUrl + "services/" + idser + "/branches/" + idbr + "/ticket/issue")
     return this.http.post(this.baseUrl + "services/" + idser + "/branches/" + idbr + "/ticket/issue", {}, this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
+  }
+    /**
+     *
+     * @param idbranch  id branch
+     * @param idservice id service
+     * @param delay delay
+     */
+  creatVisitWithDelay(idbranch,idservice, delay) {
+    console.log("creat visite url : "+this.baseUrl2 + "services/" + idservice + "/branches/" + idbranch + "/ticket/issue")
+    return this.http.post(this.baseUrl2 + "services/" + idservice + "/branches/" + idbranch + "/ticket/issue/", {delay: 5}, this.option)
       .timeout(GlobalConstant.URL_TIMEOUT)
       .map(res => res.json());
   }

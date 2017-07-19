@@ -1,3 +1,4 @@
+import { delay } from 'rxjs/operator/delay';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
@@ -41,6 +42,7 @@ export class Showticket {
   iserror: boolean = false;
   guichet: string;
   maxNumber:number=999;
+  delayTicket: number;
 
   /**Queut info  */
 
@@ -100,8 +102,11 @@ export class Showticket {
       this.idser = navParams.get('id');
       this.idbr = navParams.get('idbr');
       this.branchename = navParams.get('branchename');
+
       this.sernam = navParams.get('sernam');
-      this.getvisit(this.idser, this.idbr);
+      this.delayTicket = navParams.get('delay');
+      // this.getvisit(this.idser, this.idbr);
+      this.getVisitWithDelay(this.idbr, this.idser, this.delayTicket);
       this.backgroundMode.enable();
       this.backgroundMode.configure({title:"Mobile Ticket",text:"Ticket en cours ..."})
       /*if (this.visitId != null) {
@@ -150,6 +155,39 @@ export class Showticket {
 
       console.log("Showticket.getvisit :");
       this.restservice.creatvisit(idser, idbr).subscribe(ticketinfo => {
+      console.log('data showticket ' + ticketinfo)
+      ticketinfo = this.ticketinfo = ticketinfo;
+      // var a=data.results
+      this.ticketNumber = ticketinfo.ticketNumber;
+      this.branchId = ticketinfo.branchId;
+      this.queueId = ticketinfo.queueId;
+      this.checksum = ticketinfo.checksum;
+      this.serviceId = ticketinfo.serviceId;
+      this.visitId = ticketinfo.visitId;
+      this.queueId = ticketinfo.queueId;
+      // setInterval(console.log(this.loading), 5000);
+      console.log(ticketinfo)
+
+      if (this.visitId != null) {
+        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
+      }
+      this.iserror=false;
+      this.common.loadingfinish();
+      this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
+      console.log(ticketinfo)
+    },
+    error => {
+      this.common.loadingfinish();
+      this.iserror=true;
+      this.common.toastErrorRetry(()=>{this.getvisit(this.idser,this.idbr)})
+      // alert(error + 'erreur')
+    }
+    )
+  }
+  getVisitWithDelay(idbr ,idser, delayTicket) {
+
+      console.log("Showticket.getVisitWithDelay : ");
+      this.restservice.creatVisitWithDelay(idbr ,idser, delayTicket ).subscribe(ticketinfo => {
       console.log('data showticket ' + ticketinfo)
       ticketinfo = this.ticketinfo = ticketinfo;
       // var a=data.results

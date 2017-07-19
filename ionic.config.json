@@ -8,6 +8,10 @@
         {
             "path": "/api2/",
             "proxyUrl": "http://192.168.0.167:8080/webAdmin/api/clients/sign/"
+        },
+        {
+            "path": "/api3/",
+            "proxyUrl": "http://192.168.0.167:9090"
         }
     ],
     "type": "ionic-angular"

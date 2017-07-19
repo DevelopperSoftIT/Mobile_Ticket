@@ -1,3 +1,4 @@
+import { DelayTicketPage } from './../pages/delay-ticket/delay-ticket';
 import { MobileServer } from './../providers/mobileserver';
 import { Restservice } from './../providers/restservice';
 import { GlobalVars } from './../providers/global';
@@ -66,6 +67,7 @@ const cloudSettings: CloudSettings = {
     PopoverPage,
     ErrorComponent,
     PrdvPage,
+    DelayTicketPage,
 
 
 
@@ -81,7 +83,7 @@ const cloudSettings: CloudSettings = {
         useFactory: (createTranslateLoader),
         deps: [Http]
       }
-    })
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -96,6 +98,7 @@ const cloudSettings: CloudSettings = {
     ServicePage,
     PopoverPage,
     PrdvPage,
+    DelayTicketPage
     // PostticketPage
   ],
   providers: [SplashScreen,
