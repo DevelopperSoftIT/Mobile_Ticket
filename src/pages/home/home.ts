@@ -1,3 +1,4 @@
+import { timeout } from 'rxjs/operator/timeout';
 
 import { GlobalConstant } from './../../providers/constants';
 import { Common } from './../../providers/common';
@@ -78,7 +79,8 @@ export class HomePage {
   getCordonat(){
     this.common.presentLoadingDefault();
     // this.common.LoadingCustom();
-    this.geolocation.getCurrentPosition().then((resp) => {
+    console.log("timeout geo "+GlobalConstant.GEO_TIMEOUT)
+    this.geolocation.getCurrentPosition({timeout:GlobalConstant.GEO_TIMEOUT}).then((resp) => {
     console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
     this.globalvars.setLatitude(resp.coords.latitude);
     this.globalvars.setLongitude(resp.coords.longitude);
@@ -94,12 +96,14 @@ export class HomePage {
   }
   refleshCordonat(){
     // this.common.LoadingCustom();
-    this.geolocation.getCurrentPosition().then((resp) => {
+    console.log("timeout geo "+GlobalConstant.GEO_TIMEOUT)
+    this.geolocation.getCurrentPosition({timeout:GlobalConstant.GEO_TIMEOUT}).then((resp) => {
     console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
     this.globalvars.setLatitude(resp.coords.latitude);
     this.globalvars.setLongitude(resp.coords.longitude);
     // this.common.LoadingCustomfinish()
-  }).catch((error) => {
+  })
+  .catch((error) => {
     this.globalvars.setLatitude(0);
     this.globalvars.setLongitude(0);
       //  this.common.LoadingCustomfinish()
