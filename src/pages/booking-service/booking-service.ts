@@ -1,4 +1,3 @@
-import { CalendarPage } from '../calendar/calendar';
 import { Common } from './../../providers/common';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
@@ -6,6 +5,7 @@ import { GlobalConstant } from './../../providers/constants';
 import { PopoverPage } from './../popover/popover';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, AlertController } from 'ionic-angular';
+import { CalendarPage } from "../booking-calendar/calendar";
 
 /**
  * Generated class for the BookingServicePage page.

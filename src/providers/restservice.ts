@@ -140,7 +140,7 @@ export class Restservice {
  * @param idBranch id public branch
  */
   getBookServiceFromBranche(idBranch) {
-    console.log("get service from branche url {}"+this.baseUrl + "/MobileTicket/branches/" + idBranch + "/services/wait-info")
+    console.log("get service from branche url {}"+this.baseUrl + "/rest/calendar-backend/public/api/v1/branches/" + idBranch + "/services/")
     return this.http.get(this.baseUrl + "/rest/calendar-backend/public/api/v1/branches/" + idBranch + "/services/",this.option)
       .timeout(GlobalConstant.URL_TIMEOUT)
       .map(res => res.json());

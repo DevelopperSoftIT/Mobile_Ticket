@@ -92,5 +92,34 @@
         "inTen": "DANS 10 MINUTES",
         "inFifteen": "DANS 15 MINUTES",
         "inThirty": "DANS 30 MINUTES"
+    },
+    "ModuleCalendarPage": {
+        "title": "",
+        "subtitle": "...",
+        "message": "Veuillez indiquez la date et l'heure de votre rendez-vous",
+        "boutonNext": "Suivant",
+        "labelDate": "Date",
+        "labelHours": "Heure"
+    },
+    "ModuleResumeBookPage": {
+        "title": "",
+        "subtitle": "...",
+        "message": "Votre rendez-vous est reservé",
+        "labelNom": "Nom",
+        "labelPrenom": "Prénom",
+        "labelService": "Service",
+        "labelBranch": "Agence",
+        "labelRef": "Réference du <br> rendez-vous",
+        "boutonOk": "Ok"
+    },
+    "ModuleInfoClientPage": {
+        "title": "",
+        "subtitle": "...",
+        "message": "Veuillez saisir vos informations",
+        "labelNom": "Nom",
+        "labelPrenom": "Prénom",
+        "labelContact": "Contact",
+        "labelNote": "Note",
+        "boutonValider": "Valider"
     }
 }

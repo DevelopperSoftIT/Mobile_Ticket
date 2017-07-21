@@ -1,7 +1,7 @@
-import { ResumeBookPage } from './../resume-book/resume-book';
 import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ResumeBookPage } from "../booking-resume/resume-book";
 
 @IonicPage()
 @Component({

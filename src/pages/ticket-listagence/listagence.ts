@@ -6,12 +6,12 @@ import { Common } from './../../providers/common';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController, PopoverController } from 'ionic-angular';
 import { Component} from '@angular/core';
-import { ServicePage } from './../service/service';
 import { Http } from '@angular/http';
 import { NavController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GlobalConstant } from './../../providers/constants';
+import { ServicePage } from "../ticket-service/service";
 
 @Component({
   selector: 'page-listagence',

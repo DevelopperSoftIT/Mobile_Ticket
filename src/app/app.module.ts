@@ -1,10 +1,5 @@
 import { BookingServicePage } from './../pages/booking-service/booking-service';
 import { BookingBranchPage } from './../pages/booking-branch/booking-branch';
-import { CalendarPage } from './../pages/calendar/calendar';
-import { TimerCountPage } from './../pages/timer-count/timer-count';
-import { ResumeBookPage } from './../pages/resume-book/resume-book';
-import { InfoClientPage } from './../pages/info-client/info-client';
-import { DelayTicketPage } from './../pages/delay-ticket/delay-ticket';
 import { MobileServer } from './../providers/mobileserver';
 import { Restservice } from './../providers/restservice';
 import { GlobalVars } from './../providers/global';
@@ -12,20 +7,15 @@ import { Common } from './../providers/common';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Settings } from './../providers/settings';
-import { PrdvPage } from './../pages/prdv/prdv';
 import { ErrorComponent } from './../components/error/error';
 import { PopoverPage } from './../pages/popover/popover';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Showticket } from '../pages/showticket/showticket';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
-import { ServicePage } from '../pages/service/service'
-import { ListagencePage } from '../pages/listagence/listagence';
 import { MarketingPage } from '../pages/marketing/marketing';
 import { Parametre } from '../pages/parametre/parametre';
-import { GeolocalisationPage } from '../pages/geolocalisation/geolocalisation'
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpModule } from '@angular/http';
 import { BackgroundMode } from '@ionic-native/background-mode';
@@ -38,28 +28,15 @@ import {BrowserModule} from '@angular/platform-browser'
 import { Geolocation } from '@ionic-native/geolocation';
 import { DistanceCalculatorProvider } from '../providers/distance-calculator/distance-calculator';
 import { TimerComponent } from '../components/timer/timer';
-import { DatePickerModule } from 'datepicker-ionic2';
+import { CalendarPage } from "../pages/booking-calendar/calendar";
+import { ServicePage } from "../pages/ticket-service/service";
+import { ListagencePage } from "../pages/ticket-listagence/listagence";
+import { Showticket } from "../pages/ticket-showticket/showticket";
+import { DelayTicketPage } from "../pages/ticket-delay/delay-ticket";
+import { InfoClientPage } from "../pages/booking-info-client/info-client";
+import { ResumeBookPage } from "../pages/booking-resume/resume-book";
+import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
 
-
-//import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
-/*
-const cloudSettings: CloudSettings = {
-  'core': {
-    'app_id': '3639a903'
-  },
-  'push': {
-    'sender_id': '989212956025',
-    'pluginConfig': {
-      'ios': {
-        'badge': true,
-        'sound': true
-      },
-      'android': {
-        'iconColor': '#343434'
-      }
-    }
-  }
-};*/
 @NgModule({
   declarations: [
     MyApp,
@@ -69,11 +46,9 @@ const cloudSettings: CloudSettings = {
     ListagencePage,
     MarketingPage,
     Parametre,
-    GeolocalisationPage,
     ServicePage,
     PopoverPage,
     ErrorComponent,
-    PrdvPage,
     DelayTicketPage,
     InfoClientPage,
     ResumeBookPage,
@@ -82,16 +57,11 @@ const cloudSettings: CloudSettings = {
     CalendarPage,
     BookingBranchPage,
     BookingServicePage
-
-
-
-    //  PostticketPage
   ],
   imports: [HttpModule,
     IonicModule.forRoot(MyApp),
     BrowserModule,
     IonicStorageModule.forRoot(),
-    DatePickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -109,10 +79,8 @@ const cloudSettings: CloudSettings = {
     ListagencePage,
     MarketingPage,
     Parametre,
-    GeolocalisationPage,
     ServicePage,
     PopoverPage,
-    PrdvPage,
     DelayTicketPage,
     InfoClientPage,
     ResumeBookPage,
@@ -120,12 +88,17 @@ const cloudSettings: CloudSettings = {
     CalendarPage,
     BookingBranchPage,
     BookingServicePage
-    // PostticketPage
   ],
   providers: [SplashScreen,
-              StatusBar,
-    Settings,Restservice, MobileServer, Common, GlobalVars, BackgroundMode, AppMinimize, { provide: ErrorHandler, useClass: IonicErrorHandler },
-
+    StatusBar,
+    Settings,
+    Restservice,
+    MobileServer,
+    Common,
+    GlobalVars,
+    BackgroundMode,
+    AppMinimize,
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation,
     DistanceCalculatorProvider]
 })

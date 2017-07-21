@@ -1,4 +1,3 @@
-import { DelayTicketPage } from './../delay-ticket/delay-ticket';
 import { PopoverPage } from './../popover/popover';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
@@ -7,7 +6,7 @@ import { GlobalConstant } from './../../providers/constants';
 import { Http } from '@angular/http';
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, PopoverController } from 'ionic-angular';
-import {Showticket}  from'../showticket/showticket'
+import { DelayTicketPage } from "../ticket-delay/delay-ticket";
 
 
 

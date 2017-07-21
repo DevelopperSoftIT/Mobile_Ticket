@@ -1,20 +1,16 @@
 import { BookingBranchPage } from './../booking-branch/booking-branch';
-import { CalendarPage } from './../calendar/calendar';
-import { ResumeBookPage } from './../resume-book/resume-book';
-import { InfoClientPage } from './../info-client/info-client';
-import { timeout } from 'rxjs/operator/timeout';
-
 import { GlobalConstant } from './../../providers/constants';
 import { Common } from './../../providers/common';
 import { GlobalVars } from './../../providers/global';
-import { PrdvPage } from './../prdv/prdv';
 import { PopoverPage } from './../popover/popover';
 import { Component } from '@angular/core';
 import { NavController,PopoverController } from 'ionic-angular';
-import {ListagencePage}  from'../listagence/listagence'
 import {MarketingPage} from '../marketing/marketing'
 import {TranslateService} from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
+import { CalendarPage } from "../booking-calendar/calendar";
+import { ListagencePage } from "../ticket-listagence/listagence";
+import { ResumeBookPage } from "../booking-resume/resume-book";
 
 @Component({
   selector: 'page-home',
