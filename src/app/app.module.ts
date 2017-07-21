@@ -1,3 +1,9 @@
+import { BookingServicePage } from './../pages/booking-service/booking-service';
+import { BookingBranchPage } from './../pages/booking-branch/booking-branch';
+import { CalendarPage } from './../pages/calendar/calendar';
+import { TimerCountPage } from './../pages/timer-count/timer-count';
+import { ResumeBookPage } from './../pages/resume-book/resume-book';
+import { InfoClientPage } from './../pages/info-client/info-client';
 import { DelayTicketPage } from './../pages/delay-ticket/delay-ticket';
 import { MobileServer } from './../providers/mobileserver';
 import { Restservice } from './../providers/restservice';
@@ -31,7 +37,8 @@ import { createTranslateLoader } from "../providers/createTranslateLoader";
 import {BrowserModule} from '@angular/platform-browser'
 import { Geolocation } from '@ionic-native/geolocation';
 import { DistanceCalculatorProvider } from '../providers/distance-calculator/distance-calculator';
-
+import { TimerComponent } from '../components/timer/timer';
+import { DatePickerModule } from 'datepicker-ionic2';
 
 
 //import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
@@ -68,6 +75,13 @@ const cloudSettings: CloudSettings = {
     ErrorComponent,
     PrdvPage,
     DelayTicketPage,
+    InfoClientPage,
+    ResumeBookPage,
+    TimerComponent,
+    TimerCountPage,
+    CalendarPage,
+    BookingBranchPage,
+    BookingServicePage
 
 
 
@@ -77,6 +91,7 @@ const cloudSettings: CloudSettings = {
     IonicModule.forRoot(MyApp),
     BrowserModule,
     IonicStorageModule.forRoot(),
+    DatePickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -98,7 +113,13 @@ const cloudSettings: CloudSettings = {
     ServicePage,
     PopoverPage,
     PrdvPage,
-    DelayTicketPage
+    DelayTicketPage,
+    InfoClientPage,
+    ResumeBookPage,
+    TimerCountPage,
+    CalendarPage,
+    BookingBranchPage,
+    BookingServicePage
     // PostticketPage
   ],
   providers: [SplashScreen,

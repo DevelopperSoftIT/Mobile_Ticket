@@ -185,7 +185,7 @@ export class Showticket {
     )
   }
   getVisitWithDelay(idbr ,idser, delayTicket) {
-
+      this.common.presentLoadingDefault();
       console.log("Showticket.getVisitWithDelay : ");
       this.restservice.creatVisitWithDelay(idbr ,idser, delayTicket ).subscribe(ticketinfo => {
       console.log('data showticket ' + ticketinfo)

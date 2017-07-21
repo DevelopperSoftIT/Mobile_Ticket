@@ -82,5 +82,15 @@
         "subtitle": "...",
         "message": "..."
 
+    },
+    "ModuleDelayTicketPage": {
+        "title": "Espace publicitaire",
+        "subtitle": "...",
+        "message": "...",
+        "now": "MAINTENANT",
+        "inFive": "DANS 5 MINUTES",
+        "inTen": "DANS 10 MINUTES",
+        "inFifteen": "DANS 15 MINUTES",
+        "inThirty": "DANS 30 MINUTES"
     }
 }

@@ -1,0 +1,23 @@
+timer {
+    .timer-button {
+        font-size: 100em !important;
+        height: 100em !important;
+    }
+    .no-bottom-border.item .item-inner {
+        border-bottom: none !important;
+    }
+    .no-bottom-border {
+        background: transparent !important;
+    }
+    .no-bottom-border button {
+        font-size: 8.2em !important;
+    }
+    .card-md {
+        background: rgba(255, 255, 255, 0) !important;
+        border: none;
+        box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px -0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+    }
+    .timer-text {
+        color: white;
+    }
+}

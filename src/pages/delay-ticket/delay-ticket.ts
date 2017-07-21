@@ -1,3 +1,5 @@
+import { Common } from './../../providers/common';
+import { TimerCountPage } from './../timer-count/timer-count';
 import { Showticket } from './../showticket/showticket';
 import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
@@ -16,7 +18,10 @@ export class DelayTicketPage {
    brancheId: any;
    delayTicket:any[]; //list des temps
    services: any; //service selected
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private common:Common) {
     this.client=GlobalVars.getClient()
     //recuperer les paramètre
     this.brancheName=navParams.get('brancheName');
@@ -28,25 +33,25 @@ export class DelayTicketPage {
 
     this.delayTicket=[
       {
-        title: "Now",
+        title: this.common.getTranslate("ModuleDelayTicketPage.now"),
         delay : 0
       },
       {
-        title: "In 5 Minutes",
-        delay : 5
+        title: this.common.getTranslate("ModuleDelayTicketPage.inFive"),
+        delay : 5*60
       },
       {
-        title: "In 10 Minutes",
-        delay : 10
+        title: this.common.getTranslate("ModuleDelayTicketPage.inTen"),
+        delay : 10*60
       },
       {
-        title: "In 15 Minutes",
-        delay : 15
+        title: this.common.getTranslate("ModuleDelayTicketPage.inFifteen"),
+        delay : 15*60
       }
       ,
       {
-        title: "In 30 Minutes",
-        delay : 30
+        title: this.common.getTranslate("ModuleDelayTicketPage.inThirty"),
+        delay : 30*60
       }
     ]
   }
@@ -56,12 +61,15 @@ export class DelayTicketPage {
   }
 
   takeTicket(d){
-    if( d.delay == 0 ){
+      // this.navCtrl.setRoot(Showticket,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay});
+      if( d.delay == 0 ){
       console.log(d.title)
       console.log(d.delay)
       this.navCtrl.setRoot(Showticket,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay});
 
-    }
+    }else{
+    this.navCtrl.push(TimerCountPage,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay})
     console.log(d.title)
+    }
   }
 }

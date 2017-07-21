@@ -1,3 +1,7 @@
+import { BookingBranchPage } from './../booking-branch/booking-branch';
+import { CalendarPage } from './../calendar/calendar';
+import { ResumeBookPage } from './../resume-book/resume-book';
+import { InfoClientPage } from './../info-client/info-client';
 import { timeout } from 'rxjs/operator/timeout';
 
 import { GlobalConstant } from './../../providers/constants';
@@ -41,7 +45,8 @@ export class HomePage {
   //  this.navCtrl.push(ServicePage);
   }*/
   private showMarketing() {
-    this.navCtrl.push(MarketingPage);
+    this.navCtrl.push(ResumeBookPage);
+    // this.navCtrl.push(MarketingPage);
   }
 
   ngOnInit() {
@@ -71,7 +76,9 @@ export class HomePage {
     });
   }
   pageprdv(){
-    this.navCtrl.push(PrdvPage);
+    this.navCtrl.push(BookingBranchPage);
+    // this.navCtrl.push(InfoClientPage);
+    // this.navCtrl.push(PrdvPage);
   }
   /**
    * Recuperer les cordonnées de geolocalisation
@@ -110,6 +117,8 @@ export class HomePage {
       console.log('Error getting location', error);
     });
   }
-
+testcal() {
+  this.navCtrl.push(CalendarPage);
+}
 
 }
