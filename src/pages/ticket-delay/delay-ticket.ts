@@ -61,8 +61,8 @@ export class DelayTicketPage {
   }
 
   takeTicket(d){
-      // this.navCtrl.setRoot(Showticket,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay});
-      if( d.delay == 0 ){
+     this.navCtrl.setRoot(Showticket,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay});
+     /*    if( d.delay == 0 ){
       console.log(d.title)
       console.log(d.delay)
       this.navCtrl.setRoot(Showticket,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay});
@@ -70,6 +70,6 @@ export class DelayTicketPage {
     }else{
     this.navCtrl.push(TimerCountPage,{id:this.services.serviceId,idbr:this.brancheId,sernam:this.services.serviceName,branchename:this.brancheName, delay:d.delay})
     console.log(d.title)
-    }
+    } */
   }
 }

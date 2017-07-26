@@ -26,5 +26,7 @@
     <timer #timer [timeInSeconds]=delayTicket center style="padding-top: 3em !important;"></timer>
     <!-- <timer #timer timeInSeconds="5" center style="padding-top: 15em !important;" ></timer> -->
 
-
+    <button [disabled]="timer && !timer.hasFinished()">
+  Save
+</button>
 </ion-content>

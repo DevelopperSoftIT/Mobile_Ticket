@@ -1,10 +1,9 @@
-import { delay } from 'rxjs/operator/delay';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
 import { HomePage } from './../home/home';
 import { VisitStatusEntity } from './../../app/entitie/visit-status.entity';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 //import {TextToSpeech} from '@ionic-native/text-to-speech';
@@ -13,7 +12,9 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { Platform } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { GlobalConstant } from './../../providers/constants';
+import { TimerComponent } from "../../components/timer/timer";
 // import {sprintf} from "sprintf-js";
+
 @Component({
   selector: 'page-showticket',
   templateUrl: 'showticket.html',
@@ -23,6 +24,9 @@ import { GlobalConstant } from './../../providers/constants';
 
 })
 export class Showticket {
+
+  // @ViewChild(TimerComponent) timer: TimerComponent;
+
   ticketinfo: {};
   ticketNumber: number;
   idser: number;
@@ -41,8 +45,8 @@ export class Showticket {
   hilightSelcted: boolean = false;
   iserror: boolean = false;
   guichet: string;
-  maxNumber:number=999;
-  delayTicket: number;
+  maxNumber:number= 999;
+  delayTicket: number = 0;
 
   /**Queut info  */
 
@@ -57,7 +61,7 @@ export class Showticket {
   public prevUpperBound: number;
   public prevLowerBound: number;
 
-  public timer;
+  // public timer;
   loading: any;
   visitinfo: VisitStatusEntity = new VisitStatusEntity()
   /**Time manupule  */
@@ -138,6 +142,11 @@ export class Showticket {
       this.chargeTranslate();
 
   }
+ngOnInit() {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  //console.log(this.timer.hasFinished())
+}
 
   /*async sayText():Promise<any>{
     try{
@@ -151,6 +160,9 @@ export class Showticket {
       console.log(e);
     }
   }*/
+
+
+
   getvisit(idser, idbr) {
 
       console.log("Showticket.getvisit :");
@@ -393,12 +405,18 @@ export class Showticket {
   /** Voir la status du client  */
   private teststatut(Viststate: VisitStatusEntity) {
     console.log('test status')
+
     if (typeof Viststate == 'undefined' && this.iscalled) {
       console.log('ticket fini' + Viststate)
       this.isticketfinish = true
-    } else {
-
-      if (Viststate.currentStatus === 'IN_QUEUE' && this.istiketpresente) {
+    } else
+    {
+      if (Viststate.currentStatus === 'DELAYED') {
+      console.log('ticket delai : ' + Viststate.currentStatus + this.delayTicket)
+      //this.isticketfinish = true
+          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, this.delayTicket*1000)
+     }
+      else if (Viststate.currentStatus === 'IN_QUEUE' && this.istiketpresente) {
         if (this.queueId != Viststate.queueId) {
           this.sernam = Viststate.queueName;
         }
