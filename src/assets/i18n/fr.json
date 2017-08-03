@@ -109,7 +109,7 @@
         "labelPrenom": "Prénom",
         "labelService": "Service",
         "labelBranch": "Agence",
-        "labelRef": "Réference du <br> rendez-vous",
+        "labelRef": "Réference",
         "boutonOk": "Ok"
     },
     "ModuleInfoClientPage": {
@@ -118,7 +118,8 @@
         "message": "Veuillez saisir vos informations",
         "labelNom": "Nom",
         "labelPrenom": "Prénom",
-        "labelContact": "Contact",
+        "labelEmail": "Email",
+        "labelPhone": "Phone",
         "labelNote": "Note",
         "boutonValider": "Valider"
     }

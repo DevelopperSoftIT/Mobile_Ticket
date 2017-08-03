@@ -121,7 +121,7 @@ export class Common{
   }
 
 
-  toastError( msg = this.getTranslate("Error.errorMessage"), duration = 5000, position = 'bottom', showbutton = true, cssClass = "toast-error") {
+  toastError( msg = this.getTranslate("Error.errorMessage"), duration = 5000, position = 'bottom', showbutton = false, cssClass = "toast-error") {
     this.toast(msg, duration, position, showbutton, this.getTranslate("Error.buttonCloseToast"), cssClass);
   }
 /**

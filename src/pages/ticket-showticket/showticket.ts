@@ -163,7 +163,7 @@ ngOnInit() {
 
 
 
-  getvisit(idser, idbr) {
+ /*  getvisit(idser, idbr) {
 
       console.log("Showticket.getvisit :");
       this.restservice.creatvisit(idser, idbr).subscribe(ticketinfo => {
@@ -179,10 +179,13 @@ ngOnInit() {
       this.queueId = ticketinfo.queueId;
       // setInterval(console.log(this.loading), 5000);
       console.log(ticketinfo)
+      console.log(ticketinfo)
 
-      if (this.visitId != null) {
-        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
-      }
+        let tmp= this.delayTicket - GlobalConstant.VISIT_STATE_GET_INTERVAL;
+        setTimeout(() => { console.log("attente" +tmp)
+          this.gevisitstatus(this.branchId, this.visitId, this.checksum)
+        },this.delayTicket*1000);
+
       this.iserror=false;
       this.common.loadingfinish();
       this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
@@ -195,7 +198,7 @@ ngOnInit() {
       // alert(error + 'erreur')
     }
     )
-  }
+  } */
   getVisitWithDelay(idbr ,idser, delayTicket) {
       this.common.presentLoadingDefault();
       console.log("Showticket.getVisitWithDelay : ");
@@ -212,19 +215,23 @@ ngOnInit() {
       this.queueId = ticketinfo.queueId;
       // setInterval(console.log(this.loading), 5000);
       console.log(ticketinfo)
+      // let tmps= this.delayTicket*1000 - GlobalConstant.VISIT_STATE_GET_INTERVAL;
+      let tmps= this.delayTicket*1000 ;
 
-      if (this.visitId != null) {
-        setTimeout(() => { this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, GlobalConstant.VISIT_STATE_GET_INTERVAL);
-      }
+      setTimeout(() => {
+        console.log('Delay expired')
+        this.gevisitstatus(this.branchId, this.visitId, this.checksum)
+        this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
+      },tmps);
       this.iserror=false;
       this.common.loadingfinish();
-      this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
+      // this.common.toastInfo(this.common.getTranslate("Showticketpage.note"));
       console.log(ticketinfo)
     },
     error => {
       this.common.loadingfinish();
       this.iserror=true;
-      this.common.toastErrorRetry(()=>{this.getvisit(this.idser,this.idbr)})
+      this.common.toastErrorRetry(()=>{this.getVisitWithDelay(this.idser,this.idbr,this.delayTicket)})
       // alert(error + 'erreur')
     }
     )
@@ -414,7 +421,7 @@ ngOnInit() {
       if (Viststate.currentStatus === 'DELAYED') {
       console.log('ticket delai : ' + Viststate.currentStatus + this.delayTicket)
       //this.isticketfinish = true
-          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) }, this.delayTicket*1000)
+          setTimeout(() => { console.log('10'); this.gevisitstatus(this.branchId, this.visitId, this.checksum) },GlobalConstant.VISIT_STATE_GET_INTERVAL)
      }
       else if (Viststate.currentStatus === 'IN_QUEUE' && this.istiketpresente) {
         if (this.queueId != Viststate.queueId) {

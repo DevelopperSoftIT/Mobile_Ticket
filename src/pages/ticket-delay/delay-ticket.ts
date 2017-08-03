@@ -38,7 +38,7 @@ export class DelayTicketPage {
       },
       {
         title: this.common.getTranslate("ModuleDelayTicketPage.inFive"),
-        delay : 5*60
+        delay : 45
       },
       {
         title: this.common.getTranslate("ModuleDelayTicketPage.inTen"),
@@ -55,6 +55,7 @@ export class DelayTicketPage {
       }
     ]
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DelayTicketPage');
