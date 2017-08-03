@@ -3,7 +3,7 @@
         <ion-toolbar>
             <ion-title> {{'ModuleRendezVousPage.title' | translate }} </ion-title>
             <!-- <ion-title> {{'ModuleTicketPage.title' | translate }} </ion-title> -->
-            <div class="sub-title toolbar-title-md toolbar-title"> {{client}} </div>
+            <div class="sub-title toolbar-title-md toolbar-title">{{client}}-{{brancheName}}-{{serviceName}} </div>
             <ion-buttons end>
                 <button ion-button icon-only (click)="presentPopover($event)">
                     <ion-icon name="more" item-right ></ion-icon>
@@ -15,34 +15,42 @@
 
 <ion-content class="has-header">
     <div class="page-message"> {{'ModuleInfoClientPage.message' | translate }} </div>
+
     <div *ngIf="!iserror" class="page-content-default">
-        <ion-list class="client-info">
+        <form #form="ngForm" (ngSubmit)="booking(form)">
+            <ion-list class="client-info">
 
-            <ion-item>
-                <ion-label floating>{{'ModuleInfoClientPage.labelNom' | translate }}</ion-label>
-                <ion-input class="input-custom" type="text" value=""></ion-input>
-            </ion-item>
+                <ion-item>
+                    <ion-label floating>{{'ModuleInfoClientPage.labeltitle' | translate }}</ion-label>
+                    <ion-input class="input-custom" type="text" required [(ngModel)]="clientData.title" ngControl="title" name="title"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>{{'ModuleInfoClientPage.labelNom' | translate }}</ion-label>
+                    <ion-input class="input-custom" type="text" required [(ngModel)]="clientData.customer.firstName" ngControl="firstName" name="firstName"></ion-input>
+                </ion-item>
 
-            <ion-item>
-                <ion-label floating>{{'ModuleInfoClientPage.labelPrenom' | translate }}</ion-label>
-                <ion-input class="input-custom" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>{{'ModuleInfoClientPage.labelEmail' | translate }}</ion-label>
-                <ion-input class="input-custom" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>{{'ModuleInfoClientPage.labelPhone' | translate }}</ion-label>
-                <ion-input class="input-custom" type="text"></ion-input>
-            </ion-item>
-            <ion-item>
-                <ion-label floating>{{'ModuleInfoClientPage.labelNote' | translate }}</ion-label>
-                <ion-textarea class="input-custom" rows="5"></ion-textarea>
-            </ion-item>
+                <ion-item>
+                    <ion-label floating>{{'ModuleInfoClientPage.labelPrenom' | translate }}</ion-label>
+                    <ion-input class="input-custom" type="text" [(ngModel)]="clientData.customer.lastName" name="lastName" ngControl="lastName"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>{{'ModuleInfoClientPage.labelEmail' | translate }}</ion-label>
+                    <ion-input class="input-custom" type="text" required [(ngModel)]="clientData.customer.email" name="email" ngControl="email"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>{{'ModuleInfoClientPage.labelPhone' | translate }}</ion-label>
+                    <ion-input class="input-custom" type="text" required [(ngModel)]="clientData.customer.phone" name="phone" ngControl="phone"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>{{'ModuleInfoClientPage.labelNote' | translate }}</ion-label>
+                    <ion-textarea class="input-custom" rows="5" [(ngModel)]="clientData.notes" name="notes" ngControl="notes"></ion-textarea>
+                </ion-item>
 
-        </ion-list>
+            </ion-list>
+
+            <button ion-button round class="btn-default" type="submit">{{'ModuleInfoClientPage.boutonValider' | translate }}</button>
+        </form>
     </div>
-    <button ion-button round class="btn-default" (tap)="goToResumeInfoClient()">{{'ModuleInfoClientPage.boutonValider' | translate }}</button>
     <!--  <ion-list padding margin class="client-info">
 
         <ion-item>

@@ -3,7 +3,7 @@
         <ion-toolbar>
             <ion-title> {{'ModuleRendezVousPage.title' | translate }} </ion-title>
             <!-- <ion-title> {{'ModuleTicketPage.title' | translate }} </ion-title> -->
-            <div class="sub-title toolbar-title-md toolbar-title"> {{client}} </div>
+            <div class="sub-title toolbar-title-md toolbar-title"> {{client}}-{{brancheName}}-{{serviceName}} </div>
             <ion-buttons end>
                 <button ion-button icon-only (click)="presentPopover($event)">
                     <ion-icon name="more" item-right ></ion-icon>
@@ -20,44 +20,16 @@
 
         <ion-item>
             <ion-label> {{'ModuleCalendarPage.labelDate' | translate }}</ion-label>
-            <ion-select [(ngModel)]="seldate">
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="2017-07-20">2017-07-20</ion-option>
-                <ion-option value="2017-07-21">2017-07-21</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
-                <ion-option value="f">2017-07-20</ion-option>
+            <ion-select [(ngModel)]="seldate" (ionChange)="getTime()">
+                <ion-option [value]="dates | date:'y-MM-dd'" *ngFor="let dates of bookDate ">
+                    {{dates | date:'dd-MM-y'}}
+                </ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label>{{'ModuleCalendarPage.labelHours' | translate }}</ion-label>
-            <ion-select [(ngModel)]="gender">
-                <ion-option value="f">10:30</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
-                <ion-option value="m">12:00</ion-option>
+            <ion-select [(ngModel)]="times">
+                <ion-option [value]="time" *ngFor="let time of bookTime ">{{time}}</ion-option>
             </ion-select>
         </ion-item>
 

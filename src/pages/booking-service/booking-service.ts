@@ -132,7 +132,7 @@ export class BookingServicePage {
 
   /**item taped */
   itemTaped(service){
-    this.navCtrl.push(CalendarPage)
+    this.navCtrl.push(CalendarPage,{branch: this.branch, service: service})
     // this.navCtrl.setRoot(Showticket,{id:service.serviceId,idbr:this.id,sernam:service.serviceName,branchename:this.brancheName});
     // this.navCtrl.push(DelayTicketPage,{service : service, brancheName: this.brancheName, brancheId: this.id})
     console.log("ServicePage.itemTaped"+ service);

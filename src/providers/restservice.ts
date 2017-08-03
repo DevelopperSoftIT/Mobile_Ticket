@@ -145,5 +145,40 @@ export class Restservice {
       .timeout(GlobalConstant.URL_TIMEOUT)
       .map(res => res.json());
   }
+    /**
+     * get available date booking
+     * @param idBranch  id public branche
+     * @param idservice  id public service
+     */
+    getBookDateAvailable(idBranch,idService){
+      return this.http.get(`${this.baseUrl}/rest/calendar-backend/public/api/v1/branches/${idBranch}/services/${idService}/dates/`,this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
+
+    }
+/**
+ * get time available
+ * @param idBranch id public branche
+ * @param idService id public service
+ * @param date  date selected
+ */
+    getBookTimeAvailable(idBranch,idService,dates){
+    console.log(`getBookTimeAvailable : ${this.baseUrl}/rest/calendar-backend/public/api/v1/branches/${idBranch}/services/${idService}/dates/${dates}/times`)
+
+      return this.http.get(`${this.baseUrl}/rest/calendar-backend/public/api/v1/branches/${idBranch}/services/${idService}/dates/${dates}/times/ `,this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
+
+    }
+
+
+    postBook(idBranch,idService,dates,times,data){
+    console.log(`post booking : ${this.baseUrl}/rest/calendar-backend/public/api/v1/branches/${idBranch}/services/${idService}/dates/${dates}/times/${times}/book/`)
+
+      return this.http.post(`${this.baseUrl}/rest/calendar-backend/public/api/v1/branches/${idBranch}/services/${idService}/dates/${dates}/times/${times}/book/`,data,this.option)
+      .timeout(GlobalConstant.URL_TIMEOUT)
+      .map(res => res.json());
+
+    }
 
 }

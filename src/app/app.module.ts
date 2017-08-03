@@ -36,6 +36,7 @@ import { DelayTicketPage } from "../pages/ticket-delay/delay-ticket";
 import { InfoClientPage } from "../pages/booking-info-client/info-client";
 import { ResumeBookPage } from "../pages/booking-resume/resume-book";
 import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [

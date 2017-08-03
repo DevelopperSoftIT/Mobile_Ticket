@@ -121,6 +121,7 @@
         "labelEmail": "Email",
         "labelPhone": "Phone",
         "labelNote": "Note",
+        "labeltitle": "Étiquette du rendez-vous",
         "boutonValider": "Valider"
     }
 }
