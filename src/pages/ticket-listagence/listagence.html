@@ -15,30 +15,72 @@
 <ion-content class="has-header">
 
     <div *ngIf="!iserror" class="page-content-default">
+        <!-- <ion-segment [(ngModel)]="selectSegment"  (ionChange)="segmentChanged($event)"> -->
+        <ion-segment [(ngModel)]="selectSegment" color="primary-text" class="segment-custom">
+            <ion-segment-button value="list" color="primary-text">
+                Liste
+            </ion-segment-button>
+            <ion-segment-button value="maps" color="primary-text">
+                Carte
+            </ion-segment-button>
+        </ion-segment>
         <!--<div class="page-message"> {{'ModuleTicketPage.message' | translate }}</div>-->
-        <ion-list *ngFor=" let b of branche ">
-            <!--
-          <button class="btn-custom1 round " [disabled]="brancheIsOpenOrClose(b)" (click)="itemTaped(b)">
-              <div center>{{b.name}}</div>
-          </button>
-          -->
-            <!--<button class="btn-custom1" [disabled]="brancheIsOpenOrClose(b)" (click)="itemTaped(b)" ion-button round icon-right>-->
-            <button class="btn-custom1" [disabled]="!b.branchOpen" (click)="itemTaped(b)" ion-button round icon-right>
-            <ion-grid no-padding>
-              <ion-row no-padding>
-                <ion-col col-11 center >
-                  <div center>{{b.name}}</div>
-                  <!--<div center> {{calculatorDistance(b.latitude,b.longitude)}}</div>-->
-                </ion-col>
-                <ion-col class="icon-custom_" col-1>
-                  <!--<ion-icon color='danger' name="md-close-circle" *ngIf="brancheIsOpenOrClose(b)"></ion-icon>-->
-                  <ion-icon color='danger' name="md-close-circle" *ngIf="!b.branchOpen"></ion-icon>
-                  <ion-icon name="ios-arrow-forward-outline" *ngIf="b.branchOpen"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid >
-          </button>
-        </ion-list>
+        <div [ngSwitch]="selectSegment">
+            <div *ngSwitchCase="'list'">
+                <ion-list *ngFor=" let b of branche ">
+
+                    <ion-item class="list-item-custom" (click)="itemTaped(b)" [hidden]="!b.branchOpen">
+                        <ion-thumbnail item-start>
+                            <img src="assets/img/icon-location.png" />
+                            <!-- <ion-icon ios="ios-flag" md="md-flag"></ion-icon> -->
+                        </ion-thumbnail>
+                        <!-- <ion-icon ios="ios-arrow-dropright-circle" md="md-arrow-dropright-circle" item-start></ion-icon> -->
+                        <h2>{{b.name}}</h2>
+                        <!--  <button class="btn-custom10" [disabled]="!b.branchOpen" (click)="itemTaped(b)" ion-button round>
+                        </button> -->
+                        <p>{{b?.addressLine4}} {{b?.addressLine5}} </p>
+                        <p>{{b?.addressLine1}} {{b?.addressLine2}} {{calculatorDistance(b.latitude,b.longitude)}} </p>
+
+                        <button ion-button clear item-end><div class="list-right" >
+                            <ion-icon name="ios-clock-outline">
+                                <span class="item-note">{{ (b.estimatedWaitTime * 1000) | date:'HH:mm' }}</span>
+                            </ion-icon>
+                        </div></button>
+                    </ion-item>
+                    <!-- <button class="btn-custom1" [disabled]="!b.branchOpen" (click)="itemTaped(b)" ion-button round icon-right>
+                    <ion-grid no-padding>
+                      <ion-row no-padding>
+                        <ion-col col-11 center >
+                          <div center>{{b.name}}</div>
+                          <div center> {{calculatorDistance(b.latitude,b.longitude)}}</div>
+                        </ion-col>
+                        <ion-col class="icon-custom_" col-1>
+                          <ion-icon color='danger' name="md-close-circle" *ngIf="brancheIsOpenOrClose(b)"></ion-icon>
+                          <ion-icon color='danger' name="md-close-circle" *ngIf="!b.branchOpen"></ion-icon>
+                          <ion-icon name="ios-arrow-forward-outline" *ngIf="b.branchOpen"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid >
+                  </button> -->
+                </ion-list>
+            </div>
+            <div *ngSwitchCase="'maps'">
+                <!-- <maps></maps> -->
+
+                <agm-map [latitude]="latitude" [longitude]="longitude" id="map" center>
+                    <agm-marker [latitude]="latitude" [longitude]="longitude" [label]="'Vous'"></agm-marker>
+                    <agm-marker *ngFor="let b of branche; let i = index" (markerClick)="clickedMarker(b.name, i)" [latitude]="b.latitude" [longitude]="b.longitude" [label]="b.name" [markerDraggable]="b.branchOpen" (dragEnd)="markerDragEnd(b, $event)">
+
+                        <agm-info-window>
+                            <strong>{{b.name}} </strong>
+                            <p>{{b?.addressLine4}} {{b?.addressLine5}} </p>
+                        </agm-info-window>
+
+                    </agm-marker>
+                </agm-map>
+            </div>
+        </div>
+
     </div>
     <!--<div *ngIf="!iserror" class="page-content-default">
         <div class="page-message"> {{'ModuleTicketPage.message' | translate }}</div>
@@ -49,6 +91,5 @@
         </ion-list>
     </div>-->
     <error *ngIf="iserror"></error>
-    <!--<error *ngIf="iserror" (click)="getAgence()"></error>-->
-
+    <!--<error *ngIf="iserror" (click)="getAgence()"></error>  -->
 </ion-content>

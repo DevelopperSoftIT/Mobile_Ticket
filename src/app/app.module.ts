@@ -1,3 +1,4 @@
+import { MapsComponentModule } from './../components/maps/maps.module';
 import { BookingServicePage } from './../pages/booking-service/booking-service';
 import { BookingBranchPage } from './../pages/booking-branch/booking-branch';
 import { MobileServer } from './../providers/mobileserver';
@@ -37,6 +38,8 @@ import { InfoClientPage } from "../pages/booking-info-client/info-client";
 import { ResumeBookPage } from "../pages/booking-resume/resume-book";
 import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
 import { DatePipe } from '@angular/common';
+import { MapsComponent } from '../components/maps/maps';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { DatePipe } from '@angular/common';
     TimerCountPage,
     CalendarPage,
     BookingBranchPage,
-    BookingServicePage
+    BookingServicePage,
+    MapsComponent
   ],
   imports: [HttpModule,
     IonicModule.forRoot(MyApp),
@@ -70,6 +74,9 @@ import { DatePipe } from '@angular/common';
         deps: [Http]
       }
     }),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBIu3104JzimUPgMuzWOpt7WvUGcsWwoKE'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

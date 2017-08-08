@@ -8,7 +8,8 @@ export class Settings {
   private theme: BehaviorSubject<String>;
 
     constructor() {
-      this.theme = new BehaviorSubject('default');
+      this.theme = new BehaviorSubject('light');
+      // this.theme = new BehaviorSubject('default');
       // this.theme = new BehaviorSubject('mtn');
       // this.theme = new BehaviorSubject('moov');
 

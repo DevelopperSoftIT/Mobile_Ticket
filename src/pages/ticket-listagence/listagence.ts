@@ -5,20 +5,20 @@ import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController, PopoverController } from 'ionic-angular';
-import { Component} from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GlobalConstant } from './../../providers/constants';
 import { ServicePage } from "../ticket-service/service";
-
 @Component({
   selector: 'page-listagence',
   templateUrl: 'listagence.html',
 
 })
 export class ListagencePage {
+  googleMaps: any;
   movies: Array<any>;
   branche: Array<any>;
   loading: any;
@@ -30,6 +30,9 @@ export class ListagencePage {
   longitudeFromBranche : number;
   latitudeFromBranche : number;
   startRefrech:number=1;
+  // new declaration map option
+  selectSegment ="list";
+
 
   constructor(private toastCtrl: ToastController,
    /*public loadingCtrl: LoadingController*/
@@ -54,6 +57,8 @@ export class ListagencePage {
     console.log('load enter')
     //  this.getCordonat();
     this.getAgence();
+    // this.loadMap();
+    // this.initMap();
    // this.calculatorDistance();
   }
   ionViewWillLeave() {
@@ -212,5 +217,32 @@ export class ListagencePage {
       console.log('Error getting location', error);
     });
   }
+
+/**
+ * google map load option
+ */
+
+  /**
+   * init map
+   */
+clickedMarker(label: string, index: number) {
+		console.log(`clicked the marker: ${label || index}`)
+	}
+
+	mapClicked($event: any) {
+		// this.branche.push(new branche (
+		// 	$event.coords.lat,
+		// 	$event.coords.lng
+		// ));
+	}
+
+	markerDragEnd(m, $event: any) {
+    console.log('dragEnd', m, $event);
+    //  window.location = `geo:${m.latitude},${m.longitude};u=35`;
+  }
+  getDirections() {
+
+  }
+
 
 }
