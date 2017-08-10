@@ -65,9 +65,7 @@
                 </ion-list>
             </div>
             <div *ngSwitchCase="'maps'">
-                <!-- <maps></maps> -->
-
-                <agm-map [latitude]="latitude" [longitude]="longitude" id="map" center>
+                <agm-map [latitude]="latitude" [longitude]="longitude" id="map" [zoom]="14" center>
                     <agm-marker [latitude]="latitude" [longitude]="longitude" [label]="'Vous'"></agm-marker>
                     <agm-marker *ngFor="let b of branche; let i = index" (markerClick)="clickedMarker(b.name, i)" [latitude]="b.latitude" [longitude]="b.longitude" [label]="b.name" [markerDraggable]="b.branchOpen" (dragEnd)="markerDragEnd(b, $event)">
 

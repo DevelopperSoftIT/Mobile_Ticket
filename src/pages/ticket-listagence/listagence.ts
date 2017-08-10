@@ -5,13 +5,15 @@ import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastController, PopoverController } from 'ionic-angular';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GlobalConstant } from './../../providers/constants';
 import { ServicePage } from "../ticket-service/service";
+declare var window;
+
 @Component({
   selector: 'page-listagence',
   templateUrl: 'listagence.html',
@@ -238,7 +240,7 @@ clickedMarker(label: string, index: number) {
 
 	markerDragEnd(m, $event: any) {
     console.log('dragEnd', m, $event);
-    //  window.location = `geo:${m.latitude},${m.longitude};u=35`;
+     window.location = `geo:${m.latitude},${m.longitude};u=35`;
   }
   getDirections() {
 

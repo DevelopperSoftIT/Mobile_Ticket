@@ -45,7 +45,7 @@ import { DelayTicketPage } from "../ticket-delay/delay-ticket";
     console.log("startRefreshTim begin")
     this.startRefrech =setInterval(()=>{
       console.log("startRefreshTim begin")
-      this.refleshService(this.id)
+      // this.refleshService(this.id)
     }, GlobalConstant.SERVICE_FETCH_INTERVAL)
 
   }

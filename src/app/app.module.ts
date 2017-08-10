@@ -1,4 +1,3 @@
-import { MapsComponentModule } from './../components/maps/maps.module';
 import { BookingServicePage } from './../pages/booking-service/booking-service';
 import { BookingBranchPage } from './../pages/booking-branch/booking-branch';
 import { MobileServer } from './../providers/mobileserver';
@@ -37,8 +36,6 @@ import { DelayTicketPage } from "../pages/ticket-delay/delay-ticket";
 import { InfoClientPage } from "../pages/booking-info-client/info-client";
 import { ResumeBookPage } from "../pages/booking-resume/resume-book";
 import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
-import { DatePipe } from '@angular/common';
-import { MapsComponent } from '../components/maps/maps';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -61,7 +58,6 @@ import { AgmCoreModule } from '@agm/core';
     CalendarPage,
     BookingBranchPage,
     BookingServicePage,
-    MapsComponent
   ],
   imports: [HttpModule,
     IonicModule.forRoot(MyApp),
@@ -76,7 +72,7 @@ import { AgmCoreModule } from '@agm/core';
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBIu3104JzimUPgMuzWOpt7WvUGcsWwoKE'
-    })
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -95,7 +91,7 @@ import { AgmCoreModule } from '@agm/core';
     TimerCountPage,
     CalendarPage,
     BookingBranchPage,
-    BookingServicePage
+    BookingServicePage,
   ],
   providers: [SplashScreen,
     StatusBar,
@@ -108,6 +104,7 @@ import { AgmCoreModule } from '@agm/core';
     AppMinimize,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation,
-    DistanceCalculatorProvider]
+    DistanceCalculatorProvider,
+  ]
 })
 export class AppModule { }

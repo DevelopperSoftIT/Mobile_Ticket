@@ -15,6 +15,9 @@
             background-position-y: center; //  background-size: contain;
             //background-color: red !important;
         }
+        .custom-light {
+            //  background-color: map-get($colors, primary) !important;
+        }
         //btn accueil
         /*.btnhome {
         // margin: 20px auto;
@@ -118,7 +121,8 @@
             padding: 0.25em;
             margin: 0.5em auto;
             text-align: center;
-            color: map-get($colors, primary-text);
+            color: map-get($colors, primary); //custum ligth
+            // color: map-get($colors, primary-text);
         }
         *[no-padding] {
             padding: 0px !important;
@@ -137,6 +141,8 @@
             margin-left: auto;
             margin-right: 10px;
             display: block;
+            color: black;
+            font-size: 1.5em !important;
         }
         .customer-icon {
             width: 20px;
@@ -303,7 +309,7 @@
         ///queut info
         .queue-itm {
             display: inline-block;
-            color: map-get($colors, secondary-text);
+            color: map-get($colors, primary-text);
             vertical-align: middle;
             margin-right: 2px;
         }
@@ -312,7 +318,9 @@
             right: 2px;
         }
         .queue-itm.empty {
-            background: lightslategrey;
+            // background: lightslategrey;
+            //  custom light
+            background: rgba(119, 136, 153, 0.68);
             opacity: 0.25;
             width: 8.5vw;
             height: 8.5vw;
@@ -321,7 +329,9 @@
             max-height: 40px;
         }
         .queue-itm.other {
-            background: lightslategrey;
+            //  custom light
+            background: rgba(119, 136, 153, 0.68);
+            // background: lightslategrey;
             width: 8.5vw;
             height: 8.5vw;
             font-size: 16px;
@@ -330,7 +340,9 @@
             text-align: -webkit-center;
         }
         .queue-itm.selected {
-            background: white;
+            //custom for light thème
+            background: map-get($colors, primary);
+            // background: white;
             //  font-weight: 500;
             font-size: 17px;
             width: 12vw;
@@ -424,6 +436,35 @@
             width: 250px;
             font-family: Helvetica;
         }
+        // Timer component
+        .timer-button {
+            font-size: 100em !important;
+            height: 100px !important;
+            padding-top: 0.01em !important;
+            padding-left: 0.1em !important;
+            padding-right: 0.1em !important;
+        }
+        .no-bottom-border.item .item-inner {
+            border-bottom: none !important;
+        }
+        .no-bottom-border {
+            background: transparent !important;
+        }
+        .no-bottom-border button {
+            font-size: 8.2em !important;
+        }
+        .card {
+            padding-top: 3em !important;
+        }
+        .card-md {
+            background: rgba(255, 255, 255, 0) !important;
+            border: none;
+            box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.14), 0 0px 0px -0px rgba(0, 0, 0, 0.2), 0 0px 0px 0 rgba(0, 0, 0, 0.12);
+        }
+        .timer-text {
+            // color: white;
+            color: map-get($colors, primary) !important; //custom for light
+        }
         // new version custom item
         .list-item-custom {
             // display: block !important;
@@ -445,6 +486,11 @@
             margin-top: 1em;
             width: 30px;
             height: 30px;
+        }
+        .home ion-thumbnail img {
+            margin-top: 1em;
+            width: 80px !important;
+            height: 80px !important;
         }
         .list-item-custom h2 {
             font-size: 1em;
@@ -471,6 +517,40 @@
             float: right;
             margin-right: 30px;
             color: black;
+        }
+        .custom-default-ligth-icon {}
+        .list-right ion-icon {
+            font-size: 2em;
+        }
+        // Personalisé pour service
+        .custom-service ion-thumbnail {
+            width: 1% !important;
+            ;
+            margin-left: 0px !important;
+            padding-right: 0px !important;
+            margin: 0px !important;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .custom-service h2 {
+            margin-top: 0.5em;
+            color: #000;
+            font-size: 20px !important;
+            width: 10em !important;
+            line-height: 24px;
+            font-weight: 200 !important;
+        }
+        //custom ligth pour delay page
+        .list-item-custom-delay {
+            background: map-get($colors, primary) !important;
+            width: 95%;
+            margin-top: 10px;
+            margin-left: 14px;
+            margin-right: 14px;
+        }
+        .list-item-custom-delay ion-label {
+            text-align: center !important;
+            color: map-get($colors, primary-text) !important;
         }
         /***************************************************************************
             Bootstap Customization
