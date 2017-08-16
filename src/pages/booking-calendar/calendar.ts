@@ -2,7 +2,7 @@ import { Restservice } from './../../providers/restservice';
 import { Common } from './../../providers/common';
 import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import {  NavController, NavParams, PopoverController } from 'ionic-angular';
 import { InfoClientPage } from "../booking-info-client/info-client";
 
 /**

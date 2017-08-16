@@ -1,4 +1,3 @@
-import { delay } from 'rxjs/operator/delay';
 import { GlobalConstant } from './constants';
 import { GlobalVars } from './global';
 import { VisitStatusEntity } from './../app/entitie/visit-status.entity';

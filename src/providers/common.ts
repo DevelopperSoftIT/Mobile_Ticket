@@ -1,6 +1,5 @@
-import { PopoverPage } from './../pages/popover/popover';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadingController, PopoverController } from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { ToastController } from 'ionic-angular';
 

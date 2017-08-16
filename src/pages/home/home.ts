@@ -5,7 +5,6 @@ import { GlobalVars } from './../../providers/global';
 import { PopoverPage } from './../popover/popover';
 import { Component } from '@angular/core';
 import { NavController,PopoverController } from 'ionic-angular';
-import {MarketingPage} from '../marketing/marketing'
 import {TranslateService} from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CalendarPage } from "../booking-calendar/calendar";

@@ -2,7 +2,7 @@ import { Common } from './../../providers/common';
 import { Restservice } from './../../providers/restservice';
 import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 import { ResumeBookPage } from "../booking-resume/resume-book";
 
 @Component({

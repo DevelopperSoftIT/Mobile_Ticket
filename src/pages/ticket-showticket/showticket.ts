@@ -3,7 +3,7 @@ import { GlobalVars } from './../../providers/global';
 import { Common } from './../../providers/common';
 import { HomePage } from './../home/home';
 import { VisitStatusEntity } from './../../app/entitie/visit-status.entity';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 //import {TextToSpeech} from '@ionic-native/text-to-speech';
@@ -12,7 +12,6 @@ import { BackgroundMode } from '@ionic-native/background-mode';
 import { Platform } from 'ionic-angular';
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { GlobalConstant } from './../../providers/constants';
-import { TimerComponent } from "../../components/timer/timer";
 // import {sprintf} from "sprintf-js";
 
 @Component({
@@ -561,7 +560,7 @@ ngOnInit() {
     });
 
   }
-  /***retour home */
+  /*** retour home */
   home() {
     this.istiketpresente=false;
     this.navCtrl.setRoot(HomePage)

@@ -24,5 +24,5 @@
         <ion-label class="info-label"> {{'ModuleResumeBookPage.labelService' | translate }} : <strong>{{serviceName}}</strong> </ion-label>
         <ion-label class="info-label"> {{'ModuleResumeBookPage.labelBranch' | translate }} : <strong>{{brancheName}}</strong> </ion-label>
     </ion-list>
-    <button ion-button round class="btn-default">{{'ModuleResumeBookPage.boutonOk' | translate }}</button>
+    <button ion-button round class="btn-default" (tap)="home()">{{'ModuleResumeBookPage.boutonOk' | translate }}</button>
 </ion-content>

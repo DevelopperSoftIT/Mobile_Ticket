@@ -8,7 +8,7 @@ import { GlobalConstant } from './../../providers/constants';
 import { PopoverPage } from './../popover/popover';
 import { Component } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation';
-import { IonicPage, NavController, NavParams, ToastController, AlertController, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, ToastController, AlertController, PopoverController } from 'ionic-angular';
 
 @IonicPage()
 @Component({

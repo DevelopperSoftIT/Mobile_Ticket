@@ -2,7 +2,6 @@ import { Common } from './../../providers/common';
 import { GlobalVars } from './../../providers/global';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { TimerCountPage } from "../ticket-timer-count/timer-count";
 import { Showticket } from "../ticket-showticket/showticket";
 
 
