@@ -27,7 +27,8 @@ export class Restservice {
     console.log("point 1");
     this.headers.append("accept", "application/json");
     this.headers.append("Content-Type", "application/json");
-    this.headers.append("auth-token", "06a91668-9e6c-4ac0-9566-830c30720150");
+    this.headers.append("auth-token", "2ac01af9-58bf-4f8e-8664-f1b3cda2f6ef");// token cameroon
+    // this.headers.append("auth-token", "06a91668-9e6c-4ac0-9566-830c30720150");
     this.option = new RequestOptions({ headers: this.headers });
     this.baseUrl= GlobalVars.getUrl();
     this.baseUrl2 ="/api3/rest/mobile/";
