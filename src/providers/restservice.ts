@@ -31,7 +31,7 @@ export class Restservice {
     // this.headers.append("auth-token", "06a91668-9e6c-4ac0-9566-830c30720150");
     this.option = new RequestOptions({ headers: this.headers });
     this.baseUrl= GlobalVars.getUrl();
-    this.baseUrl2 ="/api3/rest/mobile/";
+    //this.baseUrl2 ="/api3/rest/mobile/";
     console.log("Restservice.construtor: " +this.baseUrl);
     //this.urlAdminServeur="http://192.168.0.137:8080/webAdmin/api/clients/sign/";
     this.http = http;
@@ -91,8 +91,8 @@ export class Restservice {
      * @param delay delay
      */
   creatVisitWithDelay(idbranch,idservice, delay) {
-    console.log("creat visite url : "+this.baseUrl2 + "services/" + idservice + "/branches/" + idbranch + "/ticket/issue")
-    return this.http.post(this.baseUrl2 + "services/" + idservice + "/branches/" + idbranch + "/ticket/issue/?delay="+delay, {}, this.option)
+    console.log("creat visite url : "+this.baseUrl + "/services/" + idservice + "/branches/" + idbranch + "/ticket/issue")
+    return this.http.post(this.baseUrl + "/MobileTicket/services/" + idservice + "/branches/" + idbranch + "/ticket/issue?delay="+delay, {}, this.option)
       .timeout(GlobalConstant.URL_TIMEOUT)
       .map(res => res.json());
   }
