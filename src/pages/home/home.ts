@@ -1,12 +1,13 @@
+import { SociaciauxPage } from './../sociaciaux/sociaciaux';
 import { BookingBranchPage } from './../booking-branch/booking-branch';
 import { GlobalConstant } from './../../providers/constants';
 import { Common } from './../../providers/common';
 import { GlobalVars } from './../../providers/global';
 import { PopoverPage } from './../popover/popover';
 import { Component } from '@angular/core';
-import { NavController,PopoverController } from 'ionic-angular';
-import {MarketingPage} from '../marketing/marketing'
-import {TranslateService} from '@ngx-translate/core';
+import { NavController, PopoverController } from 'ionic-angular';
+import { MarketingPage } from '../marketing/marketing'
+import { TranslateService } from '@ngx-translate/core';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CalendarPage } from "../booking-calendar/calendar";
 import { ListagencePage } from "../ticket-listagence/listagence";
@@ -17,20 +18,20 @@ import { ResumeBookPage } from "../booking-resume/resume-book";
   templateUrl: 'home.html',
 })
 export class HomePage {
-  client:string
-  startRefrech:number=1;
+  client: string
+  startRefrech: number = 1;
 
-  constructor(private globalvars:GlobalVars,
+  constructor(private globalvars: GlobalVars,
     private navCtrl: NavController,
     private translate: TranslateService,
     private popoverCtrl: PopoverController,
     private geolocation: Geolocation,
-    private common:Common) {
-    this.client=GlobalVars.getClient();
+    private common: Common) {
+    this.client = GlobalVars.getClient();
   }
 
-  private goToAgencePage(){
-  this.navCtrl.push(ListagencePage);
+  private goToAgencePage() {
+    this.navCtrl.push(ListagencePage);
     console.log("test");
   } /*
    private parametreshow(){
@@ -41,19 +42,20 @@ export class HomePage {
   //  this.navCtrl.push(ServicePage);
   }*/
   private showMarketing() {
-    this.navCtrl.push(ResumeBookPage);
+    // this.navCtrl.push(ResumeBookPage);
+    this.navCtrl.push(SociaciauxPage);
     // this.navCtrl.push(MarketingPage);
   }
 
   ngOnInit() {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-     this.getCordonat();
+    this.getCordonat();
 
   }
-   ngAfterViewInit() {
-     // console.log("startRefreshTim begin")
-    this.startRefrech =setInterval(()=>{
+  ngAfterViewInit() {
+    // console.log("startRefreshTim begin")
+    this.startRefrech = setInterval(() => {
       console.log("startRefreshTim begin")
       this.refleshCordonat();
     }, GlobalConstant.GEO_REFRESH_TIMER)
@@ -62,16 +64,17 @@ export class HomePage {
     console.log("Quiter la page Home")
     if (this.startRefrech) {
       console.log("clearInterval ionViewWillLeave")
-    clearInterval(this.startRefrech);
-   }}
+      clearInterval(this.startRefrech);
+    }
+  }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverPage,{"activeAcueil":true});
+    let popover = this.popoverCtrl.create(PopoverPage, { "activeAcueil": true });
     popover.present({
       ev: myEvent
     });
   }
-  pageprdv(){
+  pageprdv() {
     this.navCtrl.push(BookingBranchPage);
     // this.navCtrl.push(InfoClientPage);
     // this.navCtrl.push(PrdvPage);
@@ -79,42 +82,42 @@ export class HomePage {
   /**
    * Recuperer les cordonnées de geolocalisation
    */
-  getCordonat(){
+  getCordonat() {
     this.common.presentLoadingDefault();
     // this.common.LoadingCustom();
-    console.log("timeout geo "+GlobalConstant.GEO_TIMEOUT)
-    this.geolocation.getCurrentPosition({timeout:GlobalConstant.GEO_TIMEOUT}).then((resp) => {
-    console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
-    this.globalvars.setLatitude(resp.coords.latitude);
-    this.globalvars.setLongitude(resp.coords.longitude);
-    this.common.loadingfinish()
-    // this.common.LoadingCustomfinish()
-  }).catch((error) => {
-    this.globalvars.setLatitude(0);
-    this.globalvars.setLongitude(0);
-       this.common.loadingfinish()
+    console.log("timeout geo " + GlobalConstant.GEO_TIMEOUT)
+    this.geolocation.getCurrentPosition({ timeout: GlobalConstant.GEO_TIMEOUT }).then((resp) => {
+      console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
+      this.globalvars.setLatitude(resp.coords.latitude);
+      this.globalvars.setLongitude(resp.coords.longitude);
+      this.common.loadingfinish()
+      // this.common.LoadingCustomfinish()
+    }).catch((error) => {
+      this.globalvars.setLatitude(0);
+      this.globalvars.setLongitude(0);
+      this.common.loadingfinish()
       //  this.common.LoadingCustomfinish()
       console.log('Error getting location', error);
     });
   }
-  refleshCordonat(){
+  refleshCordonat() {
     // this.common.LoadingCustom();
-    console.log("timeout geo "+GlobalConstant.GEO_TIMEOUT)
-    this.geolocation.getCurrentPosition({timeout:GlobalConstant.GEO_TIMEOUT}).then((resp) => {
-    console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
-    this.globalvars.setLatitude(resp.coords.latitude);
-    this.globalvars.setLongitude(resp.coords.longitude);
-    // this.common.LoadingCustomfinish()
-  })
-  .catch((error) => {
-    this.globalvars.setLatitude(0);
-    this.globalvars.setLongitude(0);
-      //  this.common.LoadingCustomfinish()
-      console.log('Error getting location', error);
-    });
+    console.log("timeout geo " + GlobalConstant.GEO_TIMEOUT)
+    this.geolocation.getCurrentPosition({ timeout: GlobalConstant.GEO_TIMEOUT }).then((resp) => {
+      console.log(`longitude : ${resp.coords.longitude}  latitude : ${resp.coords.latitude}`)
+      this.globalvars.setLatitude(resp.coords.latitude);
+      this.globalvars.setLongitude(resp.coords.longitude);
+      // this.common.LoadingCustomfinish()
+    })
+      .catch((error) => {
+        this.globalvars.setLatitude(0);
+        this.globalvars.setLongitude(0);
+        //  this.common.LoadingCustomfinish()
+        console.log('Error getting location', error);
+      });
   }
-testcal() {
-  this.navCtrl.push(CalendarPage);
-}
+  testcal() {
+    this.navCtrl.push(CalendarPage);
+  }
 
 }

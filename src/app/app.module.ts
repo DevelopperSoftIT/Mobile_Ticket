@@ -1,3 +1,10 @@
+import { MtwitterPageModule } from './../pages/mtwitter/mtwitter.module';
+import { MfacebookPageModule } from './../pages/mfacebook/mfacebook.module';
+import { SociaciauxPageModule } from './../pages/sociaciaux/sociaciaux.module';
+import { SociaciauxPage } from './../pages/sociaciaux/sociaciaux';
+import { Safe } from './../pipes/safe';
+import { Youtube } from './../providers/youtube';
+import { VideopipePipe } from './../pipes/videopipe/videopipe';
 import { BookingServicePage } from './../pages/booking-service/booking-service';
 import { BookingBranchPage } from './../pages/booking-branch/booking-branch';
 import { MobileServer } from './../providers/mobileserver';
@@ -24,7 +31,7 @@ import { Http } from '@angular/http'
 import { AppMinimize } from '@ionic-native/app-minimize';
 import { createTranslateLoader } from "../providers/createTranslateLoader";
 //new Import ionic 3
-import {BrowserModule} from '@angular/platform-browser'
+import { BrowserModule } from '@angular/platform-browser'
 import { Geolocation } from '@ionic-native/geolocation';
 import { DistanceCalculatorProvider } from '../providers/distance-calculator/distance-calculator';
 import { TimerComponent } from '../components/timer/timer';
@@ -56,11 +63,17 @@ import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
     TimerCountPage,
     CalendarPage,
     BookingBranchPage,
-    BookingServicePage
+    BookingServicePage,
+    VideopipePipe,
+    Safe,
+    // SociaciauxPage
   ],
   imports: [HttpModule,
     IonicModule.forRoot(MyApp),
     BrowserModule,
+    SociaciauxPageModule,
+    MfacebookPageModule,
+    MtwitterPageModule,
     IonicStorageModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -87,7 +100,8 @@ import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
     TimerCountPage,
     CalendarPage,
     BookingBranchPage,
-    BookingServicePage
+    BookingServicePage,
+    // SociaciauxPage
   ],
   providers: [SplashScreen,
     StatusBar,
@@ -98,6 +112,7 @@ import { TimerCountPage } from "../pages/ticket-timer-count/timer-count";
     GlobalVars,
     BackgroundMode,
     AppMinimize,
+    Youtube,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     Geolocation,
     DistanceCalculatorProvider]

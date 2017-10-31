@@ -73,7 +73,8 @@ translateConfig() {
       })
     } else {
       // Url direct de l'API Gateway
-      this.globalvars.setUrl('http://10.77.210.19:9090/MobileTicket/')
+      this.globalvars.setUrl('http://154.72.112.138:9090/MobileTicket/')
+      // this.globalvars.setUrl('http://10.77.210.19:9090/MobileTicket/')
       // this.globalvars.setUrl('http://192.168.0.167:9090/MobileTicket/')
       this.globalvars.setClient("SOFT-IT");
       // this.globalvars.setClient("MTN BENIN");

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>
+        {{'ModuleMarketingPage.title' | translate }} </ion-title>
+      <div class="sub-title toolbar-title-md toolbar-title">{{client}} </div>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+<ion-content class="has-header">
+  <div class="page-message"> {{'ModuleMarketingPage.message' | translate }}</div>
+  <button class=" btn-custom1 customSociauxButtonYt" (tap)=(goToMarketing()) ion-button round outline item-end icon-left>
+    <ion-icon name="logo-youtube"></ion-icon>
+    Youtube
+  </button>
+  <button class="btn-custom1 customSociauxButtonFb" (tap)="goToFbMarketing()" ion-button round outline item-end icon-left>
+    <ion-icon name="logo-facebook"></ion-icon>
+    Facebook
+  </button>
+  <button class=" btn-custom1 customSociauxButtonTw" (tap)="goToTwMarketing()" ion-button round outline item-end icon-left>
+    <ion-icon name="logo-twitter"></ion-icon>
+    Twitter
+  </button>
+</ion-content>

@@ -1,16 +1,16 @@
 <ion-header>
-    <ion-navbar color='primary_'>
-        <ion-toolbar>
-            <ion-title> {{'ModuleTicketPage.title' | translate }} </ion-title>
-            <div class="sub-title toolbar-title-md toolbar-title">{{client}} </div>
-        </ion-toolbar>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title> {{'ModuleMarketingPage.title' | translate }} </ion-title>
+      <div class="sub-title toolbar-title-md toolbar-title">{{client}} - Youtube </div>
+    </ion-toolbar>
+  </ion-navbar>
 </ion-header>
 <ion-content class="has-header">
 
-    <div class="page-message"> {{'ModuleMarketingPage.message' | translate }}</div>
+  <div class="page-message"> {{'ModuleMarketingPage.message' | translate }}</div>
 
-    <!--
+  <!--
             <ion-card>
 
                 <img src="http://www.brjavocats.com/i/image-nouvelles-technologies.jpg">
@@ -33,7 +33,7 @@
             </ion-card>-->
 
 
-    <!--     <ion-card *ngFor=" let mark of Marckic">
+  <!--     <ion-card *ngFor=" let mark of Marckic">
 
             <img src='{{mark.url}}' />
             <div class="card-title">{{mark.message}}</div>
@@ -51,4 +51,23 @@
             Aimez-nous
             </button>
         </ion-card>-->
+
+  <ion-card class="costomCard" *ngFor="let data of datas">
+    <iframe allowfullscreen frameborder="0" height="200" width="100%" [src]="data.snippet.resourceId.videoId | safe:'resourceUrl'">
+    </iframe>
+    <ion-card-content class="costomContent">
+      <ion-card-title class="title">
+        {{data.snippet.title}}
+      </ion-card-title>
+      <p class="description">
+        {{data.snippet.description}}
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="infiniteScrool($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
 </ion-content>
